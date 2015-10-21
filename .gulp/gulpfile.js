@@ -12,14 +12,13 @@ gulp.task('set-release-packages', shell.task([
   'meteor remove accounts-password',
   'meteor remove insecure',
   'meteor remove autopublish',
-  'meteor remove msavin:mongol',
+  'meteor remove msavin:mongol'
 ], {ignoreErrors: true}));
 
 gulp.task('set-dev-packages', shell.task([
   'meteor add accounts-password',
   'meteor add msavin:mongol',
-  'meteor remove insecure',
-  'meteor add accounts-facebook',
+  'meteor remove insecure'
 ], {ignoreErrors: true}));
 
 gulp.task('run-local', shell.task([
@@ -77,7 +76,6 @@ gulp.task('deploy-dokku', function(cb) {
 gulp.task('run', ['set-dev-packages', 'run-local']);
 gulp.task('release', function (callback) {
   runSequence(
-    'set-release-packages',
     'bump',
     'changelog',
     'commit-changes',

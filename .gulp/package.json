@@ -1,7 +1,7 @@
 {
-  "name": "Randy",
-  "description": "A simple list randomizer.",
-  "version": "0.5.7",
+  "name": "Ghostdoc",
+  "description": "Smart Text Viewer",
+  "version": "0.0.1",
   "dependencies": {
     "gulp": "^3.9.0",
     "gulp-bump": "^1.0.0",
