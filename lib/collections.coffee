@@ -27,15 +27,16 @@ Schemas.Artifacts = new SimpleSchema
   name:
     type: String
     label: 'Name'
-
-  categories:
-    type: [String]
-    label: 'Categories'
-
+    
   tokens:
     type: [String]
     label: 'Tokens/Aliases'
-  
+
+  image:
+    type: String
+    optional: true
+    label: 'Image url'
+
   author:
     type: String
     label: 'Author ID'
