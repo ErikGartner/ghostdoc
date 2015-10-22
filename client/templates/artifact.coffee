@@ -1,15 +1,52 @@
-Template.artifactSummary.helpers
+Template.artifact.helpers
   artifact: ->
     return Artifacts.findOne(_id:Session.get('selectedArtifact'))
 
+  # This helper generates the dynamic list of data
   references: ->
-    data = []
-    $('.token[data-id="' + Session.get('selectedArtifact') + '"').each((index) ->
-      paragraph = $(this).parent().html()
-      token = $(this).text()
-      console.log $(this)
-      paragraph = S(paragraph).replaceAll($(this)[0].outerHTML, token).s
-      console.log paragraph
-      data.push paragraph
+    activeArtifact = Artifacts.findOne _id: Session.get('selectedArtifact')
+    text = Texts.findOne(_id: Session.get('selectedText'))?.text
+    if not activeArtifact or not text?
+      return
+
+    filteredData = []
+    data = marked.lexer(text)
+    console.log 'data', data
+    closestsHeader = undefined
+
+    # Filter out elements not containing any token
+    for item in data
+      if item.type == 'heading'
+        closestsHeader = item
+
+      else if item.type == 'paragraph'
+        for token in activeArtifact.tokens
+          if item.text.toLowerCase().indexOf(token.toLowerCase()) > -1
+            if closestsHeader?
+              filteredData.push closestsHeader
+              closestsHeader = undefined
+            filteredData.push item
+            break
+
+    console.log 'filteredData', filteredData
+    filteredData.links = data.links
+    html = marked.parser(filteredData)
+    console.log 'html', html
+
+    # Highlight all containing artifact
+    Artifacts.find().forEach((artifact) ->
+      for token in artifact.tokens
+        html = S(html).replaceAll(token, '<a class="token" data-id="' +
+                                  artifact._id + '">' + token + '</a>').s
     )
-    return data
+    return html
+
+Template.artifact.events
+  'click .token': (event) ->
+    id = $(event.target).data('id')
+    Session.set('selectedArtifact', id)
+    return
+
+  'click #artifactLabel': (event) ->
+    Session.set('selectedArtifact', undefined)
+    return

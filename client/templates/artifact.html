@@ -1,9 +1,9 @@
-<template name="artifactSummary">
-  <h2>{{artifact.name}}</h2>
-  <img src="{{artifact.image}}">
-  <ul>
-  {{#each references}}
-  <li>{{{this}}}</li>
-  {{/each}}
-  </ul>
+<template name="artifact">
+  <div id="artifactDiv" class="ui segment">
+    <a id="artifactLabel" class="ui blue right ribbon label">{{artifact.name}}</a>
+    <div class="ui close right rail">
+      <img class="ui rounded image" src={{artifact.image}}>
+    </div>
+    {{{references}}}
+  </div>
 </template>

@@ -1,3 +1,5 @@
+simplemde = undefined
+
 #*
 # Highlights the artifacts
 #
@@ -10,16 +12,50 @@ postProcessPreivew = (html) ->
   )
   return html
 
+saveText = ->
+  id = Session.get('selectedText')
+  text = simplemde.value()
+
+  if id? and text.trim() == ''
+    Meteor.call 'deleteText', id
+  else
+    Meteor.call 'saveText', id, text, (err, res) ->
+      if not err?
+        Session.set('selectedText', res)
+  return
+
 Template.editor.onRendered ->
   opts =
     element: $("#simplemde")[0]
     spellChecker: false
+    status: ['lines', 'words', 'cursor']
+    toolbar: [
+      "bold",
+      "italic",
+      "strikethrough",
+      "ordered-list",
+      "unordered-list",
+      "preview",
+      "side-by-side",
+      "fullscreen",
+      "guide",
+      "|",
+      {
+        name: "save",
+        action: saveText,
+        className: "fa fa-floppy-o",
+        title: "Save",
+      }
+    ]
     previewRender: (plaintext) ->
       html = marked(plaintext)
       return postProcessPreivew(html)
   simplemde = new SimpleMDE(opts)
 
-Template.home.events
+  Tracker.autorun ->
+    simplemde.value Texts.findOne(_id:Session.get('selectedText'))?.text
+
+Template.editor.events
   'click .token': (event) ->
     id = $(event.target).data('id')
     Session.set('selectedArtifact', id)

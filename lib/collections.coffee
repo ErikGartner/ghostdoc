@@ -27,7 +27,7 @@ Schemas.Artifacts = new SimpleSchema
   name:
     type: String
     label: 'Name'
-    
+
   tokens:
     type: [String]
     label: 'Tokens/Aliases'
@@ -40,6 +40,10 @@ Schemas.Artifacts = new SimpleSchema
   author:
     type: String
     label: 'Author ID'
+
+  text:
+    type: String
+    label: 'Document ID'
 
 Texts.attachSchema Schemas.Texts
 Artifacts.attachSchema Schemas.Artifacts

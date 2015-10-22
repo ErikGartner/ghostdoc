@@ -1,5 +1,5 @@
 Meteor.publish 'artifacts', ->
-  return Artifacts.find()
+  return Artifacts.find(author: @userId)
 
 Meteor.publish 'texts', ->
-  return Texts.find()
+  return Texts.find(author: @userId)

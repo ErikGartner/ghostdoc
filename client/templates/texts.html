@@ -1,0 +1,8 @@
+<template name="texts">
+  <h2>Docs</h2>
+  <div class="ui link list">
+    {{#each texts}}
+      <a class="item textSelector" data-id="{{this._id}}">{{this.name}}</a>
+    {{/each}}
+  </div>
+</template>

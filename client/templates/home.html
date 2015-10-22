@@ -3,12 +3,18 @@
     <div class="row"></div>
     <div class="row">
       <div class="one wide column"></div>
-
+      <div class="three wide column">
+        {{> texts}}
+        {{> user}}
+      </div>
       <div class="eight wide column">
-        {{> editor}}
+        {{#if selectedArtifact}}
+          {{> artifact}}
+        {{else}}
+          {{> editor}}
+        {{/if}}
       </div>
       <div class="three wide column">
-        {{> artifactSummary}}
       </div>
       <div class="one wide column"></div>
     </div>
