@@ -24,7 +24,6 @@ iron:router
 datariot:ganalytics
 reywood:publish-composite
 accounts-facebook
-d4nyll:epic
 strikeout:string.js
 accounts-password
 msavin:mongol

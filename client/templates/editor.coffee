@@ -1,26 +1,24 @@
 #*
 # Highlights the artifacts
 #
-postProcessPreivew = (editor) ->
+postProcessPreivew = (html) ->
   console.log 'Post-processing preview...'
-  previewer = editor.getElement('previewer').body
   Artifacts.find().forEach((artifact) ->
     for token in artifact.tokens
-      $(previewer).html((_, html) ->
-        return S(html).replaceAll(token, '<span class="token" data-id="' +
-                                  artifact._id + '">' + token + '</span>').s
-      )
+      html = S(html).replaceAll(token, '<a class="token" data-id="' +
+                                artifact._id + '">' + token + '</a>').s
   )
-
+  return html
 
 Template.editor.onRendered ->
   opts =
-    autogrow:
-      minHeight: 500
-    textarea: 'epictextarea'
-  epic = Epic.create('epiceditor', opts)
-  epic.on('preview', ->
-    postProcessPreivew(epic)
-  )
-  epic.preview()
-  $('#epicareaepiceditor').hide()
+    element: $("#simplemde")[0]
+    spellChecker: false
+    previewRender: (plaintext) ->
+      html = marked(plaintext)
+      return postProcessPreivew(html)
+  simplemde = new SimpleMDE(opts)
+
+Template.home.events
+  'click .token': (event) ->
+    console.log 'clicked', $(event.target)
