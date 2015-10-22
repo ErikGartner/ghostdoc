@@ -30,20 +30,33 @@ Schemas.Artifacts = new SimpleSchema
 
   tokens:
     type: [String]
-    label: 'Tokens/Aliases'
+    minCount: 1
+    label: 'Token'
 
   image:
     type: String
     optional: true
-    label: 'Image url'
+    label: 'Image URL'
 
   author:
     type: String
     label: 'Author ID'
 
-  text:
-    type: String
-    label: 'Document ID'
-
 Texts.attachSchema Schemas.Texts
 Artifacts.attachSchema Schemas.Artifacts
+
+Artifacts.allow(
+  insert: (userId, doc) ->
+    return userId
+
+  update: (userId, doc) ->
+    return userId == doc.author
+
+  remove: (userId, doc) ->
+    return userId == doc.author
+)
+
+Texts.allow(
+  insert: (userId, doc) ->
+    return userId
+)

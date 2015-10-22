@@ -4,9 +4,6 @@ Meteor.methods
     if !uid?
       throw new Meteor.Error('not-authorized')
 
-    if Meteor.isClient
-      return id
-
     check text, String
     if id?
       data = Texts.findOne author: uid, _id: id
@@ -26,7 +23,7 @@ Meteor.methods
       text: text
 
     if id?
-      id = Texts.update {_id:id}, {$set: data}
+      Texts.update {_id:id}, {$set: data}
     else
       id = Texts.insert data
     return id

@@ -18,10 +18,13 @@ saveText = ->
 
   if id? and text.trim() == ''
     Meteor.call 'deleteText', id
+    Session.set('editText', undefined)
+    Session.set('selectedText', undefined)
   else
     Meteor.call 'saveText', id, text, (err, res) ->
       if not err?
         Session.set('selectedText', res)
+        Session.set('editText', undefined)
   return
 
 Template.editor.onRendered ->

@@ -20,7 +20,7 @@ Template.texts.events
     Session.set('editText', true)
     Session.set('selectedArtifact', undefined)
 
-  'click .newIcon': (event) ->
+  'click #newIcon': (event) ->
     Session.set('selectedText', undefined)
     Session.set('editText', true)
     Session.set('selectedArtifact', undefined)

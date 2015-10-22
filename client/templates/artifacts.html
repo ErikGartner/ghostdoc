@@ -1,21 +1,44 @@
 <template name="artifacts">
-  <h4>Artifacts</h4>
+  <h2>Artifacts</h2>
   <div class="ui relaxed list">
     {{#each artifacts}}
       <div class="item">
-        <i class="icon red heart favoriteIcon" data-id="{{_id}}"></i>
+        <i class="icon tag editArtifact" data-id="{{_id}}"></i>
         <div class="content">
-          <span class="header"><a class="listitem" data-id="{{_id}}">{{name}}</a></span>
-          <div class="description">{{listAuthor}}</div>
+          <span class="header"><a class="listitem selectArtifact" data-id="{{_id}}">{{name}}</a></span>
         </div>
       </div>
     {{/each}}
   </div>
 
-  <div class="ui fluid buttons">
-    <button class="ui green right labeled icon button" id="addArtifact">
-      <i class="plus icon"></i>
-      Add
-    </button>
+  <button class="ui fluid green right labeled icon button" id="addArtifact">
+    <i class="plus icon"></i>
+    Add
+  </button>
+
+  <div id="insertArtifactModal" class="ui small modal">
+    <div class="header">Add an artifact</div>
+    <div class="content">
+      {{editId}}
+      {{#autoForm collection="Artifacts" doc=editId id="artifactForm" type="insert"}}
+        {{> afQuickField name='name'}}
+        {{> afQuickField name='tokens'}}
+        {{> afQuickField name='image'}}
+        <button type="submit" class="ui green button">Insert</button>
+      {{/autoForm}}
+    </div>
+  </div>
+
+  <div id="updateArtifactModal" class="ui small modal">
+    <div class="header">Edit artifact</div>
+    <div class="content">
+      {{#autoForm collection="Artifacts" doc=editId id="artifactForm" type="update"}}
+        {{> afQuickField name='name'}}
+        {{> afQuickField name='tokens'}}
+        {{> afQuickField name='image'}}
+        <button type="submit" class="ui blue button">Update</button>
+        {{> quickRemoveButton collection="Artifacts" _id=editId._id class="ui red button"}}
+      {{/autoForm}}
+    </div>
   </div>
 </template>
