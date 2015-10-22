@@ -1,8 +1,14 @@
 <template name="texts">
   <h2>Docs</h2>
-  <div class="ui link list">
-    {{#each texts}}
-      <a class="item textSelector" data-id="{{this._id}}">{{this.name}}</a>
-    {{/each}}
+  <div class="ui relaxed list">
+  {{#each texts}}
+    <div class="item">
+      <i class="link icon wrench editIcon" data-id="{{_id}}"></i>
+      <div class="content">
+        <span class="header"><a class="listitem textSelector" data-id="{{this._id}}">{{this.name}}</a></span>
+      </div>
+    </div>
+  {{/each}}
   </div>
+  <button class="ui fluid green button newIcon">New</button>
 </template>

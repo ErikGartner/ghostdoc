@@ -11,7 +11,6 @@ Template.artifact.helpers
 
     filteredData = []
     data = marked.lexer(text)
-    console.log 'data', data
     closestsHeader = undefined
 
     # Filter out elements not containing any token
@@ -28,10 +27,8 @@ Template.artifact.helpers
             filteredData.push item
             break
 
-    console.log 'filteredData', filteredData
     filteredData.links = data.links
     html = marked.parser(filteredData)
-    console.log 'html', html
 
     # Highlight all containing artifact
     Artifacts.find().forEach((artifact) ->

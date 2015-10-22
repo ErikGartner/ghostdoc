@@ -11,7 +11,11 @@
         {{#if selectedArtifact}}
           {{> artifact}}
         {{else}}
-          {{> viewer}}
+          {{#if editText}}
+            {{> editor}}
+          {{else}}
+            {{> viewer}}
+          {{/if}}
         {{/if}}
       </div>
       <div class="three wide column">
