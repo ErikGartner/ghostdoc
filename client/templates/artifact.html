@@ -1,4 +1,9 @@
 <template name="artifactSummary">
   <h2>{{artifact.name}}</h2>
   <img src="{{artifact.image}}">
+  <ul>
+  {{#each references}}
+  <li>{{{this}}}</li>
+  {{/each}}
+  </ul>
 </template>
