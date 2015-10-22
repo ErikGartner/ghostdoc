@@ -21,4 +21,5 @@ Template.editor.onRendered ->
 
 Template.home.events
   'click .token': (event) ->
-    console.log 'clicked', $(event.target)
+    id = $(event.target).data('id')
+    Session.set('selectedArtifact', id)
