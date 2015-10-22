@@ -1,0 +1,21 @@
+<template name="artifacts">
+  <h4>Artifacts</h4>
+  <div class="ui relaxed list">
+    {{#each artifacts}}
+      <div class="item">
+        <i class="icon red heart favoriteIcon" data-id="{{_id}}"></i>
+        <div class="content">
+          <span class="header"><a class="listitem" data-id="{{_id}}">{{name}}</a></span>
+          <div class="description">{{listAuthor}}</div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+  <div class="ui fluid buttons">
+    <button class="ui green right labeled icon button" id="addArtifact">
+      <i class="plus icon"></i>
+      Add
+    </button>
+  </div>
+</template>
