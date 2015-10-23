@@ -68,9 +68,9 @@ gulp.task('push-changes', function (cb) {
 });
 
 
-gulp.task('deploy-dokku', function(cb) {
-  console.log('Deploying to Dokku!');
-  git.push('dokku', 'master', cb);
+gulp.task('deploy', function(cb) {
+  console.log('Deploying to Dokku (Gartner.io)!');
+  git.push('gartner', 'master', cb);
 });
 
 gulp.task('run', ['set-dev-packages', 'run-local']);
