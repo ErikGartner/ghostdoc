@@ -19,7 +19,6 @@
   <div id="insertArtifactModal" class="ui small modal">
     <div class="header">Add an artifact</div>
     <div class="content">
-      {{editId}}
       {{#autoForm collection="Artifacts" doc=editId id="artifactForm" type="insert"}}
         {{> afQuickField name='name'}}
         {{> afQuickField name='tokens'}}
