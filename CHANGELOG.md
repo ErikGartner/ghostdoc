@@ -1,3 +1,14 @@
+<a name="0.0.8"></a>
+## [0.0.8](//compare/0.0.7...v0.0.8) (2015-10-23)
+
+
+### Features
+
+* Added artifacts management 8c2c313
+* Added basic text functionality expect 41360c7
+
+
+
 <a name="0.0.6"></a>
 ## [0.0.6](//compare/0.0.6...v0.0.6) (2015-10-22)
 
