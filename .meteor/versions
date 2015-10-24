@@ -90,11 +90,11 @@ semantic:ui-css@2.1.2
 service-configuration@1.0.5
 session@1.1.1
 sha@1.0.4
+silentcicero:string.js@0.0.1
 spacebars@1.0.7
 spacebars-compiler@1.0.7
 srp@1.0.4
 standard-minifiers@1.0.1
-strikeout:string.js@2.1.0
 templating@1.1.4
 templating-tools@1.0.0
 tracker@1.0.9

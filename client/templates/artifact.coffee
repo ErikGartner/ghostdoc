@@ -1,6 +1,6 @@
 Template.artifact.helpers
   artifact: ->
-    return Artifacts.findOne(_id:Session.get('selectedArtifact'))
+    return Artifacts.findOne _id:Session.get('selectedArtifact')
 
   # This helper generates the dynamic list of data
   references: ->
@@ -22,7 +22,9 @@ Template.artifact.helpers
 
         else if item.type == 'paragraph'
           for token in activeArtifact.tokens
-            if item.text.toLowerCase().indexOf(token.toLowerCase()) > -1
+            a = S(item.text.toLowerCase()).latinise()
+            b = S(token.toLowerCase()).latinise()
+            if a.contains(b.s)
               if closestsHeader?
                 filteredData.push closestsHeader
                 closestsHeader = undefined
@@ -33,11 +35,10 @@ Template.artifact.helpers
       html = marked.parser(filteredData)
 
       # Highlight all containing artifact
-      Artifacts.find().forEach((artifact) ->
+      Artifacts.find().forEach (artifact) ->
         for token in artifact.tokens
           html = S(html).replaceAll(token, '<a class="token" data-id="' +
                                     artifact._id + '">' + token + '</a>').s
-      )
       htmls.push html
     return htmls
 
