@@ -19,7 +19,7 @@
   <div id="insertArtifactModal" class="ui small modal">
     <div class="header">Add an artifact</div>
     <div class="content">
-      {{#autoForm collection="Artifacts" doc=editId id="artifactForm" type="insert"}}
+      {{#autoForm collection="Artifacts" id="addArtifactForm" type="insert"}}
         {{> afQuickField name='name'}}
         {{> afQuickField name='tokens'}}
         {{> afQuickField name='image'}}
@@ -31,7 +31,7 @@
   <div id="updateArtifactModal" class="ui small modal">
     <div class="header">Edit artifact</div>
     <div class="content">
-      {{#autoForm collection="Artifacts" doc=editId id="artifactForm" type="update"}}
+      {{#autoForm collection="Artifacts" doc=editId id="editArtifactForm" type="update"}}
         {{> afQuickField name='name'}}
         {{> afQuickField name='tokens'}}
         {{> afQuickField name='image'}}

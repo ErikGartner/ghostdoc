@@ -25,7 +25,7 @@ Template.artifacts.events
     Session.set 'selectedArtifact', id
     Session.set 'editArtifactId', undefined
 
-AutoForm.addHooks 'artifactForm',
+AutoForm.addHooks 'addArtifactForm',
   before:
     insert: (doc) ->
       doc.author = Meteor.userId()
