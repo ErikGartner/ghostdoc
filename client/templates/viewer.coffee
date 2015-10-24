@@ -5,13 +5,7 @@ Template.viewer.helpers
       return
 
     html = marked(text)
-    Artifacts.find().forEach((artifact) ->
-      for token in artifact.tokens
-        linkStart = '<a class="token" data-id="' + artifact._id + '">'
-        linkEnd = '</a>'
-        reg = new RegExp('(' + token + ')', 'gi')
-        html = html.replace(reg, linkStart + '$1' + linkEnd)
-    )
+    html = Tagger.hightlightHTML html, Artifacts.find()
     return html
 
 Template.viewer.events
