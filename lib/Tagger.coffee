@@ -1,12 +1,14 @@
 class TaggerClass
 
+  @reg = (token) ->
+    return new RegExp('\\b(' + token + ')', 'gi')
+
   hightlightHTML: (html, artifacts) ->
     artifacts.forEach (artifact) ->
       for token in artifact.tokens
         linkStart = '<a class="token" data-id="' + artifact._id + '">'
         linkEnd = '</a>'
-        reg = new RegExp('\\b(' + token + ')', 'gi')
-        html = html.replace(reg, linkStart + '$1' + linkEnd)
+        html = html.replace(TaggerClass.reg(token), linkStart + '$1' + linkEnd)
     return html
 
   extractReferences: (texts, artifact) ->
@@ -24,9 +26,7 @@ class TaggerClass
 
         else if item.type == 'paragraph'
           for token in artifact.tokens
-            a = S(item.text.toLowerCase()).latinise()
-            b = S(token.toLowerCase()).latinise()
-            if a.contains(b.s)
+            if item.text.match(TaggerClass.reg(token))?
               if closestsHeader?
                 filteredData.push closestsHeader
                 closestsHeader = undefined
