@@ -1,3 +1,13 @@
+<a name="0.2.3"></a>
+## [0.2.3](//compare/0.2.2...v0.2.3) (2015-10-24)
+
+
+### Features
+
+* Tokens now now only matches beginning of words 12bbdde
+
+
+
 <a name="0.2.2"></a>
 ## [0.2.2](//compare/0.2.1...v0.2.2) (2015-10-24)
 
