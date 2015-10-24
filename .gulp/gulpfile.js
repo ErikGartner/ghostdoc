@@ -25,13 +25,14 @@ gulp.task('run-local', shell.task([
   'meteor run --settings ../settings.json',
 ]));
 
-gulp.task('bump', function() {
+gulp.task('bump', function(cb) {
   gulp.src('../settings.json')
   .pipe(bump({key: "public.ghostdoc.version", type: argv.bump}))
   .pipe(gulp.dest('../'));
   gulp.src('./package.json')
   .pipe(bump({key: "version", type: argv.bump}))
   .pipe(gulp.dest('./'));
+  cb(undefined);
 });
 
 gulp.task('changelog', function () {
@@ -76,6 +77,7 @@ gulp.task('deploy', function(cb) {
 gulp.task('run', ['set-dev-packages', 'run-local']);
 gulp.task('release', function (callback) {
   runSequence(
+    'set-release-packages',
     'bump',
     'changelog',
     'commit-changes',

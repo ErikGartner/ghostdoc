@@ -1,3 +1,6 @@
+Template.artifact.onRendered ->
+  $('.ui.sticky').sticky context: '#artifactDiv'
+
 Template.artifact.helpers
   artifact: ->
     return Artifacts.findOne _id:Session.get('selectedArtifact')

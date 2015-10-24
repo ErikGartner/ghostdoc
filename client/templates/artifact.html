@@ -2,7 +2,9 @@
   <div id="artifactDiv" class="ui basic segment">
     <a id="artifactLabel" class="ui top green attached label">{{artifact.name}}</a>
     <div class="ui close right rail">
-      <img class="ui rounded image" src={{artifact.image}}>
+      <div class="ui sticky" style="width: 272px !important; height: 263px !important;">
+        <img class="ui rounded image" src={{artifact.image}}>
+      </div>
     </div>
     {{#each references}}
       {{{this}}}
