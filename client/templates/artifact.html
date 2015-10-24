@@ -4,6 +4,8 @@
     <div class="ui close right rail">
       <img class="ui rounded image" src={{artifact.image}}>
     </div>
-    {{{references}}}
+    {{#each references}}
+      {{{this}}}
+    {{/each}}
   </div>
 </template>
