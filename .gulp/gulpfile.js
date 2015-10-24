@@ -25,14 +25,13 @@ gulp.task('run-local', shell.task([
   'meteor run --settings ../settings.json',
 ]));
 
-gulp.task('bump', function(cb) {
+gulp.task('bump', function() {
   gulp.src('../settings.json')
   .pipe(bump({key: "public.ghostdoc.version", type: argv.bump}))
   .pipe(gulp.dest('../'));
-  gulp.src('./package.json')
+  return gulp.src('./package.json')
   .pipe(bump({key: "version", type: argv.bump}))
   .pipe(gulp.dest('./'));
-  cb(undefined);
 });
 
 gulp.task('changelog', function () {
@@ -64,14 +63,14 @@ gulp.task('commit-changes', function () {
     .pipe(git.commit('chore: bump version number'));
 });
 
-gulp.task('push-changes', function (cb) {
-  git.push('origin', 'master', cb);
+gulp.task('push-changes', function () {
+  return git.push('origin', 'master');
 });
 
 
-gulp.task('deploy', function(cb) {
+gulp.task('deploy', function() {
   console.log('Deploying to Dokku (Gartner.io)!');
-  git.push('gartner', 'master', cb);
+  return git.push('gartner', 'master');
 });
 
 gulp.task('run', ['set-dev-packages', 'run-local']);
