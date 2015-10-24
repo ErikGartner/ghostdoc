@@ -1,4 +1,21 @@
 <a name="0.0.8"></a>
+## [0.0.8](//compare/0.0.8...v0.0.8) (2015-10-24)
+
+
+### Bug Fixes
+
+* Bugs regarding adding artifacts 6b99405
+* Removed debug print 2449b05
+
+### Features
+
+* Latinise before token compare dd3313b
+* Now searches all texts. dfd4808
+* Sorting of artifacts 9ad4dea
+
+
+
+<a name="0.0.8"></a>
 ## [0.0.8](//compare/0.0.7...v0.0.8) (2015-10-23)
 
 
