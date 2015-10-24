@@ -1,3 +1,18 @@
+<a name="0.2.0"></a>
+# [0.2.0](//compare/0.1.1...v0.2.0) (2015-10-24)
+
+
+### Bug Fixes
+
+* accidental space after token when highlighting 1e7b1cc
+* Bugs in gulp script 272e77a
+
+### Features
+
+* Improved token highlighting e824a24
+
+
+
 <a name="0.1.1"></a>
 ## [0.1.1](//compare/0.1.0...v0.1.1) (2015-10-24)
 
