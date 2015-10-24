@@ -43,7 +43,7 @@ Template.artifact.helpers
         for token in artifact.tokens
           linkStart = '<a class="token" data-id="' + artifact._id + '">'
           linkEnd = '</a>'
-          reg = new RegExp('(' + token + ' )', 'gi')
+          reg = new RegExp('(' + token + ')', 'gi')
           html = html.replace(reg, linkStart + '$1' + linkEnd)
 
       htmls.push html
