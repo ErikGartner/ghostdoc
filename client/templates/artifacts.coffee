@@ -1,6 +1,6 @@
 Template.artifacts.helpers
   artifacts: ->
-    return Artifacts.find()
+    return Artifacts.find({}, {sort:{name: 1}})
 
   editId: ->
     return Artifacts.findOne _id: Session.get('editArtifactId')
