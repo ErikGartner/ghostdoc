@@ -1,3 +1,18 @@
+<a name="0.2.4"></a>
+## [0.2.4](//compare/0.2.3...v0.2.4) (2015-10-25)
+
+
+### Bug Fixes
+
+* disabled doubeling and stacking grid e63a011
+* Now both highlight and extract uses the same search function 33f7a36
+
+### Features
+
+* Added autoscrolling when clicking links b74de72
+
+
+
 <a name="0.2.3"></a>
 ## [0.2.3](//compare/0.2.2...v0.2.3) (2015-10-24)
 
