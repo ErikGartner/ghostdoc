@@ -12,3 +12,4 @@ Template.viewer.events
   'click .token': (event) ->
     id = $(event.target).data('id')
     Session.set('selectedArtifact', id)
+    $('html, body').animate {scrollTop: 0}, 'slow'

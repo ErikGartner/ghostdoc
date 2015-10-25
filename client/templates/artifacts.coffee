@@ -24,6 +24,7 @@ Template.artifacts.events
     id = $(event.target).data 'id'
     Session.set 'selectedArtifact', id
     Session.set 'editArtifactId', undefined
+    $('html, body').animate {scrollTop: 0}, 'slow'
 
 AutoForm.addHooks 'addArtifactForm',
   before:
