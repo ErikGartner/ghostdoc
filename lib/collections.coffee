@@ -91,3 +91,11 @@ Texts.allow(
   remove: (userId, doc) ->
     return userId == doc.author
 )
+
+Meteor.users.helpers
+  mail: ->
+    if @emails?
+      return @emails[0].address
+    else if @services?.facebook?.email
+      return @services.facebook.email
+    return undefined

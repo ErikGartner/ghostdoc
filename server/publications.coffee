@@ -2,8 +2,10 @@ Meteor.publishComposite 'texts', ->
   pub =
     find: ->
       user = Meteor.users.findOne _id: @userId
-      return Texts.find $or: [{author: @userId}, {collaborators:
-        user.services?.facebook?.email}]
+      if user?
+        return Texts.find $or: [{author: @userId}, {collaborators: user.mail()}]
+      else
+        return undefined
 
     children: [
       {

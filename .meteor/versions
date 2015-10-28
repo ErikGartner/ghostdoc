@@ -21,6 +21,7 @@ check@1.1.0
 chuangbo:marked@0.3.5_1
 coffeescript@1.0.11
 datariot:ganalytics@0.2.1
+dburles:collection-helpers@1.0.4
 ddp@1.2.2
 ddp-client@1.2.1
 ddp-common@1.2.2
