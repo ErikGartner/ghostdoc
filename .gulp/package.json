@@ -1,7 +1,7 @@
 {
   "name": "Ghostdoc",
   "description": "Smart Text Viewer",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "dependencies": {
     "gulp": "^3.9.0",
     "gulp-bump": "^1.0.0",
