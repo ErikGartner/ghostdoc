@@ -1,3 +1,13 @@
+<a name="0.3.1"></a>
+## [0.3.1](//compare/0.3.0...v0.3.1) (2015-10-28)
+
+
+### Bug Fixes
+
+* sharing works for accounts-password now aswell. 2f23404
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](//compare/0.2.4...v0.3.0) (2015-10-28)
 
