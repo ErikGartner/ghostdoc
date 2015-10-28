@@ -7,21 +7,6 @@ postProcessPreivew = (html) ->
   console.log 'Post-processing preview...'
   return Tagger.hightlightHTML html, Artifacts.find()
 
-saveText = ->
-  id = Session.get('selectedText')
-  text = simplemde.value()
-
-  if id? and text.trim() == ''
-    Meteor.call 'deleteText', id
-    Session.set('editText', undefined)
-    Session.set('selectedText', undefined)
-  else
-    Meteor.call 'saveText', id, text, (err, res) ->
-      if not err?
-        Session.set('selectedText', res)
-        Session.set('editText', undefined)
-  return
-
 Template.editor.onRendered ->
   opts =
     element: $("#simplemde")[0]
@@ -36,14 +21,7 @@ Template.editor.onRendered ->
       "preview",
       "side-by-side",
       "fullscreen",
-      "guide",
-      "|",
-      {
-        name: "save",
-        action: saveText,
-        className: "fa fa-floppy-o",
-        title: "Save",
-      }
+      "guide"
     ]
     previewRender: (plaintext) ->
       html = marked(plaintext)
@@ -53,7 +31,22 @@ Template.editor.onRendered ->
   Tracker.autorun ->
     simplemde.value Texts.findOne(_id:Session.get('selectedText'))?.text
 
-Template.editor.events
-  'click .token': (event) ->
-    id = $(event.target).data('id')
-    Session.set('selectedArtifact', id)
+Template.editor.helpers
+  editorMode: ->
+    if Session.get 'selectedText'
+      return 'update'
+    else
+      return 'insert'
+
+  editDoc: ->
+    return Texts.findOne(_id:Session.get('selectedText'))
+
+AutoForm.addHooks 'updateText',
+  before:
+    insert: (doc) ->
+      doc.text = simplemde.value()
+      return doc
+
+    update: (doc) ->
+      doc.$set.text = simplemde.value()
+      return doc

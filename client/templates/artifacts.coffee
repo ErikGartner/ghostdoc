@@ -25,9 +25,3 @@ Template.artifacts.events
     Session.set 'selectedArtifact', id
     Session.set 'editArtifactId', undefined
     $('html, body').animate {scrollTop: 0}, 'slow'
-
-AutoForm.addHooks 'addArtifactForm',
-  before:
-    insert: (doc) ->
-      doc.author = Meteor.userId()
-      return doc
