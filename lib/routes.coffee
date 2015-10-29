@@ -1,6 +1,6 @@
 Router.route('/', ->
   GAnalytics.pageview()
-  @render('editor')
+  @render('viewer')
 )
 
 Router.configure
