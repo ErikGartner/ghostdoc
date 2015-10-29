@@ -1,13 +1,34 @@
 <template name="artifact">
   <div id="artifactDiv" class="ui basic segment">
-    <a id="artifactLabel" class="ui top green attached label">{{artifact.name}}</a>
+    <a id="artifactLabel" class="ui top green attached label">{{name}}</a>
     <div class="ui close right rail">
       <div class="ui sticky" style="width: 272px !important; height: 263px !important;">
-        <img class="ui rounded image" src={{artifact.image}}>
+        <img class="ui rounded image" src={{image}}>
       </div>
     </div>
     {{#each references}}
       {{{this}}}
     {{/each}}
   </div>
+</template>
+
+<template name="editArtifact">
+  {{#autoForm collection="Artifacts" doc=this id="editArtifactForm" type="update"}}
+    {{> afQuickField name='name'}}
+    {{> afQuickField name='texts'}}
+    {{> afQuickField name='tokens'}}
+    {{> afQuickField name='image'}}
+    <button type="submit" class="ui blue button">Update</button>
+    {{> quickRemoveButton collection="Artifacts" _id=this._id class="ui red button"}}
+  {{/autoForm}}
+</template>
+
+<template name="addArtifact">
+  {{#autoForm collection="Artifacts" id="addArtifactForm" type="insert"}}
+    {{> afQuickField name='name'}}
+    {{> afQuickField name='texts'}}
+    {{> afQuickField name='tokens'}}
+    {{> afQuickField name='image'}}
+    <button type="submit" class="ui green button">Insert</button>
+  {{/autoForm}}
 </template>

@@ -29,17 +29,15 @@ Template.editor.onRendered ->
   simplemde = new SimpleMDE(opts)
 
   Tracker.autorun ->
-    simplemde.value Texts.findOne(_id:Session.get('selectedText'))?.text
+    simplemde.value @text
 
 Template.editor.helpers
   editorMode: ->
-    if Session.get 'selectedText'
+    console.log @
+    if @_id
       return 'update'
     else
       return 'insert'
-
-  editDoc: ->
-    return Texts.findOne(_id:Session.get('selectedText'))
 
 AutoForm.addHooks 'updateText',
   before:

@@ -3,15 +3,16 @@
   <div class="ui relaxed list">
   {{#each texts}}
     <div class="item">
-      <i class="link icon wrench editIcon" data-id="{{_id}}"></i>
       <div class="content">
-        <span class="header"><a class="listitem textSelector" data-id="{{this._id}}">{{this.name}}</a></span>
+        <span class="header">
+          <a href="{{pathFor route='doc.edit'}}"><i class="link icon wrench editIcon" data-id="{{_id}}"></i></a>
+          <a class="listitem textSelector" href="{{pathFor route='doc.view'}}">{{name}}</a></span>
       </div>
     </div>
   {{/each}}
   </div>
-  <button class="ui fluid green right labeled icon button" id="newIcon">
+    <a href="{{pathFor route='doc.add'}}" class="ui fluid green right labeled icon button">
     <i class="plus icon"></i>
     Add
-  </button>
+  </a>
 </template>

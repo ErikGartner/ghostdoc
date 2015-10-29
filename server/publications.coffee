@@ -1,3 +1,6 @@
+Meteor.publish 'artifacts', ->
+  return Artifacts.find author: @userId
+
 Meteor.publishComposite 'texts', ->
   pub =
     find: ->

@@ -6,7 +6,8 @@ class TaggerClass
   hightlightHTML: (html, artifacts) ->
     artifacts.forEach (artifact) ->
       for token in artifact.tokens
-        linkStart = '<a class="token" data-id="' + artifact._id + '">'
+        linkStart = '<a href="/artifact/' + artifact._id +
+          '"class="token" data-id="' + artifact._id + '">'
         linkEnd = '</a>'
         html = html.replace(TaggerClass.reg(token), linkStart + '$1' + linkEnd)
     return html
