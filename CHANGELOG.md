@@ -1,3 +1,13 @@
+<a name="0.4.1"></a>
+## [0.4.1](//compare/0.4.0...v0.4.1) (2015-10-29)
+
+
+### Bug Fixes
+
+* Now scrolls agains when switching artifact d78920b
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](//compare/0.3.1...v0.4.0) (2015-10-29)
 
