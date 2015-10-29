@@ -39,6 +39,7 @@ class TaggerClass
     # save original rendering in case of
     defaultTextRenderer = renderer.text         # does nothing
     defaultParagraphRender = renderer.paragraph # only adds <p> tags
+    defaultHeadingRender = renderer.heading # only adds <p> tags
 
     # custom rendering function that highlights
     renderer.text = (text) ->
@@ -52,11 +53,21 @@ class TaggerClass
             linkEnd)
       return html
 
+    console.log renderer.heading
+
     # textId is set then add id of text source to each paragraph
     if textId?
       renderer.paragraph = (text) ->
         return '<p class="reference" data-source="' + textId + '">' +
           text + '</p>'
+
+      renderer.heading = (text, level, raw) ->
+        return '<h' + level +
+          ' class="reference"' +
+          ' data-source="' + textId +
+          '" id="' + this.options.headerPrefix +
+          raw.toLowerCase().replace(/[^\w]+/g, '-') + '">' + text +
+          '</h' + level + '>\n';
 
     return marked.parser lexData, {renderer: renderer}
 
