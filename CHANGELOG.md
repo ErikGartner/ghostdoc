@@ -1,3 +1,18 @@
+<a name="0.4.2"></a>
+## [0.4.2](//compare/0.4.1...v0.4.2) (2015-10-29)
+
+
+### Bug Fixes
+
+* Now scrolls everywhere. ec8ff90
+
+### Features
+
+* alt+click on artifact text to jump to source 9e32fcf
+* Default view is now empty rather than add doc c08c9d5
+
+
+
 <a name="0.4.1"></a>
 ## [0.4.1](//compare/0.4.0...v0.4.1) (2015-10-29)
 
