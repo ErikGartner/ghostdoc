@@ -3,8 +3,8 @@ Template.viewer.helpers
     if not @text?
       return
 
-    html = marked(@text)
-    html = Tagger.hightlightHTML html, Artifacts.find(texts: @_id)
+    lexData = Tagger.parseToLexical @text
+    html = Tagger.renderToHtml lexData, Artifacts.find(texts: @_id)
     return html
 
 Template.viewer.events

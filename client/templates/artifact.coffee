@@ -7,9 +7,11 @@ Template.artifact.helpers
     if not @_id?
       return
 
-    htmls = Tagger.extractReferences Texts.find(_id: $in: @texts), @
-    return _.map htmls, (html) ->
-      return Tagger.hightlightHTML html, Artifacts.find()
+    return Texts.find(_id: $in: @texts).map (doc) =>
+      lexData = Tagger.parseToLexical doc.text
+      lexData = Tagger.extractReferences lexData, @
+      return Tagger.renderToHtml lexData, Artifacts.find(texts: doc._id),
+        doc._id
 
 Template.artifact.events
   'click .token': (event) ->

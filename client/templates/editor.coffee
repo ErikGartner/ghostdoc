@@ -1,12 +1,5 @@
 simplemde = undefined
 
-#*
-# Highlights the artifacts
-#
-postProcessPreivew = (html) ->
-  console.log 'Post-processing preview...'
-  return Tagger.hightlightHTML html, Artifacts.find()
-
 Template.editor.onRendered ->
   opts =
     element: $("#simplemde")[0]
@@ -23,9 +16,7 @@ Template.editor.onRendered ->
       "fullscreen",
       "guide"
     ]
-    previewRender: (plaintext) ->
-      html = marked(plaintext)
-      return postProcessPreivew(html)
+
   simplemde = new SimpleMDE(opts)
 
   Tracker.autorun ->
