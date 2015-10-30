@@ -1,14 +1,17 @@
-class TaggerClass
 
-  # [Markdown] -> parseToLexical ->[Lexdata] -> (optionally) extractReferences
-  #  -> [Lexdata] -> renderToHtml -> [HTML]
+# Data flow:
+# [Markdown] -> (opt.) preprocessMarkdown -> [Markdown] -> parseToLexical ->
+# [Lexdata] -> (opt.) extractReferences  -> [Lexdata] -> renderToHtml -> [HTML]
+class TaggerClass
 
   @reg = (token) ->
     return new RegExp('\\b(' + token + ')', 'gi')
 
+  # parses markdown to Lexical token
   parseToLexical: (markdown) ->
     return marked.lexer markdown
 
+  # returns a subset of lexdata that contains tokens of artifact
   extractReferences: (lexData, artifact) ->
     filteredData = []
     filteredData.links = lexData.links
@@ -29,31 +32,36 @@ class TaggerClass
 
     return filteredData
 
+  # Detects and linkifies token
+  preprocessMarkdown: (markdown, artifacts) ->
+    artifacts.forEach (artifact) ->
+      for token in artifact.tokens
+        link = '(' + artifact._id + ' "GHOSTDOC-TOKEN")'
+        markdown = markdown.replace(TaggerClass.reg(token),'[$1]' +
+          link)
+    return markdown
+
+  # this method just renders without highlighting
   renderToBasicHtml: (lexData) ->
-    # this method just renders without highlighting
     return marked.parser lexData
 
-  renderToHtml: (lexData, artifacts, textId) ->
+  # renders the lexdata to highlighted Ghostdoc html.
+  # This method should be called if data has been through preprocessTokens
+  renderToHtml: (lexData, textId) ->
     renderer = new marked.Renderer()
 
     # save original rendering in case of
-    defaultTextRenderer = renderer.text         # does nothing
+    defaultLinkRenderer = renderer.link
     defaultParagraphRender = renderer.paragraph # only adds <p> tags
     defaultHeadingRender = renderer.heading # only adds <p> tags
 
     # custom rendering function that highlights
-    renderer.text = (text) ->
-      html = text # skip calling default renderer to speed up
-      artifacts.forEach (artifact) ->
-        for token in artifact.tokens
-          linkStart = '<a href="/artifact/' + artifact._id +
-            '"class="token" data-id="' + artifact._id + '">'
-          linkEnd = '</a>'
-          html = html.replace(TaggerClass.reg(token), linkStart + '$1' +
-            linkEnd)
-      return html
-
-    console.log renderer.heading
+    renderer.link = (href, title, text) ->
+      if title != 'GHOSTDOC-TOKEN'
+        return defaultLinkRenderer(href, title, text)
+      else
+        return '<a href="/artifact/' + href +
+          '"class="token" data-id="' + href + '">' + text + '</a>'
 
     # textId is set then add id of text source to each paragraph
     if textId?
