@@ -1,3 +1,17 @@
+<a name="0.5.0"></a>
+# [0.5.0](//compare/0.4.2...v0.5.0) (2015-10-30)
+
+
+### Features
+
+* Disabled SimpleMDE editor to speed up editing load time. e3143f5
+
+### Performance Improvements
+
+* improved rendering speeds after problems with new design. dbf8353
+
+
+
 <a name="0.4.2"></a>
 ## [0.4.2](//compare/0.4.1...v0.4.2) (2015-10-29)
 
