@@ -3,7 +3,7 @@
     {{#autoForm collection="Texts" doc=this id="updateText" type=editorMode}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='collaborators'}}
-      {{> afQuickField name='text' rows=6}}
+      {{> afQuickField name='text' rows=15}}
 
       {{#if _id}}
         {{> quickRemoveButton collection="Texts" _id=_id class="ui red button"}}
