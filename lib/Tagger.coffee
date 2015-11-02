@@ -29,6 +29,7 @@ class TaggerClass
               filteredData.push closestsHeader
               closestsHeader = undefined
             filteredData.push item
+            break
 
     return filteredData
 
