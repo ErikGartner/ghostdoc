@@ -1,24 +1,19 @@
 <template name="ApplicationLayout">
   <div class="ui grid">
-    <div class="row">
-      <div class="three wide column">
+    <div class="row" style="padding-top:4em">
+      <div class="one wide column">
       </div>
-      <div class="ten wide column">
-        {{> search}}
-      </div>
-      <div class="three wide column">
-      </div>
-    </div>
-    <div class="row">
       <div class="three wide column">
         {{> texts}}
         {{> artifacts}}
         {{> user}}
       </div>
-      <div class="ten wide column">
+      <div class="eight wide column">
         {{> yield}}
       </div>
       <div class="three wide column">
+      </div>
+      <div class="one wide column">
       </div>
     </div>
   </div>
