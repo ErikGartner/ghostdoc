@@ -1,3 +1,13 @@
+<a name="0.5.1"></a>
+## [0.5.1](//compare/0.5.0...v0.5.1) (2015-11-02)
+
+
+### Bug Fixes
+
+* A bug that resulted in duplicated references 176cbc8
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](//compare/0.4.2...v0.5.0) (2015-10-30)
 

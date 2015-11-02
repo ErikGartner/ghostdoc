@@ -99,3 +99,13 @@ Meteor.users.helpers
     else if @services?.facebook?.email
       return @services.facebook.email
     return undefined
+
+@textIndex = new EasySearch.Index
+  collection: Texts,
+  fields: ['name'],
+  engine: new EasySearch.MongoDB()
+
+@artifactIndex = new EasySearch.Index
+  collection: Artifacts,
+  fields: ['name'],
+  engine: new EasySearch.MongoDB()
