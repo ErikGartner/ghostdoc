@@ -1,0 +1,25 @@
+<template name="infobox">
+  <div class="ui card">
+    {{#if image}}
+      <div class="image">
+        <img class="ui rounded image" src={{image}}>
+      </div>
+    {{/if}}
+    <div class="content">
+      <a class="header">{{name}}</a>
+      <div class="description">
+        <div class="ui list">
+        {{#each gemsItems}}
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">{{name}}</div>
+              <div class="description">{{result}}</div>
+            </div>
+          </a>
+        {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

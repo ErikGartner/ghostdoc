@@ -1,6 +1,9 @@
 Meteor.publish 'artifacts', ->
   return Artifacts.find author: @userId
 
+Meteor.publish 'gems', ->
+  return Gems.find author: @userId
+
 Meteor.publishComposite 'texts', ->
   pub =
     find: ->
@@ -14,6 +17,12 @@ Meteor.publishComposite 'texts', ->
       {
         find: (text) ->
           return Artifacts.find texts: text._id
+
+        children: [
+          find: (text, artifact) ->
+            if artifact.gems?
+              return Gems.find _id:$in:artifact.gems
+        ]
       },
       {
         find: (text) ->

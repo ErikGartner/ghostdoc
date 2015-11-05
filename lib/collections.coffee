@@ -1,5 +1,6 @@
 @Texts = new Mongo.Collection('texts')
 @Artifacts = new Mongo.Collection('artifacts')
+@Gems = new Mongo.Collection('gems')
 
 @Schemas = {}
 Schemas.Texts = new SimpleSchema
@@ -31,6 +32,23 @@ Schemas.Texts = new SimpleSchema
     autoValue: ->
       if @isUpdate or @isInsert
         return new Date()
+
+Schemas.Gem = new SimpleSchema
+  name:
+    type: String
+    label: 'Name'
+    max: 50
+
+  author:
+    type: String
+    label: 'Author'
+    autoValue: ->
+      if @isInsert
+        return Meteor.userId()
+
+  patterns:
+    type: [String]
+    label: 'Pattern'
 
 Schemas.Artifacts = new SimpleSchema
   name:
@@ -67,8 +85,22 @@ Schemas.Artifacts = new SimpleSchema
         return Texts.find(author: Meteor.userId()).map (doc) ->
           return {label: doc.name, value: doc._id}
 
+  gems:
+    type: [String]
+    minCount: 0
+    optional: true
+    label: 'Gems'
+    allowedValues: ->
+      return Gems.find(author: Meteor.userId()).map (doc) ->
+        return doc._id
+    autoform:
+      options: ->
+        return Gems.find(author: Meteor.userId()).map (doc) ->
+          return {label: doc.name, value: doc._id}
+
 Texts.attachSchema Schemas.Texts
 Artifacts.attachSchema Schemas.Artifacts
+Gems.attachSchema Schemas.Gem
 
 Artifacts.allow(
   insert: (userId, doc) ->
@@ -92,6 +124,17 @@ Texts.allow(
     return userId == doc.author
 )
 
+Gems.allow(
+  insert: (userId, doc) ->
+    return userId
+
+  update: (userId, doc) ->
+    return userId == doc.author
+
+  remove: (userId, doc) ->
+    return userId == doc.author
+)
+
 Meteor.users.helpers
   mail: ->
     if @emails?
@@ -99,13 +142,3 @@ Meteor.users.helpers
     else if @services?.facebook?.email
       return @services.facebook.email
     return undefined
-
-@textIndex = new EasySearch.Index
-  collection: Texts,
-  fields: ['name'],
-  engine: new EasySearch.MongoDB()
-
-@artifactIndex = new EasySearch.Index
-  collection: Artifacts,
-  fields: ['name'],
-  engine: new EasySearch.MongoDB()

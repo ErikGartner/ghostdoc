@@ -53,3 +53,18 @@ Router.route '/artifact',
   action: ->
     GAnalytics.pageview()
     @render 'addArtifact'
+
+Router.route '/gem/:_id/edit',
+  name: 'gem.edit'
+  action: ->
+    GAnalytics.pageview()
+    @render 'editGem', {
+      data: ->
+        return Gems.findOne _id: @params._id
+    }
+
+Router.route '/gem',
+  name: 'gem.add'
+  action: ->
+    GAnalytics.pageview()
+    @render 'addGem'

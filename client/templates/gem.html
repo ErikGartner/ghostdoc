@@ -1,0 +1,16 @@
+<template name="editGem">
+  {{#autoForm collection="Gems" doc=this id="editGemForm" type="update"}}
+    {{> afQuickField name='name'}}
+    {{> afQuickField name='patterns'}}
+    <button type="submit" class="ui blue button">Update</button>
+    {{> quickRemoveButton collection="Gems" _id=this._id class="ui red button"}}
+  {{/autoForm}}
+</template>
+
+<template name="addGem">
+  {{#autoForm collection="Gems" id="addGemForm" type="insert"}}
+    {{> afQuickField name='name'}}
+    {{> afQuickField name='patterns'}}
+    <button type="submit" class="ui green button">Insert</button>
+  {{/autoForm}}
+</template>

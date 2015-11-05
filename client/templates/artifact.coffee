@@ -7,6 +7,9 @@ Template.artifact.helpers
     if not @_id?
       return
 
+    console.log Texts.find(_id: $in: @texts).map (doc) =>
+      return GemExtractor.extractGems doc.text, @
+
     return Texts.find(_id: $in: @texts).map (doc) =>
       markdown = Tagger.preprocessMarkdown doc.text,
         Artifacts.find(texts: doc._id)

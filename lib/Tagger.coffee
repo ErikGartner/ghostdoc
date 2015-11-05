@@ -4,6 +4,7 @@
 # [Lexdata] -> (opt.) extractReferences  -> [Lexdata] -> renderToHtml -> [HTML]
 class TaggerClass
 
+  # Regexp for token matching
   @reg = (token) ->
     return new RegExp('\\b(' + token + ')', 'gi')
 
