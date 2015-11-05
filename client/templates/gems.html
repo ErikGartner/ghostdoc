@@ -1,0 +1,18 @@
+<template name="gems">
+  <h2>Gems</h2>
+  <div class="ui relaxed list">
+    {{#each gems}}
+      <div class="item">
+        <div class="content">
+          <span class="header"><i class="diamond icon editArtifact"></i>
+            <a class="listitem selectArtifact" data-id="{{_id}}" href="{{pathFor route='gem.edit'}}">{{name}}</a></span>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
+  <a href="{{pathFor route='gem.add'}}" class="ui fluid green right labeled icon button">
+    <i class="plus icon"></i>
+    Add
+  </a>
+</template>
