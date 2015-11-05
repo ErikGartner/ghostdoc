@@ -20,8 +20,7 @@ Meteor.publishComposite 'texts', ->
 
         children: [
           find: (text, artifact) ->
-            if artifact.gems?
-              return Gems.find _id:$in:artifact.gems
+            return Gems.find artifacts: artifact._id
         ]
       },
       {

@@ -50,6 +50,19 @@ Schemas.Gem = new SimpleSchema
     type: [String]
     label: 'Pattern'
 
+  artifacts:
+    type: [String]
+    minCount: 0
+    optional: true
+    label: 'Artifacts'
+    allowedValues: ->
+      return Artifacts.find(author: Meteor.userId()).map (doc) ->
+        return doc._id
+    autoform:
+      options: ->
+        return Artifacts.find(author: Meteor.userId()).map (doc) ->
+          return {label: doc.name, value: doc._id}
+
 Schemas.Artifacts = new SimpleSchema
   name:
     type: String
@@ -83,19 +96,6 @@ Schemas.Artifacts = new SimpleSchema
     autoform:
       options: ->
         return Texts.find(author: Meteor.userId()).map (doc) ->
-          return {label: doc.name, value: doc._id}
-
-  gems:
-    type: [String]
-    minCount: 0
-    optional: true
-    label: 'Gems'
-    allowedValues: ->
-      return Gems.find(author: Meteor.userId()).map (doc) ->
-        return doc._id
-    autoform:
-      options: ->
-        return Gems.find(author: Meteor.userId()).map (doc) ->
           return {label: doc.name, value: doc._id}
 
 Texts.attachSchema Schemas.Texts

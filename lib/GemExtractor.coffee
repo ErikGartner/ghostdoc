@@ -12,9 +12,8 @@ class GemExtractorClass
     return RegExp(pattern, 'i')
 
   # Extracts all data related to a gem for one artifcact.
-  @extractGem = (text, g, artifact) ->
+  @extractGem = (text, gem, artifact) ->
     results = []
-    gem = Gems.findOne _id:g
     if not gem?
       return undefined
 
@@ -39,9 +38,7 @@ class GemExtractorClass
   # Searches for and extracts all gems
   extractGems: (text, artifact) ->
     gems = []
-    if not artifact.gems?
-      return gems
-    for gem in artifact.gems
+    Gems.find(artifacts:artifact._id).forEach (gem) ->
       result = GemExtractorClass.extractGem text, gem, artifact
       if result?
         gems.push result
