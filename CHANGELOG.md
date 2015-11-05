@@ -1,3 +1,13 @@
+<a name="0.7.0"></a>
+# [0.7.0](//compare/0.6.0...v0.7.0) (2015-11-05)
+
+
+### Bug Fixes
+
+* Gems are now easier to connect to artifacts a55b2ce
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](//compare/0.5.2...v0.6.0) (2015-11-05)
 
