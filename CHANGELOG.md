@@ -1,3 +1,17 @@
+<a name="0.5.2"></a>
+## [0.5.2](//compare/0.5.1...v0.5.2) (2015-11-05)
+
+
+### Bug Fixes
+
+* removed unfinished features 469e7e3
+
+### Features
+
+* Added Gems 4f01bfa
+
+
+
 <a name="0.5.1"></a>
 ## [0.5.1](//compare/0.5.0...v0.5.1) (2015-11-02)
 
