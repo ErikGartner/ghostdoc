@@ -1,3 +1,13 @@
+<a name="0.7.2"></a>
+## [0.7.2](//compare/0.7.1...v0.7.2) (2015-11-29)
+
+
+### Bug Fixes
+
+* Minor bug with longest match f838014
+
+
+
 <a name="0.7.1"></a>
 ## [0.7.1](//compare/0.7.0...v0.7.1) (2015-11-29)
 
