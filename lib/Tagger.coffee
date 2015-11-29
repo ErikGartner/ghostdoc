@@ -9,8 +9,8 @@ class TaggerClass
     return new RegExp('\\b(' + token + ')', 'gi')
 
   @longestFirst = (a, b) ->
-    e1 = b.length
-    e2 = a.length
+    e1 = b?.length
+    e2 = a?.length
     return e1>e2 ? 1 : ( e1<e2 ? -1 : 0 )
 
   # parses markdown to Lexical token
