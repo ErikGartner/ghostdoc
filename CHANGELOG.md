@@ -1,3 +1,13 @@
+<a name="0.7.1"></a>
+## [0.7.1](//compare/0.7.0...v0.7.1) (2015-11-29)
+
+
+### Features
+
+* Now uses longest match for tags 6a26511
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](//compare/0.6.0...v0.7.0) (2015-11-05)
 
