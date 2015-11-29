@@ -42,7 +42,7 @@ class TaggerClass
   # Detects and linkifies token
   preprocessMarkdown: (markdown, artifacts) ->
     artifacts.forEach (artifact) ->
-      tokens = artifact.tokens.sort(TaggerClass.lengthSort)
+      tokens = artifact.tokens.sort(TaggerClass.longestFirst)
       for token in tokens
         link = '(' + artifact._id + ' "GHOSTDOC-TOKEN")'
         markdown = markdown.replace(TaggerClass.reg(token),'[$1]' +
