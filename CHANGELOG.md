@@ -1,3 +1,13 @@
+<a name="0.7.3"></a>
+## [0.7.3](//compare/0.7.2...v0.7.3) (2015-11-29)
+
+
+### Bug Fixes
+
+* Crash when comparing null 10304fa
+
+
+
 <a name="0.7.2"></a>
 ## [0.7.2](//compare/0.7.1...v0.7.2) (2015-11-29)
 
