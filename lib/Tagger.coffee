@@ -8,6 +8,11 @@ class TaggerClass
   @reg = (token) ->
     return new RegExp('\\b(' + token + ')', 'gi')
 
+  @longestFirst = (a, b) ->
+    e1 = b.length
+    e2 = a.length
+    return e1>e2 ? 1 : ( e1<e2 ? -1 : 0 )
+
   # parses markdown to Lexical token
   parseToLexical: (markdown) ->
     return marked.lexer markdown
@@ -37,7 +42,8 @@ class TaggerClass
   # Detects and linkifies token
   preprocessMarkdown: (markdown, artifacts) ->
     artifacts.forEach (artifact) ->
-      for token in artifact.tokens
+      tokens = artifact.tokens.sort(TaggerClass.lengthSort)
+      for token in tokens
         link = '(' + artifact._id + ' "GHOSTDOC-TOKEN")'
         markdown = markdown.replace(TaggerClass.reg(token),'[$1]' +
           link)
