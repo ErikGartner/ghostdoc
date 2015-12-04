@@ -1,3 +1,13 @@
+<a name="0.7.4"></a>
+## [0.7.4](//compare/0.7.3...v0.7.4) (2015-12-04)
+
+
+### Features
+
+* Now loads METEOR_SETTING on build 51e427c
+
+
+
 <a name="0.7.3"></a>
 ## [0.7.3](//compare/0.7.2...v0.7.3) (2015-11-29)
 

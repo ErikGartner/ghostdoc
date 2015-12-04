@@ -43,6 +43,7 @@ class TaggerClass
   preprocessMarkdown: (markdown, artifacts) ->
     artifacts.forEach (artifact) ->
       tokens = artifact.tokens.sort(TaggerClass.longestFirst)
+      console.log tokens
       for token in tokens
         link = '(' + artifact._id + ' "GHOSTDOC-TOKEN")'
         markdown = markdown.replace(TaggerClass.reg(token),'[$1]' +
