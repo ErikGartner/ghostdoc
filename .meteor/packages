@@ -21,7 +21,6 @@ semantic:ui-css
 iandouglas:accounts-ui-semantic-ui
 aldeed:collection2
 iron:router
-datariot:ganalytics
 reywood:publish-composite
 accounts-facebook
 silentcicero:string.js
@@ -31,3 +30,4 @@ aldeed:autoform
 fabienb4:autoform-semantic-ui
 aldeed:delete-button
 dburles:collection-helpers
+okgrow:analytics

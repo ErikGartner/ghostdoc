@@ -1,7 +1,7 @@
 {
   "public": {
-    "ga": {
-      "account": "UA-71930396-1"
+    "analyticsSettings": {
+      "Google Analytics" : {"trackingId": "UA-71930396-1"}
     },
     "ghostdoc": {
       "version": "0.7.6"

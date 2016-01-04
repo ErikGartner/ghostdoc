@@ -23,7 +23,6 @@ callback-hook@1.0.4
 check@1.1.0
 chuangbo:marked@0.3.5_1
 coffeescript@1.0.11
-datariot:ganalytics@0.2.1
 dburles:collection-helpers@1.0.4
 ddp@1.2.2
 ddp-client@1.2.1
@@ -73,6 +72,7 @@ npm-mongo@1.4.39_1
 oauth@1.1.6
 oauth2@1.1.5
 observe-sequence@1.0.7
+okgrow:analytics@1.0.4
 ordered-dict@1.0.4
 promise@0.5.1
 raix:eventemitter@0.1.3
