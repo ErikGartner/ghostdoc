@@ -1,0 +1,102 @@
+<template name="selector">
+  <div class="ui large breadcrumb">
+    <span class="section">{{> loginButtons}}</span>
+    <i class="right chevron icon divider"></i>
+    <span class="section">{{> selector_project}}</span>
+    <i class="right chevron icon divider"></i>
+    <span class="section">{{> selector_view}}</span>
+  </div>
+</template>
+
+<template name="selector_project">
+  <div class="ui dropdown">
+  <i class="sort icon"></i>
+  <span class="text">Projects</span>
+  <div class="menu">
+    <div class="ui icon search input">
+      <i class="search icon"></i>
+      <input type="text" placeholder="Search projects...">
+    </div>
+    <div class="divider"></div>
+    <div class="header">
+      <i class="sort icon"></i>
+      Projects
+    </div>
+    <div class="scrolling menu">
+      <div class="item">
+        <div class="ui red empty circular label"></div>
+        Important
+      </div>
+      <div class="item">
+        <div class="ui blue empty circular label"></div>
+        Announcement
+      </div>
+      <div class="item">
+        <div class="ui black empty circular label"></div>
+        Cannot Fix
+      </div>
+      <div class="item">
+        <div class="ui purple empty circular label"></div>
+        News
+      </div>
+      <div class="item">
+        <div class="ui orange empty circular label"></div>
+        Enhancement
+      </div>
+      <div class="item">
+        <div class="ui empty circular label"></div>
+        Change Declined
+      </div>
+      <div class="item">
+        <div class="ui yellow empty circular label"></div>
+        Off Topic
+      </div>
+      <div class="item">
+        <div class="ui pink empty circular label"></div>
+        Interesting
+      </div>
+      <div class="item">
+        <div class="ui green empty circular label"></div>
+        Discussion
+      </div>
+    </div>
+  </div>
+</div>
+</template>
+
+<template name="selector_view">
+  <div class="ui dropdown">
+  <span class="text">Source/Artifact</span>
+  <div class="menu">
+    <div class="ui icon search input">
+      <i class="search icon"></i>
+      <input type="text" placeholder="Search...">
+    </div>
+    <div class="divider"></div>
+    <div class="header">
+      <i class="file icon"></i>
+      Sources
+    </div>
+    <div class="scrolling menu">
+      {{#each texts}}
+        <div class="item" data-value="{{_id}}" data-type="doc">
+          <i class="file icon"></i>
+          {{name}}
+        </div>
+      {{/each}}
+    </div>
+    <div class="header">
+      <i class="tag icon"></i>
+      Artifacts
+    </div>
+    <div class="scrolling menu">
+      {{#each artifacts}}
+        <div class="item" data-value="{{_id}}" data-type="artifact">
+          <i class="tag icon"></i>
+          {{name}}
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+</template>

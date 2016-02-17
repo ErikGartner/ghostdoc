@@ -1,11 +1,6 @@
 <template name="artifact">
-  <div id="artifactDiv" class="ui basic segment">
-    <a id="artifactLabel" class="ui top green attached label">{{name}}</a>
-    <div class="ui close right rail">
-      <div class="ui sticky" style="width: 272px !important; height: 263px !important;">
-        {{> infobox}}
-      </div>
-    </div>
+  <div id="artifactDiv">
+    {{> infobox}}
     {{#each references}}
       {{{this}}}
     {{/each}}

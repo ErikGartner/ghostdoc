@@ -22,7 +22,6 @@ iandouglas:accounts-ui-semantic-ui
 aldeed:collection2
 iron:router
 reywood:publish-composite
-accounts-facebook
 silentcicero:string.js
 chuangbo:marked
 check
@@ -31,3 +30,6 @@ fabienb4:autoform-semantic-ui
 aldeed:delete-button
 dburles:collection-helpers
 okgrow:analytics
+accounts-password
+msavin:mongol
+accounts-facebook

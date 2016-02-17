@@ -1,20 +1,22 @@
 <template name="ApplicationLayout">
-  <div class="ui grid">
-    <div class="row" style="padding-top:4em">
-      <div class="one wide column">
+  {{> sidebar}}
+
+  <div class="pusher">
+    <div class="ui container">
+      <div class="ui centered stackable grid">
+        <div class="row" style="padding-top:2em;">
+          <div class="six wide column">
+            {{> header}}
+          </div>
+          <div class="six wide column right aligned" style="padding-top:0.7em;">
+             {{> selector}}
+           </div>
+        </div>
       </div>
-      <div class="three wide column">
-        {{> texts}}
-        {{> artifacts}}
-        {{> gems}}
-        {{> user}}
-      </div>
-      <div class="eight wide column">
-        {{> yield}}
-      </div>
-      <div class="three wide column">
-      </div>
-      <div class="one wide column">
+      <div class="ui centered stackable grid">
+        <div class="twelve wide column">
+          {{> yield}}
+        </div>
       </div>
     </div>
   </div>
