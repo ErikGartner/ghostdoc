@@ -1,3 +1,71 @@
 <template name="project">
-  PRject!
+
+  <h2><a href="{{pathFor route='project.edit'}}"><i class="icon edit"></i></a>{{name}}</h2>
+  <p>{{description}}</p>
+  <div class="ui three column grid">
+    <div class="row">
+      <div class="three wide column">
+        <h3>Collaborators</h3>
+        <ul>
+        {{#each collaborators}}
+          <li>{{this}}</li>
+        {{/each}}
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="column">
+        <h3>Sources</h3>
+        <ul>
+          {{#each sources}}
+          <li>{{name}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      <div class="column">
+        <h3>Artifacts</h3>
+        <ul>
+          {{#each artifacts}}
+          <li>{{name}}</li>
+          {{/each}}
+        </ul>
+      </div>
+
+      <div class="column">
+        <h3>Gems</h3>
+        <ul>
+          {{#each gems}}
+          <li>{{name}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<template name="addProject">
+  {{#autoForm collection="Projects" id="addProjectForm" type="insert"}}
+    {{> afQuickField name='name'}}
+    {{> afQuickField name='description' rows=5}}
+    {{> afQuickField name='sources'}}
+    {{> afQuickField name='artifacts'}}
+    {{> afQuickField name='gems'}}
+    {{> afQuickField name='collaborators'}}
+    <button type="submit" class="ui green button">Insert</button>
+  {{/autoForm}}
+</template>
+
+<template name="editProject">
+  {{#autoForm collection="Projects" doc=this id="editProjectForm" type="update"}}
+    {{> afQuickField name='name'}}
+    {{> afQuickField name='description' rows=5}}
+    {{> afQuickField name='sources'}}
+    {{> afQuickField name='artifacts'}}
+    {{> afQuickField name='gems'}}
+    {{> afQuickField name='collaborators'}}
+    <button type="submit" class="ui blue button">Update</button>
+    {{> quickRemoveButton collection="Projects" _id=this._id class="ui red button"}}
+  {{/autoForm}}
 </template>

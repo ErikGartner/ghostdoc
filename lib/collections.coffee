@@ -1,9 +1,10 @@
 @Texts = new Mongo.Collection('texts')
 @Artifacts = new Mongo.Collection('artifacts')
 @Gems = new Mongo.Collection('gems')
+@Projects = new Mongo.Collection('projects')
 
 @Schemas = {}
-Schemas.Texts = new SimpleSchema
+Schemas.Text = new SimpleSchema
   name:
     type: String
     label: 'Name'
@@ -19,12 +20,6 @@ Schemas.Texts = new SimpleSchema
   text:
     type: String
     label: 'Text'
-
-  collaborators:
-    type: [String]
-    optional: true
-    minCount: 0
-    label: 'Collaborator email'
 
   updatedAt:
     type: Date
@@ -63,7 +58,7 @@ Schemas.Gem = new SimpleSchema
         return Artifacts.find(author: Meteor.userId()).map (doc) ->
           return {label: doc.name, value: doc._id}
 
-Schemas.Artifacts = new SimpleSchema
+Schemas.Artifact = new SimpleSchema
   name:
     type: String
     label: 'Name'
@@ -86,7 +81,31 @@ Schemas.Artifacts = new SimpleSchema
       if @isInsert
         return Meteor.userId()
 
-  texts:
+Schemas.Project = new SimpleSchema
+  name:
+    type: String
+    label: 'Name'
+    max: 300
+
+  description:
+    type: String
+    label: 'Description'
+    max: 1000
+
+  author:
+    type: String
+    label: 'Author ID'
+    autoValue: ->
+      if @isInsert
+        return Meteor.userId()
+
+  collaborators:
+    type: [String]
+    optional: true
+    minCount: 0
+    label: 'Collaborator email'
+
+  sources:
     type: [String]
     minCount: 1
     label: 'Source Documents'
@@ -98,9 +117,36 @@ Schemas.Artifacts = new SimpleSchema
         return Texts.find(author: Meteor.userId()).map (doc) ->
           return {label: doc.name, value: doc._id}
 
-Texts.attachSchema Schemas.Texts
-Artifacts.attachSchema Schemas.Artifacts
+  artifacts:
+    type: [String]
+    minCount: 0
+    optional: true
+    label: 'Artifacts'
+    allowedValues: ->
+      return Artifacts.find(author: Meteor.userId()).map (doc) ->
+        return doc._id
+    autoform:
+      options: ->
+        return Artifacts.find(author: Meteor.userId()).map (doc) ->
+          return {label: doc.name, value: doc._id}
+
+  gems:
+    type: [String]
+    minCount: 0
+    optional: true
+    label: 'Gems'
+    allowedValues: ->
+      return Gems.find(author: Meteor.userId()).map (doc) ->
+        return doc._id
+    autoform:
+      options: ->
+        return Gems.find(author: Meteor.userId()).map (doc) ->
+          return {label: doc.name, value: doc._id}
+
+Texts.attachSchema Schemas.Text
+Artifacts.attachSchema Schemas.Artifact
 Gems.attachSchema Schemas.Gem
+Projects.attachSchema Schemas.Project
 
 Artifacts.allow(
   insert: (userId, doc) ->
@@ -125,6 +171,17 @@ Texts.allow(
 )
 
 Gems.allow(
+  insert: (userId, doc) ->
+    return userId
+
+  update: (userId, doc) ->
+    return userId == doc.author
+
+  remove: (userId, doc) ->
+    return userId == doc.author
+)
+
+Projects.allow(
   insert: (userId, doc) ->
     return userId
 

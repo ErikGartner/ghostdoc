@@ -10,4 +10,8 @@ Template.selector_view.helpers
     return Texts.find()
 
   artifacts: ->
-    return Artifacts.find {}, {sort:{name: 1}}
+    return Artifacts.find {}, {sort: {name: 1}}
+
+Template.selector_project.helpers
+  projects: ->
+    return Projects.find()

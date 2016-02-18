@@ -4,6 +4,9 @@ Meteor.publish 'artifacts', ->
 Meteor.publish 'gems', ->
   return Gems.find author: @userId
 
+Meteor.publish 'projects', ->
+  return Projects.find author: @userId
+
 Meteor.publishComposite 'texts', ->
   pub =
     find: ->

@@ -61,7 +61,23 @@ Router.route '/gem',
   action: ->
     @render 'addGem'
 
+Router.route '/project',
+  name: 'project.add',
+  action: ->
+    @render 'addProject'
+
 Router.route '/project/:_id',
   name: 'project.view',
   action: ->
-    @render 'project'
+    @render 'project', {
+      data: ->
+        return Projects.findOne _id: @params._id
+    }
+
+Router.route '/project/:_id/edit',
+  name: 'project.edit',
+  action: ->
+    @render 'editProject', {
+      data: ->
+        return Projects.findOne _id: @params._id
+    }
