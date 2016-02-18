@@ -1,9 +1,10 @@
 Template.infobox.helpers
 
   gemsItems: ->
-    if not @_id?
+    projectId = Router.current().params._projectId
+    if not @_id or not projectId?
       return
-    gems = Texts.find(_id: $in: @texts).map (doc) =>
-      GemExtractor.extractGems doc.text, @
-    gems = _.flatten gems, true
+
+    gems = GemExtractor.extractGems projectId, @_id
+    console.log gems
     return gems

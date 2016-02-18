@@ -45,19 +45,6 @@ Schemas.Gem = new SimpleSchema
     type: [String]
     label: 'Pattern'
 
-  artifacts:
-    type: [String]
-    minCount: 0
-    optional: true
-    label: 'Artifacts'
-    allowedValues: ->
-      return Artifacts.find(author: Meteor.userId()).map (doc) ->
-        return doc._id
-    autoform:
-      options: ->
-        return Artifacts.find(author: Meteor.userId()).map (doc) ->
-          return {label: doc.name, value: doc._id}
-
 Schemas.Artifact = new SimpleSchema
   name:
     type: String

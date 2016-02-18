@@ -1,3 +1,9 @@
+Meteor.publish 'gems', ->
+  return Gems.find author: @userId
+
+Meteor.publish 'artifacts', ->
+  return Artifacts.find author: @userId
+
 Meteor.publishComposite 'projects', ->
   pub =
     find: ->
