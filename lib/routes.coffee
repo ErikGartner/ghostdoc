@@ -1,9 +1,10 @@
-Router.route('/', ->
-  @render('viewer')
-)
-
 Router.configure
   layoutTemplate: 'ApplicationLayout'
+
+Router.route '/',
+  name: 'home'
+  action: ->
+    @render 'viewer'
 
 Router.route '/doc',
   name: 'doc.add'
@@ -59,3 +60,8 @@ Router.route '/gem',
   name: 'gem.add'
   action: ->
     @render 'addGem'
+
+Router.route '/project/:_id',
+  name: 'project.view',
+  action: ->
+    @render 'project'
