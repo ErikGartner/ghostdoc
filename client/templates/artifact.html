@@ -10,21 +10,25 @@
 </template>
 
 <template name="editArtifact">
-  {{#autoForm collection="Artifacts" doc=this id="editArtifactForm" type="update"}}
-    {{> afQuickField name='name'}}
-    {{> afQuickField name='tokens'}}
-    {{> afQuickField name='image'}}
-    <button type="submit" class="ui blue button">Update</button>
-    {{> quickRemoveButton collection="Artifacts" _id=this._id class="ui red button"}}
-  {{/autoForm}}
+  <div>
+    {{#autoForm collection="Artifacts" doc=this id="editArtifactForm" type="update"}}
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='tokens'}}
+      {{> afQuickField name='image'}}
+      <button type="submit" class="ui blue button">Update</button>
+      {{> quickRemoveButton collection="Artifacts" _id=this._id class="ui red button"}}
+    {{/autoForm}}
+  </div>
 </template>
 
 <template name="addArtifact">
-  {{#autoForm collection="Artifacts" id="addArtifactForm" type="insert"}}
-    {{> afQuickField name='name'}}
-    {{> afQuickField name='texts'}}
-    {{> afQuickField name='tokens'}}
-    {{> afQuickField name='image'}}
-    <button type="submit" class="ui green button">Insert</button>
-  {{/autoForm}}
+  <div>
+    {{#autoForm collection="Artifacts" id="addArtifactForm" type="insert"}}
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='texts'}}
+      {{> afQuickField name='tokens'}}
+      {{> afQuickField name='image'}}
+      <button type="submit" class="ui green button">Insert</button>
+    {{/autoForm}}
+  </div>
 </template>
