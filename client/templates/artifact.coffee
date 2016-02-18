@@ -4,8 +4,7 @@ Template.artifact.helpers
     if not @_id?
       return
 
-    projectId = Router.current().params._projectId
-    project = Projects.findOne(_id: projectId)
+    project = Projects.findOne(_id: @projectId)
     sources = Texts.find(_id: $in: project.sources)
     artifacts = Artifacts.find(_id: $in: project.artifacts)
 
@@ -15,16 +14,12 @@ Template.artifact.helpers
       lexData = Tagger.extractReferences lexData, @
       return Tagger.renderToHtml lexData, doc._id
 
-  projectId: ->
-    return Router.current().params._projectId
-
 Template.artifact.events
   'click a.token': (event) ->
-    currentId = Router.current().params._id
     id = $(event.target).data('id')
-    if id == currentId
-      return
     projectId = Router.current().params._projectId
+    if id == projectId
+      return
     Router.go 'artifact.view', {_projectId: projectId, _id: id}
     $('html, body').animate {scrollTop: 0}, 'slow'
 

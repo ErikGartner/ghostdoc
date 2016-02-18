@@ -16,7 +16,9 @@ Router.route '/project/:_projectId',
   action: ->
     @render 'project', {
       data: ->
-        return Projects.findOne _id: @params._projectId
+        data = {projectId: @params._projectId}
+        _.extend data, Projects.findOne _id: @params._projectId
+        return data
     }
 
 Router.route '/project/:_projectId/edit',
@@ -24,10 +26,12 @@ Router.route '/project/:_projectId/edit',
   action: ->
     @render 'editProject', {
       data: ->
-        return Projects.findOne _id: @params._projectId
+        data = {projectId: @params._projectId}
+        _.extend data, Projects.findOne _id: @params._projectId
+        return data
     }
 
-Router.route '/doc',
+Router.route '/project/:_projectId/doc',
   name: 'doc.add'
   action: ->
     @render 'editor'
@@ -37,7 +41,9 @@ Router.route '/project/:_projectId/doc/:_id/edit',
   action: ->
     @render 'editor', {
       data: ->
-        return Texts.findOne _id: @params._id
+        data = {projectId: @params._projectId}
+        _.extend data, Texts.findOne _id: @params._id
+        return data
     }
 
 Router.route '/project/:_projectId/doc/:_id',
@@ -45,7 +51,9 @@ Router.route '/project/:_projectId/doc/:_id',
   action: ->
     @render 'viewer', {
       data: ->
-        return Texts.findOne _id: @params._id
+        data = {projectId: @params._projectId}
+        _.extend data, Texts.findOne _id: @params._id
+        return data
     }
 
 Router.route '/project/:_projectId/artifact',
@@ -58,7 +66,9 @@ Router.route '/project/:_projectId/artifact/:_id',
   action: ->
     @render 'artifact', {
       data: ->
-        return Artifacts.findOne _id: @params._id
+        data = {projectId: @params._projectId}
+        _.extend data, Artifacts.findOne _id: @params._id
+        return data
     }
 
 Router.route '/project/:_projectId/artifact/:_id/edit',
@@ -66,7 +76,9 @@ Router.route '/project/:_projectId/artifact/:_id/edit',
   action: ->
     @render 'editArtifact', {
       data: ->
-        return Artifacts.findOne _id: @params._id
+        data = {projectId: @params._projectId}
+        _.extend data, Artifacts.findOne _id: @params._id
+        return data
     }
 
 Router.route '/project/:_projectId/gem',
@@ -79,5 +91,7 @@ Router.route '/project/:_projectId/gem/:_id/edit',
   action: ->
     @render 'editGem', {
       data: ->
-        return Gems.findOne _id: @params._id
+        data = {projectId: @params._projectId}
+        _.extend data, Gems.findOne _id: @params._id
+        return data
     }

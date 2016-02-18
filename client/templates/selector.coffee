@@ -1,8 +1,8 @@
 Template.selector_view.onRendered ->
   $('#selector_view').dropdown
-    onChange: (value, text, $selectedItem) ->
-      type = $($selectedItem).data('type')
+    onChange: (value, text, $selectedItem) =>
       projectId = Router.current().params._projectId
+      type = $($selectedItem).data('type')
       Router.go type + '.view', {_projectId: projectId, _id: value}
 
 Template.selector_project.onRendered ->
@@ -12,7 +12,8 @@ Template.selector_project.onRendered ->
 
 Template.selector_view.helpers
   texts: ->
-    project = Projects.findOne _id: Router.current().params._projectId
+    projectId = Router.current().params._projectId
+    project = Projects.findOne _id: projectId
     if project?.sources?
       return Texts.find {_id: $in: project.sources}
 
@@ -20,7 +21,7 @@ Template.selector_view.helpers
     projectId = Router.current().params._projectId
     if not projectId?
       return
-    project = Projects.findOne _id: Router.current().params._projectId
+    project = Projects.findOne _id: projectId
     if project?.artifacts?
       return Artifacts.find {_id: $in: project.artifacts}, {sort: {name: 1}}
 
