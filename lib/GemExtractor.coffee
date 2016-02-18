@@ -40,8 +40,8 @@ class GemExtractorClass
     data = []
 
     artifact = Artifacts.findOne(_id: artifactId)
-    gemsIds = Projects.findOne(_id: projectId).gems
-    sourceIds = Projects.findOne(_id: projectId).sources
+    gemsIds = Projects.findOne(_id: projectId)?.gems
+    sourceIds = Projects.findOne(_id: projectId)?.sources
     if not gemsIds or not artifact?
       return
 

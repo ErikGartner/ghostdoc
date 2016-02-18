@@ -4,9 +4,13 @@ Template.artifact.helpers
     if not @_id?
       return
 
-    return Texts.find(_id: $in: @texts).map (doc) =>
-      markdown = Tagger.preprocessMarkdown doc.text,
-        Artifacts.find(texts: doc._id)
+    projectId = Router.current().params._projectId
+    project = Projects.findOne(_id: projectId)
+    sources = Texts.find(_id: $in: project.sources)
+    artifacts = Artifacts.find(_id: $in: project.artifacts)
+
+    return sources.map (doc) =>
+      markdown = Tagger.preprocessMarkdown doc.text, artifacts
       lexData = Tagger.parseToLexical markdown
       lexData = Tagger.extractReferences lexData, @
       return Tagger.renderToHtml lexData, doc._id

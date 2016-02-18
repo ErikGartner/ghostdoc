@@ -6,5 +6,5 @@ Template.infobox.helpers
       return
 
     gems = GemExtractor.extractGems projectId, @_id
-    console.log gems
+    gems = _.flatten gems, true
     return gems

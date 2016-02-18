@@ -48,6 +48,11 @@ Router.route '/project/:_projectId/doc/:_id',
         return Texts.findOne _id: @params._id
     }
 
+Router.route '/project/:_projectId/artifact',
+  name: 'artifact.add'
+  action: ->
+    @render 'addArtifact'
+
 Router.route '/project/:_projectId/artifact/:_id',
   name: 'artifact.view'
   action: ->
@@ -64,20 +69,15 @@ Router.route '/project/:_projectId/artifact/:_id/edit',
         return Artifacts.findOne _id: @params._id
     }
 
-Router.route '/artifact',
-  name: 'artifact.add'
+Router.route '/project/:_projectId/gem',
+  name: 'gem.add'
   action: ->
-    @render 'addArtifact'
+    @render 'addGem'
 
-Router.route '/gem/:_id/edit',
+Router.route '/project/:_projectId/gem/:_id/edit',
   name: 'gem.edit'
   action: ->
     @render 'editGem', {
       data: ->
         return Gems.findOne _id: @params._id
     }
-
-Router.route '/gem',
-  name: 'gem.add'
-  action: ->
-    @render 'addGem'

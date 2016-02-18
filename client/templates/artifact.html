@@ -1,7 +1,7 @@
 <template name="artifact">
   <h1><a href="{{pathFor route='artifact.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}}</h1>
   <div class="ui divider"></div>
-  
+
   <div id="artifactDiv" class="ui fluid container">
     {{> infobox}}
     {{#each references}}
@@ -26,7 +26,6 @@
   <div>
     {{#autoForm collection="Artifacts" id="addArtifactForm" type="insert"}}
       {{> afQuickField name='name'}}
-      {{> afQuickField name='texts'}}
       {{> afQuickField name='tokens'}}
       {{> afQuickField name='image'}}
       <button type="submit" class="ui green button">Insert</button>

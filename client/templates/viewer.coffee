@@ -3,7 +3,11 @@ Template.viewer.helpers
     if not @text?
       return
 
-    markdown = Tagger.preprocessMarkdown @text, Artifacts.find(texts: @_id)
+    projectId = Router.current().params._projectId
+    project = Projects.findOne(_id: projectId)
+    artifacts = Artifacts.find(_id: $in: project.artifacts)
+
+    markdown = Tagger.preprocessMarkdown @text, artifacts
     lexData = Tagger.parseToLexical markdown
     html = Tagger.renderToHtml lexData
     return html
