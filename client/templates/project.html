@@ -1,6 +1,6 @@
 <template name="project">
 
-  <h2><a href="{{pathFor route='project.edit' _projectId=_id}}"><i class="icon edit"></i></a>{{name}}</h2>
+  <h1><a href="{{pathFor route='project.edit' _projectId=_id}}"><i class="icon edit"></i></a>{{name}}</h1>
 
   <p><i>{{description}}</i></p>
 
@@ -48,26 +48,30 @@
 </template>
 
 <template name="addProject">
-  {{#autoForm collection="Projects" id="addProjectForm" type="insert"}}
-    {{> afQuickField name='name'}}
-    {{> afQuickField name='description' rows=5}}
-    {{> afQuickField name='sources'}}
-    {{> afQuickField name='artifacts'}}
-    {{> afQuickField name='gems'}}
-    {{> afQuickField name='collaborators'}}
-    <button type="submit" class="ui green button">Insert</button>
-  {{/autoForm}}
+  <div>
+    {{#autoForm collection="Projects" id="addProjectForm" type="insert"}}
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='description' rows=5}}
+      {{> afQuickField name='sources'}}
+      {{> afQuickField name='artifacts'}}
+      {{> afQuickField name='gems'}}
+      {{> afQuickField name='collaborators'}}
+      <button type="submit" class="ui green button">Insert</button>
+    {{/autoForm}}
+  </div>
 </template>
 
 <template name="editProject">
-  {{#autoForm collection="Projects" doc=this id="editProjectForm" type="update"}}
-    {{> afQuickField name='name'}}
-    {{> afQuickField name='description' rows=5}}
-    {{> afQuickField name='sources'}}
-    {{> afQuickField name='artifacts'}}
-    {{> afQuickField name='gems'}}
-    {{> afQuickField name='collaborators'}}
-    <button type="submit" class="ui blue button">Update</button>
-    {{> quickRemoveButton collection="Projects" _id=this._id class="ui red button"}}
-  {{/autoForm}}
+  <div>
+    {{#autoForm collection="Projects" doc=this id="editProjectForm" type="update"}}
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='description' rows=5}}
+      {{> afQuickField name='sources'}}
+      {{> afQuickField name='artifacts'}}
+      {{> afQuickField name='gems'}}
+      {{> afQuickField name='collaborators'}}
+      <button type="submit" class="ui blue button">Update</button>
+      {{> quickRemoveButton collection="Projects" _id=this._id class="ui red button"}}
+    {{/autoForm}}
+  </div>
 </template>

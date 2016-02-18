@@ -68,8 +68,8 @@ class TaggerClass
       if title != 'GHOSTDOC-TOKEN'
         return defaultLinkRenderer(href, title, text)
       else
-        return '<a href="/artifact/' + href +
-          '"class="token" data-id="' + href + '">' + text + '</a>'
+        return '<a class="token" data-id="' + href + '">' +
+          text + '</a>'
 
     # textId is set then add id of text source to each paragraph
     if textId?
@@ -81,9 +81,9 @@ class TaggerClass
         return '<h' + level +
           ' class="reference"' +
           ' data-source="' + textId +
-          '" id="' + this.options.headerPrefix +
+          '" id="header-' +
           raw.toLowerCase().replace(/[^\w]+/g, '-') + '">' + text +
-          '</h' + level + '>\n';
+          '</h' + level + '>\n'
 
     return marked.parser lexData, {renderer: renderer}
 

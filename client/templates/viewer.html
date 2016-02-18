@@ -1,5 +1,6 @@
 <template name="viewer">
-  <div class="ui basic segment">
+  <h1><a href="{{pathFor route='doc.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}}</h1>
+  <div class="ui fluid container">
     {{{render}}}
   </div>
 </template>

@@ -1,6 +1,3 @@
-Template.artifact.onRendered ->
-  $('.ui.sticky').sticky context: '#artifactDiv'
-
 Template.artifact.helpers
   # This helper generates the dynamic list of data
   references: ->
@@ -14,14 +11,25 @@ Template.artifact.helpers
       lexData = Tagger.extractReferences lexData, @
       return Tagger.renderToHtml lexData, doc._id
 
+  projectId: ->
+    return Router.current().params._projectId
+
 Template.artifact.events
   'click a.token': (event) ->
+    currentId = Router.current().params._id
+    id = $(event.target).data('id')
+    if id == currentId
+      return
+    projectId = Router.current().params._projectId
+    Router.go 'artifact.view', {_projectId: projectId, _id: id}
     $('html, body').animate {scrollTop: 0}, 'slow'
 
   'click .reference': (event) ->
     if event.altKey
       text = $(event.target)[0].textContent
-      Router.go '/doc/' + $(event.target).data 'source'
+      id = $(event.target).data 'source'
+      projectId = Router.current().params._projectId
+      Router.go 'doc.view', {_projectId: projectId, _id: id}
 
       setTimeout( ->
         target = $("*:contains('" + text + "'):last").offset().top - 15

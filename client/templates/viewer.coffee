@@ -8,6 +8,12 @@ Template.viewer.helpers
     html = Tagger.renderToHtml lexData
     return html
 
+  projectId: ->
+    return Router.current().params._projectId
+
 Template.viewer.events
   'click .token': (event) ->
+    id = $(event.target).data('id')
+    projectId = Router.current().params._projectId
+    Router.go 'artifact.view', {_projectId: projectId, _id: id}
     $('html, body').animate {scrollTop: 0}, 'slow'

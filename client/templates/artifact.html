@@ -1,5 +1,7 @@
 <template name="artifact">
-  <div id="artifactDiv" class="ui basic segment">
+  <h1><a href="{{pathFor route='artifact.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}}</h1>
+
+  <div id="artifactDiv" class="ui fluid container">
     {{> infobox}}
     {{#each references}}
       {{{this}}}
@@ -10,7 +12,6 @@
 <template name="editArtifact">
   {{#autoForm collection="Artifacts" doc=this id="editArtifactForm" type="update"}}
     {{> afQuickField name='name'}}
-    {{> afQuickField name='texts'}}
     {{> afQuickField name='tokens'}}
     {{> afQuickField name='image'}}
     <button type="submit" class="ui blue button">Update</button>
