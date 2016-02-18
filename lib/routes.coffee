@@ -6,12 +6,33 @@ Router.route '/',
   action: ->
     @render 'viewer'
 
+Router.route '/project',
+  name: 'project.add',
+  action: ->
+    @render 'addProject'
+
+Router.route '/project/:_projectId',
+  name: 'project.view',
+  action: ->
+    @render 'project', {
+      data: ->
+        return Projects.findOne _id: @params._projectId
+    }
+
+Router.route '/project/:_projectId/edit',
+  name: 'project.edit',
+  action: ->
+    @render 'editProject', {
+      data: ->
+        return Projects.findOne _id: @params._projectId
+    }
+
 Router.route '/doc',
   name: 'doc.add'
   action: ->
     @render 'editor'
 
-Router.route '/doc/:_id/edit',
+Router.route '/project/:_projectId/doc/:_id/edit',
   name: 'doc.edit'
   action: ->
     @render 'editor', {
@@ -19,7 +40,7 @@ Router.route '/doc/:_id/edit',
         return Texts.findOne _id: @params._id
     }
 
-Router.route '/doc/:_id',
+Router.route '/project/:_projectId/doc/:_id',
   name: 'doc.view'
   action: ->
     @render 'viewer', {
@@ -27,7 +48,7 @@ Router.route '/doc/:_id',
         return Texts.findOne _id: @params._id
     }
 
-Router.route '/artifact/:_id',
+Router.route '/project/:_projectId/artifact/:_id',
   name: 'artifact.view'
   action: ->
     @render 'artifact', {
@@ -35,7 +56,7 @@ Router.route '/artifact/:_id',
         return Artifacts.findOne _id: @params._id
     }
 
-Router.route '/artifact/:_id/edit',
+Router.route '/project/:_projectId/artifact/:_id/edit',
   name: 'artifact.edit'
   action: ->
     @render 'editArtifact', {
@@ -60,24 +81,3 @@ Router.route '/gem',
   name: 'gem.add'
   action: ->
     @render 'addGem'
-
-Router.route '/project',
-  name: 'project.add',
-  action: ->
-    @render 'addProject'
-
-Router.route '/project/:_id',
-  name: 'project.view',
-  action: ->
-    @render 'project', {
-      data: ->
-        return Projects.findOne _id: @params._id
-    }
-
-Router.route '/project/:_id/edit',
-  name: 'project.edit',
-  action: ->
-    @render 'editProject', {
-      data: ->
-        return Projects.findOne _id: @params._id
-    }

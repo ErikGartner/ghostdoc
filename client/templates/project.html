@@ -1,8 +1,10 @@
 <template name="project">
 
-  <h2><a href="{{pathFor route='project.edit'}}"><i class="icon edit"></i></a>{{name}}</h2>
-  <p>{{description}}</p>
-  <div class="ui three column grid">
+  <h2><a href="{{pathFor route='project.edit' _projectId=_id}}"><i class="icon edit"></i></a>{{name}}</h2>
+
+  <p><i>{{description}}</i></p>
+
+  <div class="ui stackable three column grid">
     <div class="row">
       <div class="three wide column">
         <h3>Collaborators</h3>

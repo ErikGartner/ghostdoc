@@ -9,7 +9,7 @@
 </template>
 
 <template name="selector_project">
-  <div class="ui dropdown">
+  <div class="ui dropdown" id="selector_project">
   <span class="text">Projects</span>
   <div class="menu">
     <div class="ui icon search input">
@@ -23,7 +23,7 @@
     </div>
     <div class="scrolling menu">
       {{#each projects}}
-        <div class="item" data-value="{{_id}}" data-type="project">
+        <div class="item" data-value="{{_id}}">
           <i class="sitemap icon"></i>
           {{name}}
         </div>
@@ -34,7 +34,7 @@
 </template>
 
 <template name="selector_view">
-  <div class="ui dropdown">
+  <div class="ui dropdown" id="selector_view">
   <span class="text">Source/Artifact</span>
   <div class="menu">
     <div class="ui icon search input">

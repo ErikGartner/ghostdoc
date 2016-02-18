@@ -1,16 +1,28 @@
 Template.selector_view.onRendered ->
-  $('.ui.dropdown').dropdown({
+  $('#selector_view').dropdown
     onChange: (value, text, $selectedItem) ->
       type = $($selectedItem).data('type')
-      Router.go type + '.view', {_id: value}
-  })
+      projectId = Router.current().params._projectId
+      Router.go type + '.view', {_projectId: projectId, _id: value}
+
+Template.selector_project.onRendered ->
+  $('#selector_project').dropdown
+    onChange: (value, text, $selectedItem) ->
+      Router.go 'project.view', {_projectId: value}
 
 Template.selector_view.helpers
   texts: ->
-    return Texts.find()
+    project = Projects.findOne _id: Router.current().params._projectId
+    if project?.sources?
+      return Texts.find {_id: $in: project.sources}
 
   artifacts: ->
-    return Artifacts.find {}, {sort: {name: 1}}
+    projectId = Router.current().params._projectId
+    if not projectId?
+      return
+    project = Projects.findOne _id: Router.current().params._projectId
+    if project?.artifacts?
+      return Artifacts.find {_id: $in: project.artifacts}, {sort: {name: 1}}
 
 Template.selector_project.helpers
   projects: ->
