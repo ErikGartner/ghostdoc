@@ -12,15 +12,10 @@ Template.artifact.helpers
       markdown = Tagger.preprocessMarkdown doc.text, artifacts
       lexData = Tagger.parseToLexical markdown
       lexData = Tagger.extractReferences lexData, @
-      return Tagger.renderToHtml lexData, doc._id
+      return Tagger.renderToHtml lexData, @projectId, doc._id
 
 Template.artifact.events
   'click a.token': (event) ->
-    id = $(event.target).data('id')
-    projectId = Router.current().params._projectId
-    if id == projectId
-      return
-    Router.go 'artifact.view', {_projectId: projectId, _id: id}
     $('html, body').animate {scrollTop: 0}, 'slow'
 
   'click .reference': (event) ->

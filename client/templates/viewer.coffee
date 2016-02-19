@@ -8,13 +8,11 @@ Template.viewer.helpers
 
     markdown = Tagger.preprocessMarkdown @text, artifacts
     lexData = Tagger.parseToLexical markdown
-    html = Tagger.renderToHtml lexData
+    html = Tagger.renderToHtml lexData, @projectId
     return html
 
 Template.viewer.events
   'click .token': (event) ->
-    id = $(event.target).data('id')
-    Router.go 'artifact.view', {_projectId: @projectId, _id: id}
     $('html, body').animate {scrollTop: 0}, 'slow'
 
   'click div': (event) ->

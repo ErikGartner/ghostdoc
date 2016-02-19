@@ -55,7 +55,7 @@ class TaggerClass
 
   # renders the lexdata to highlighted Ghostdoc html.
   # This method should be called if data has been through preprocessTokens
-  renderToHtml: (lexData, textId) ->
+  renderToHtml: (lexData, projectId, textId) ->
     renderer = new marked.Renderer()
 
     # save original rendering in case of
@@ -68,7 +68,8 @@ class TaggerClass
       if title != 'GHOSTDOC-TOKEN'
         return defaultLinkRenderer(href, title, text)
       else
-        return '<a class="token" data-id="' + href + '">' +
+        href = '/project/' + projectId + '/artifact/' + href
+        return '<a class="token" href="' + href + '">' +
           text + '</a>'
 
     # textId is set then add id of text source to each paragraph
