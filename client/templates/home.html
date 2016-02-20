@@ -1,7 +1,8 @@
 <template name="home">
-  <div class="ui three column grid">
-    {{#each topProjects}}
-      <div class="ui column">
+  <div class="ui stackable doubling three column grid">
+    <div class="row">
+      {{#each topProjects}}
+      <div class="column">
         <h2><a href="{{pathFor 'project.view' _projectId=_id}}">{{name}}</a></h2>
         <i>{{description}}</i>
         <div class="ui list">
@@ -19,6 +20,21 @@
           {{/each}}
         </div>
       </div>
-    {{/each}}
+      {{/each}}
+    </div>
+
+    <div class="row">
+
+        <div class="ui center aligned basic segment">
+          <div class="ui horizontal divider">
+            Or
+          </div>
+          <a class="ui green labeled icon button" href="{{pathFor 'project.add'}}">
+            Create New Project
+            <i class="add icon"></i>
+          </a>
+        </div>
+
+    </div>
   </div>
 </template>
