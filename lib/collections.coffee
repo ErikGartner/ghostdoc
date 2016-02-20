@@ -94,8 +94,9 @@ Schemas.Project = new SimpleSchema
 
   sources:
     type: [String]
-    minCount: 1
+    minCount: 0
     label: 'Source Documents'
+    optional: true
     allowedValues: ->
       return Texts.find(author: Meteor.userId()).map (doc) ->
         return doc._id

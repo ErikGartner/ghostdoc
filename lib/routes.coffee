@@ -4,7 +4,7 @@ Router.configure
 Router.route '/',
   name: 'home'
   action: ->
-    @render 'viewer'
+    @render 'home'
 
 Router.route '/project',
   name: 'project.add',

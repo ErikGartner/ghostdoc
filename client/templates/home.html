@@ -1,0 +1,24 @@
+<template name="home">
+  <div class="ui three column grid">
+    {{#each topProjects}}
+      <div class="ui column">
+        <h2><a href="{{pathFor 'project.view' _projectId=_id}}">{{name}}</a></h2>
+        <i>{{description}}</i>
+        <div class="ui list">
+          {{#each topSources}}
+          <a class="link item" href="{{pathFor 'doc.view' _id=_id _projectId=_projectId}}">
+            <i class="file icon"></i>
+            {{name}}
+          </a>
+          {{/each}}
+          {{#each topArtifacts}}
+          <a class="link item" href="{{pathFor 'artifact.view' _id=_id _projectId=_projectId}}">
+            <i class="tag icon"></i>
+            {{name}}
+          </a>
+          {{/each}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</template>
