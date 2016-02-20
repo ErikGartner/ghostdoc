@@ -10,7 +10,7 @@
 
 <template name="selector_project">
   <div class="ui dropdown" id="selector_project">
-  <span class="text">Project</span>
+  <span class="text">{{activeSelection}}</span>
   <div class="menu">
     <div class="ui icon search input">
       <i class="search icon"></i>
@@ -38,7 +38,7 @@
 
 <template name="selector_view">
   <div class="ui dropdown" id="selector_view">
-  <span class="text">Source/Artifact</span>
+  <span class="text">{{activeSelection}}</span>
   <div class="menu">
     <div class="ui icon search input">
       <i class="search icon"></i>
