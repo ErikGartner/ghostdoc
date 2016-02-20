@@ -42,12 +42,14 @@
 
       <div class="column">
         <h3>Gems</h3>
-        {{#each gems}}
-        <a class="link item" href="{{pathFor 'gem.edit' _id=_id _projectId=_projectId}}">
-          <i class="diamond icon"></i>
-          {{name}}
-        </a>
-        {{/each}}
+        <div class="ui list">
+          {{#each gems}}
+          <a class="link item" href="{{pathFor 'gem.edit' _id=_id _projectId=_projectId}}">
+            <i class="diamond icon"></i>
+            {{name}}
+          </a>
+          {{/each}}
+        </div>
       </div>
     </div>
   </div>
