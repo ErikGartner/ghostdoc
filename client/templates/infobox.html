@@ -1,27 +1,24 @@
 <template name="infobox">
   <div class="ui right floated image">
-    <div class="ui card">
+    <div class="">
       {{#if image}}
-        <div class="image">
-          <img class="ui rounded image" src={{image}}>
-        </div>
+      <img class="ui medium rounded image" src={{image}}>
       {{/if}}
-      <div class="content">
-        <a class="header">{{name}}</a>
-        <div class="description">
-          <div class="ui list">
-          {{#each gemsItems}}
-            <a class="item">
-              <i class="right triangle icon"></i>
-              <div class="content">
-                <div class="header">{{name}}</div>
-                <div class="description">{{result}}</div>
-              </div>
-            </a>
-          {{/each}}
+      {{#if gemsItems}}
+      <div class="ui segment">
+      <div class="ui list">
+      {{#each gemsItems}}
+        <a class="item">
+          <i class="right triangle icon"></i>
+          <div class="content">
+            <div class="header">{{name}}</div>
+            <div class="description">{{result}}</div>
           </div>
-        </div>
+        </a>
+      {{/each}}
       </div>
+      </div>
+      {{/if}}
     </div>
   </div>
 </template>
