@@ -1,6 +1,6 @@
 Template.home.helpers
   topProjects: ->
-    return Projects.find {}, {limit: 9, sort: {name: 1}}
+    return Projects.find {}, {sort: {name: 1}}
 
   topSources: ->
     if @sources?

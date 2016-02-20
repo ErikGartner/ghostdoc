@@ -17,10 +17,14 @@ Meteor.publishComposite 'projects', ->
     children: [
       {
         find: (project) ->
+          if not project.sources?
+            return undefined
           return Texts.find _id: $in: project.sources
       },
       {
         find: (project) ->
+          if not project.artifacts?
+            return undefined
           return Artifacts.find _id: $in: project.artifacts
       },
       {
