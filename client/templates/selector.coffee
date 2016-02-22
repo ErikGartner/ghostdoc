@@ -9,17 +9,11 @@ Template.selector_project.onRendered ->
 Template.selector_view.helpers
   texts: ->
     projectId = Router.current().params._projectId
-    project = Projects.findOne _id: projectId
-    if project?.sources?
-      return Texts.find {_id: $in: project.sources}
+    return Texts.find {project: projectId}
 
   artifacts: ->
     projectId = Router.current().params._projectId
-    if not projectId?
-      return
-    project = Projects.findOne _id: projectId
-    if project?.artifacts?
-      return Artifacts.find {_id: $in: project.artifacts}, {sort: {name: 1}}
+    return Artifacts.find {project: projectId}, {sort: {name: 1}}
 
   _projectId: ->
     return Router.current().params._projectId

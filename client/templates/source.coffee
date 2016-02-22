@@ -1,4 +1,4 @@
-Template.viewer.helpers
+Template.source.helpers
   render: ->
     if not @text?
       return
@@ -11,7 +11,7 @@ Template.viewer.helpers
     html = Tagger.renderToHtml lexData, @projectId
     return html
 
-Template.viewer.events
+Template.source.events
   'click .token': (event) ->
     $('html, body').animate {scrollTop: 0}, 'slow'
 

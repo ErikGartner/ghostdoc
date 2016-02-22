@@ -3,13 +3,7 @@ Template.home.helpers
     return Projects.find {}, {sort: {name: 1}}
 
   topSources: ->
-    if @sources?
-      return Texts.find({_id: $in: @sources}, {limit: 5, sort: {name: 1}}).map (doc) =>
-        doc._projectId = @_id
-        return doc
+    return Texts.find {project: @_id},  {limit: 5, sort: {name: 1}}
 
   topArtifacts: ->
-    if @artifacts?
-      return Artifacts.find({_id: $in: @artifacts}, {limit: 5, sort: {name: 1}}).map (doc) =>
-        doc._projectId = @_id
-        return doc
+    return Artifacts.find {project: @_id}, {limit: 5, sort: {name: 1}}

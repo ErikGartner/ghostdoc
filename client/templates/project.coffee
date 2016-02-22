@@ -1,18 +1,9 @@
 Template.project.helpers
   sources: ->
-    if @sources?
-      return Texts.find({_id: $in: @sources},  {sort: {name: 1}}).map (doc) =>
-        doc._projectId = @_id
-        return doc
+    return Texts.find {project: @_id},  {sort: {name: 1}}
 
   artifacts: ->
-    if @artifacts?
-      return Artifacts.find({_id: $in: @artifacts}, {sort: {name: 1}}).map (doc) =>
-        doc._projectId = @_id
-        return doc
+    return Artifacts.find {project: @_id}, {sort: {name: 1}}
 
   gems: ->
-    if @gems?
-      return Gems.find({_id: $in: @gems}, {sort: {name: 1}}).map (doc) =>
-        doc._projectId = @_id
-        return doc
+    return Gems.find {project: @_id}, {sort: {name: 1}}

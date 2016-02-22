@@ -4,9 +4,8 @@ Template.artifact.helpers
     if not @_id?
       return
 
-    project = Projects.findOne(_id: @projectId)
-    sources = Texts.find(_id: $in: project.sources)
-    artifacts = Artifacts.find(_id: $in: project.artifacts)
+    sources = Texts.find project: @projectId
+    artifacts = Artifacts.find project: @projectId
 
     return sources.map (doc) =>
       markdown = Tagger.preprocessMarkdown doc.text, artifacts
@@ -23,7 +22,7 @@ Template.artifact.events
       text = $(event.target)[0].textContent
       id = $(event.target).data 'source'
       projectId = Router.current().params._projectId
-      Router.go 'doc.view', {_projectId: projectId, _id: id}
+      Router.go 'source.view', {_projectId: projectId, _id: id}
 
       setTimeout( ->
         target = $("*:contains('" + text + "'):last").offset().top - 15

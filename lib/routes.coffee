@@ -31,25 +31,25 @@ Router.route '/project/:_projectId/edit',
         return data
     }
 
-Router.route '/project/:_projectId/doc',
-  name: 'doc.add'
+Router.route '/project/:_projectId/source',
+  name: 'source.add'
   action: ->
-    @render 'editor'
+    @render 'addSource'
 
-Router.route '/project/:_projectId/doc/:_id/edit',
-  name: 'doc.edit'
+Router.route '/project/:_projectId/source/:_id/edit',
+  name: 'source.edit'
   action: ->
-    @render 'editor', {
+    @render 'editSource', {
       data: ->
         data = {projectId: @params._projectId}
         _.extend data, Texts.findOne _id: @params._id
         return data
     }
 
-Router.route '/project/:_projectId/doc/:_id',
-  name: 'doc.view'
+Router.route '/project/:_projectId/source/:_id',
+  name: 'source.view'
   action: ->
-    @render 'viewer', {
+    @render 'source', {
       data: ->
         data = {projectId: @params._projectId}
         _.extend data, Texts.findOne _id: @params._id

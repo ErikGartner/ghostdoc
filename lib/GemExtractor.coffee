@@ -40,13 +40,11 @@ class GemExtractorClass
     data = []
 
     artifact = Artifacts.findOne(_id: artifactId)
-    gemsIds = Projects.findOne(_id: projectId)?.gems
-    sourceIds = Projects.findOne(_id: projectId)?.sources
-    if not gemsIds or not artifact?
+    if not artifact?
       return
 
-    Texts.find(_id: $in: sourceIds).forEach (source) ->
-      Gems.find(_id: $in: gemsIds).forEach (gem) ->
+    Texts.find(project: projectId).forEach (source) ->
+      Gems.find(project: projectId).forEach (gem) ->
         result = GemExtractorClass.extractGem source.text, gem, artifact
         if result?
           data.push result

@@ -1,9 +1,3 @@
-Meteor.publish 'gems', ->
-  return Gems.find author: @userId
-
-Meteor.publish 'artifacts', ->
-  return Artifacts.find author: @userId
-
 Meteor.publishComposite 'projects', ->
   pub =
     find: ->
@@ -17,21 +11,15 @@ Meteor.publishComposite 'projects', ->
     children: [
       {
         find: (project) ->
-          if not project.sources?
-            return undefined
-          return Texts.find _id: $in: project.sources
+          return Texts.find project: project._id
       },
       {
         find: (project) ->
-          if not project.artifacts?
-            return undefined
-          return Artifacts.find _id: $in: project.artifacts
+          return Artifacts.find project: project._id
       },
       {
         find: (project) ->
-          if not project.gems?
-            return undefined
-          return Gems.find _id: $in: project.gems
+          return Gems.find project: project._id
       },
       {
         find: (project) ->

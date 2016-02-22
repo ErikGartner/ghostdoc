@@ -50,13 +50,13 @@
     </div>
     <div class="scrolling menu">
       {{#if _projectId}}
-      <a class="item" href="{{pathFor 'doc.add' _projectId=_projectId}}">
+      <a class="item" href="{{pathFor 'source.add' _projectId=_projectId}}">
         <i class="plus icon"></i>
         <i>Create New Source</i>
       </a>
       {{/if}}
       {{#each texts}}
-        <a class="item" data-value="{{_id}}"  href="{{pathFor 'doc.view' _projectId=_projectId}}">
+        <a class="item" data-value="{{_id}}"  href="{{pathFor 'source.view' _projectId=_projectId}}">
           <i class="file icon"></i>
           {{name}}
         </a>

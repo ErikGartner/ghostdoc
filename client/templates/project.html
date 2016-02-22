@@ -21,7 +21,7 @@
         <h3>Sources</h3>
         <div class="ui list">
           {{#each sources}}
-          <a class="link item" href="{{pathFor 'doc.view' _id=_id _projectId=_projectId}}">
+          <a class="link item" href="{{pathFor 'source.view' _id=_id _projectId=project}}">
             <i class="file icon"></i>
             {{name}}
           </a>
@@ -32,7 +32,7 @@
         <h3>Artifacts</h3>
         <div class="ui list">
           {{#each artifacts}}
-          <a class="link item" href="{{pathFor 'artifact.view' _id=_id _projectId=_projectId}}">
+          <a class="link item" href="{{pathFor 'artifact.view' _id=_id _projectId=project}}">
             <i class="tag icon"></i>
             {{name}}
           </a>
@@ -44,7 +44,7 @@
         <h3>Gems</h3>
         <div class="ui list">
           {{#each gems}}
-          <a class="link item" href="{{pathFor 'gem.edit' _id=_id _projectId=_projectId}}">
+          <a class="link item" href="{{pathFor 'gem.edit' _id=_id _projectId=project}}">
             <i class="diamond icon"></i>
             {{name}}
           </a>
@@ -61,9 +61,6 @@
     {{#autoForm collection="Projects" id="addProjectForm" type="insert"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='description' rows=5}}
-      {{> afQuickField name='sources'}}
-      {{> afQuickField name='artifacts'}}
-      {{> afQuickField name='gems'}}
       {{> afQuickField name='collaborators'}}
       <button type="submit" class="ui green button">Insert</button>
     {{/autoForm}}
@@ -75,9 +72,6 @@
     {{#autoForm collection="Projects" doc=this id="editProjectForm" type="update"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='description' rows=5}}
-      {{> afQuickField name='sources'}}
-      {{> afQuickField name='artifacts'}}
-      {{> afQuickField name='gems'}}
       {{> afQuickField name='collaborators'}}
       <button type="submit" class="ui blue button">Update</button>
       {{> quickRemoveButton collection="Projects" _id=this._id class="ui red button"}}

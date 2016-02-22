@@ -1,8 +1,8 @@
 addToProjectHook =
-  after:
-    insert: (err, res) ->
-      if not err?
-        console.log res, @
+  before:
+    insert: (doc) ->
+      doc.project = Router.current().params._projectId
+      return doc
 
-
-AutoForm.addHooks ['addArtifactForm'] , addToProjectHook
+AutoForm.addHooks ['addArtifactForm', 'addGemForm', 'addSourceForm'],
+  addToProjectHook
