@@ -11,6 +11,13 @@ Template.source.helpers
     html = Tagger.renderToHtml lexData, @projectId
     return html
 
+Template.editSource.helpers
+  beforeRemove: ->
+    return (collection, id) ->
+      doc = collection.findOne id
+      if confirm('Really delete "' + doc.name + '"?')
+        this.remove()
+
 Template.source.events
   'click .token': (event) ->
     $('html, body').animate {scrollTop: 0}, 'slow'

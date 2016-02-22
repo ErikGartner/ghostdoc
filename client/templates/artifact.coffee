@@ -13,6 +13,13 @@ Template.artifact.helpers
       lexData = Tagger.extractReferences lexData, @
       return Tagger.renderToHtml lexData, @projectId, doc._id
 
+Template.editArtifact.helpers
+  beforeRemove: ->
+    return (collection, id) ->
+      doc = collection.findOne id
+      if confirm('Really delete "' + doc.name + '"?')
+        this.remove()
+
 Template.artifact.events
   'click a.token': (event) ->
     $('html, body').animate {scrollTop: 0}, 'slow'

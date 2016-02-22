@@ -17,7 +17,7 @@
       {{> afQuickField name='tokens'}}
       {{> afQuickField name='image'}}
       <button type="submit" class="ui blue button">Update</button>
-      {{> quickRemoveButton collection="Artifacts" _id=this._id class="ui red button"}}
+      {{> quickRemoveButton collection="Artifacts" _id=this._id class="ui red button" beforeRemove=beforeRemove}}
     {{/autoForm}}
   </div>
 </template>

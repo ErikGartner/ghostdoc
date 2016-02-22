@@ -18,7 +18,7 @@
       {{> afQuickField name='name'}}
       {{> afQuickField name='text' rows=15}}
       {{#if _id}}
-        {{> quickRemoveButton collection="Texts" _id=_id class="ui red button"}}
+        {{> quickRemoveButton collection="Texts" _id=_id class="ui red button" beforeRemove=beforeRemove}}
       {{/if}}
       <button type="submit" class="ui blue button">Save</button>
     {{/autoForm}}
