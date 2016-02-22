@@ -3,8 +3,7 @@ Template.source.helpers
     if not @text?
       return
 
-    project = Projects.findOne _id: @projectId
-    artifacts = Artifacts.find _id: $in: project.artifacts
+    artifacts = Artifacts.find project: @projectId
 
     markdown = Tagger.preprocessMarkdown @text, artifacts
     lexData = Tagger.parseToLexical markdown
