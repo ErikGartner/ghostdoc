@@ -3,15 +3,7 @@ Template.artifact.helpers
   references: ->
     if not @_id?
       return
-
-    sources = Texts.find project: @projectId
-    artifacts = Artifacts.find project: @projectId
-
-    return sources.map (doc) =>
-      markdown = Tagger.preprocessMarkdown doc.text, artifacts
-      lexData = Tagger.parseToLexical markdown
-      lexData = Tagger.extractReferences lexData, @
-      return Tagger.renderToHtml lexData, @projectId, doc._id
+    return @processed()
 
 Template.editArtifact.helpers
   beforeRemove: ->

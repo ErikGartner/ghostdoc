@@ -2,13 +2,7 @@ Template.source.helpers
   render: ->
     if not @text?
       return
-
-    artifacts = Artifacts.find project: @projectId
-
-    markdown = Tagger.preprocessMarkdown @text, artifacts
-    lexData = Tagger.parseToLexical markdown
-    html = Tagger.renderToHtml lexData, @projectId
-    return html
+    return @processed()
 
 Template.editSource.helpers
   beforeRemove: ->

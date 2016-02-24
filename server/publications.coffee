@@ -23,7 +23,11 @@ Meteor.publishComposite 'projects', ->
       },
       {
         find: (project) ->
-          return Meteor.users.find(_id: project.author)
+          return Meteor.users.find _id: project.author
+      },
+      {
+        find: (project) ->
+          return RitterData.find()
       }
     ]
   return pub

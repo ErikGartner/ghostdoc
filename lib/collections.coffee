@@ -130,6 +130,14 @@ Artifacts.attachSchema Schemas.Artifact
 Gems.attachSchema Schemas.Gem
 Projects.attachSchema Schemas.Project
 
+Meteor.users.helpers
+  mail: ->
+    if @emails?
+      return @emails[0].address
+    else if @services?.facebook?.email
+      return @services.facebook.email
+    return undefined
+
 Artifacts.allow(
   insert: (userId, doc) ->
     return userId
@@ -201,11 +209,3 @@ Projects.allow(
   remove: (userId, doc) ->
     return userId == doc.author
 )
-
-Meteor.users.helpers
-  mail: ->
-    if @emails?
-      return @emails[0].address
-    else if @services?.facebook?.email
-      return @services.facebook.email
-    return undefined
