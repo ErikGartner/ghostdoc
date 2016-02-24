@@ -7,3 +7,6 @@ Template.project.helpers
 
   gems: ->
     return Gems.find {project: @_id}, {sort: {name: 1}}
+
+  authorName: ->
+    return Meteor.users.findOne(_id: @author)?.profile?.name
