@@ -23,8 +23,22 @@ Artifacts.helpers
     else
       return []
 
-Texts.after.update (userId, doc, fieldNames, modifier, options) ->
-  Ritter.processProject doc.project
+projectUpdateHook = (userId, doc) ->
+  if Meteor.isServer
+    Ritter.processProject doc.project
 
-Artifacts.after.update (userId, doc, fieldNames, modifier, options) ->
-  Ritter.processProject doc.project
+Texts.after.insert projectUpdateHook
+Texts.after.update projectUpdateHook
+Texts.after.remove projectUpdateHook
+
+Artifacts.after.insert projectUpdateHook
+Artifacts.after.update projectUpdateHook
+Artifacts.after.remove projectUpdateHook
+
+Gems.after.insert projectUpdateHook
+Gems.after.update projectUpdateHook
+Gems.after.remove projectUpdateHook
+
+Projects.after.remove (userId, doc) ->
+  if Meteor.isServer
+    Ritter.removeProject doc._id

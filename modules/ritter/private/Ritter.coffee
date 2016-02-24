@@ -48,7 +48,7 @@ class RitterClass
     id = RitterClass.ritterId artifact._id, 'gems'
     RitterData.remove id: id
 
-    gems = GemExtractor.extractGems artifact.projectId, artifact._id
+    gems = GemExtractor.extractGems artifact.project, artifact._id
     gems = _.flatten gems, true
 
     RitterData.insert {id: id, data: gems, type: 'gems', project: artifact.project}
@@ -57,7 +57,7 @@ class RitterClass
     RitterData.remove project: projectId
 
   removeOrphanData: (projectId) ->
-    # Remove all data with no source
+    RitterData.remove project: projectId
     return
 
 @Ritter = new RitterClass
