@@ -8,20 +8,23 @@ Texts.helpers
     else
       return marked(@text)
 
+  isProcessed: ->
+    return Ritter.getData(@_id, 'text')?
+
 Artifacts.helpers
   processed: ->
     proc = Ritter.getData @_id, 'artifact'
     if proc?
       return proc.data
     else
-      return []
+      return false
 
   gems: ->
     proc = Ritter.getData @_id, 'gems'
     if proc?
       return proc.data
     else
-      return []
+      return false
 
 projectUpdateHook = (userId, doc) ->
   if Meteor.isServer

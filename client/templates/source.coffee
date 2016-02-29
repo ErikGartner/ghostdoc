@@ -20,4 +20,3 @@ Template.source.events
     if not text? or text == ''
       return
     console.log text
-    $('.ui.popup').popup('show')

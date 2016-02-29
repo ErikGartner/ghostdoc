@@ -2,7 +2,7 @@ Template.artifact.helpers
   # This helper generates the dynamic list of data
   references: ->
     if not @_id?
-      return
+      return false
     return @processed()
 
 Template.editArtifact.helpers
@@ -10,7 +10,7 @@ Template.editArtifact.helpers
     return (collection, id) ->
       doc = collection.findOne id
       if confirm('Really delete "' + doc.name + '"?')
-        this.remove()
+        @remove()
 
 Template.artifact.events
   'click a.token': (event) ->

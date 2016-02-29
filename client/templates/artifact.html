@@ -4,9 +4,14 @@
 
   <div id="artifactDiv" class="ui fluid container">
     {{> infobox}}
+
     {{#each references}}
       {{{this}}}
     {{/each}}
+
+    <div class="ui {{# if references}}{{else}}active{{/if}} inverted dimmer">
+      <div class="ui large text loader">Processing data...</div>
+    </div>
   </div>
 </template>
 
@@ -28,7 +33,7 @@
       {{> afQuickField name='name'}}
       {{> afQuickField name='tokens'}}
       {{> afQuickField name='image'}}
-      <button type="submit" class="ui green button">Insert</button>
+      <button type="submit" class="ui green button">Add</button>
     {{/autoForm}}
   </div>
 </template>

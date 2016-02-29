@@ -1,14 +1,9 @@
 <template name="source">
-  <h1><a href="{{pathFor route='source.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}}</h1>
+  <h1><a href="{{pathFor route='source.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if isProcessed}}{{else}}active{{/if}} mini inline loader"></div></h1>
   <div class="ui divider"></div>
 
   <div class="ui fluid container">
     {{{render}}}
-  </div>
-
-  <div class="ui popup">
-    <div class="header">User Rating</div>
-    <div class="ui star rating" data-rating="3"></div>
   </div>
 </template>
 
