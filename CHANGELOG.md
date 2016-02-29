@@ -1,3 +1,37 @@
+<a name="0.8.0"></a>
+# [0.8.0](//compare/0.7.6...v0.8.0) (2016-02-29)
+
+
+### Bug Fixes
+
+* Bug in source viewer d805323
+* Bug in tagger 7b6f823
+* Bug that prevented gems from working. 0ecd52f
+* Crash due to missing property in settings 256567c
+* Gem list was broken 48006a5
+* Regressions with rendering tokens 88cd847
+* Remove old analytics call 0e3ecbc
+
+### Features
+
+* Add confirmation on deletes 9bc07c9
+* Add create button to home page 4ef5767
+* Add homescreen 3ef03d0
+* Adding artifacts, gems and sources is now coupled to a project. Always a8c4379
+* Collaborators can now edit eachothers items 852fc23
+* First version of server side processing 51d12ac
+* Links to project page b19ba55
+* Loaders when processing f155052
+* Name of project owner fda3985
+* Reimplemented gems for new design 61fb603
+* Removed old views a497c50
+* Removed useless links in menu. Fixed inner workings of selector 0b988b5
+* Restyled infobox, also hides it when no info available. 7c885c5
+* Selector is now working properly. b084370
+* Updated dependencies 7be197f
+
+
+
 <a name="0.7.6"></a>
 ## [0.7.6](//compare/0.7.5...v0.7.6) (2016-01-04)
 
