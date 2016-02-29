@@ -1,9 +1,5 @@
 Template.infobox.helpers
-
   gemsItems: ->
-    if not @_id?
+    if not @_id? or not @projectId?
       return
-    gems = Texts.find(_id: $in: @texts).map (doc) =>
-      GemExtractor.extractGems doc.text, @
-    gems = _.flatten gems, true
-    return gems
+    return @gems()

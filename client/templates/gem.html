@@ -4,7 +4,7 @@
     {{> afQuickField name='patterns'}}
     {{> afQuickField name='artifacts'}}
     <button type="submit" class="ui blue button">Update</button>
-    {{> quickRemoveButton collection="Gems" _id=this._id class="ui red button"}}
+    {{> quickRemoveButton collection="Gems" _id=this._id class="ui red button" beforeRemove=beforeRemove}}
   {{/autoForm}}
 </template>
 

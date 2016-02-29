@@ -35,13 +35,19 @@ class GemExtractorClass
     else
       return undefined
 
-  # Searches for and extracts all gems
-  extractGems: (text, artifact) ->
-    gems = []
-    Gems.find(artifacts:artifact._id).forEach (gem) ->
-      result = GemExtractorClass.extractGem text, gem, artifact
-      if result?
-        gems.push result
-    return gems
+  # Searches for and extracts all gems for an artifact with a project
+  extractGems: (projectId, artifactId) ->
+    data = []
+
+    artifact = Artifacts.findOne(_id: artifactId)
+    if not artifact?
+      return
+
+    Texts.find(project: projectId).forEach (source) ->
+      Gems.find(project: projectId).forEach (gem) ->
+        result = GemExtractorClass.extractGem source.text, gem, artifact
+        if result?
+          data.push result
+    return data
 
 @GemExtractor = new GemExtractorClass

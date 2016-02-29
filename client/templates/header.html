@@ -1,0 +1,16 @@
+<template name="sidebar">
+  <div class="ui left vertical push sidebar labeled icon menu">
+    <a class="item" href="{{pathFor route='home'}}">
+      <i class="home icon"></i>
+      Home
+    </a>
+    <i class="item">
+      Ghostdoc<br>
+      {{appVersion}}
+    </i>
+  </div>
+</template>
+
+<template name="header">
+    <h1><i class="sidebar icon" id="logo"></i><a class="unstyled" style="color:black;" href="{{pathFor 'home'}}">Ghostdoc</a></h1>
+</template>

@@ -1,31 +1,33 @@
-Meteor.publish 'artifacts', ->
-  return Artifacts.find author: @userId
-
-Meteor.publish 'gems', ->
-  return Gems.find author: @userId
-
-Meteor.publishComposite 'texts', ->
+Meteor.publishComposite 'projects', ->
   pub =
     find: ->
       user = Meteor.users.findOne _id: @userId
       if user?
-        return Texts.find $or: [{author: @userId}, {collaborators: user.mail()}]
+        return Projects.find $or: [{author: @userId},
+          {collaborators: user.mail()}]
       else
         return undefined
 
     children: [
       {
-        find: (text) ->
-          return Artifacts.find texts: text._id
-
-        children: [
-          find: (text, artifact) ->
-            return Gems.find artifacts: artifact._id
-        ]
+        find: (project) ->
+          return Texts.find project: project._id
       },
       {
-        find: (text) ->
-          return Meteor.users.find(_id: text.author)
+        find: (project) ->
+          return Artifacts.find project: project._id
+      },
+      {
+        find: (project) ->
+          return Gems.find project: project._id
+      },
+      {
+        find: (project) ->
+          return Meteor.users.find _id: project.author
+      },
+      {
+        find: (project) ->
+          return RitterData.find()
       }
     ]
   return pub

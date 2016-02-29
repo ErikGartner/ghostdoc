@@ -1,0 +1,85 @@
+<template name="selector">
+  <div class="ui large breadcrumb">
+    <span class="section">{{> loginButtons}}</span>
+    <i class="right chevron icon divider"></i>
+    <span class="section">{{> selector_project}}</span>
+    <i class="right chevron icon divider"></i>
+    <span class="section">{{> selector_view}}</span>
+  </div>
+</template>
+
+<template name="selector_project">
+  <div class="ui dropdown" id="selector_project">
+  <span class="text">{{activeSelection}}</span>
+  <div class="menu">
+    <div class="ui icon search input">
+      <i class="search icon"></i>
+      <input type="text" placeholder="Search projects...">
+    </div>
+    <div class="header">
+      <i class="sitemap icon"></i>
+      Projects
+    </div>
+    <div class="scrolling menu">
+      <a class="item" href="{{pathFor 'project.add'}}">
+        <i class="plus icon"></i>
+        <i>Create New Project</i>
+      </a>
+      {{#each projects}}
+        <a class="item" data-value="{{_id}}"  href="{{pathFor 'project.view' _projectId=_id}}">
+          <i class="sitemap icon"></i>
+          {{name}}
+        </a>
+      {{/each}}
+    </div>
+  </div>
+</div>
+</template>
+
+<template name="selector_view">
+  <div class="ui dropdown" id="selector_view">
+  <span class="text">{{activeSelection}}</span>
+  <div class="menu">
+    <div class="ui icon search input">
+      <i class="search icon"></i>
+      <input type="text" placeholder="Search...">
+    </div>
+    <div class="header">
+      <i class="file icon"></i>
+      Sources
+    </div>
+    <div class="scrolling menu">
+      {{#if _projectId}}
+      <a class="item" href="{{pathFor 'source.add' _projectId=_projectId}}">
+        <i class="plus icon"></i>
+        <i>Create New Source</i>
+      </a>
+      {{/if}}
+      {{#each texts}}
+        <a class="item" data-value="{{_id}}"  href="{{pathFor 'source.view' _projectId=_projectId}}">
+          <i class="file icon"></i>
+          {{name}}
+        </a>
+      {{/each}}
+    </div>
+    <div class="header">
+      <i class="tag icon"></i>
+      Artifacts
+    </div>
+    <div class="scrolling menu">
+      {{#if _projectId}}
+      <a class="item" href="{{pathFor 'artifact.add' _projectId=_projectId}}">
+        <i class="plus icon"></i>
+        <i>Create New Artifact</i>
+      </a>
+      {{/if}}
+      {{#each artifacts}}
+        <a class="item" data-value="{{_id}}"  href="{{pathFor 'artifact.view' _projectId=_projectId}}">
+          <i class="tag icon"></i>
+          {{name}}
+        </a>
+      {{/each}}
+    </div>
+  </div>
+</div>
+</template>

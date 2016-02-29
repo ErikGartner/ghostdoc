@@ -1,61 +1,97 @@
-Router.route('/', ->
-  @render('viewer')
-)
-
 Router.configure
   layoutTemplate: 'ApplicationLayout'
 
-Router.route '/doc',
-  name: 'doc.add'
+Router.route '/',
+  name: 'home'
   action: ->
-    @render 'editor'
+    @render 'home'
 
-Router.route '/doc/:_id/edit',
-  name: 'doc.edit'
+Router.route '/project',
+  name: 'project.add',
   action: ->
-    @render 'editor', {
+    @render 'addProject'
+
+Router.route '/project/:_projectId',
+  name: 'project.view',
+  action: ->
+    @render 'project', {
       data: ->
-        return Texts.findOne _id: @params._id
+        data = {projectId: @params._projectId}
+        _.extend data, Projects.findOne _id: @params._projectId
+        return data
     }
 
-Router.route '/doc/:_id',
-  name: 'doc.view'
+Router.route '/project/:_projectId/edit',
+  name: 'project.edit',
   action: ->
-    @render 'viewer', {
+    @render 'editProject', {
       data: ->
-        return Texts.findOne _id: @params._id
+        data = {projectId: @params._projectId}
+        _.extend data, Projects.findOne _id: @params._projectId
+        return data
     }
 
-Router.route '/artifact/:_id',
-  name: 'artifact.view'
+Router.route '/project/:_projectId/source',
+  name: 'source.add'
   action: ->
-    @render 'artifact', {
+    @render 'addSource'
+
+Router.route '/project/:_projectId/source/:_id/edit',
+  name: 'source.edit'
+  action: ->
+    @render 'editSource', {
       data: ->
-        return Artifacts.findOne _id: @params._id
+        data = {projectId: @params._projectId}
+        _.extend data, Texts.findOne _id: @params._id
+        return data
     }
 
-Router.route '/artifact/:_id/edit',
-  name: 'artifact.edit'
+Router.route '/project/:_projectId/source/:_id',
+  name: 'source.view'
   action: ->
-    @render 'editArtifact', {
+    @render 'source', {
       data: ->
-        return Artifacts.findOne _id: @params._id
+        data = {projectId: @params._projectId}
+        _.extend data, Texts.findOne _id: @params._id
+        return data
     }
 
-Router.route '/artifact',
+Router.route '/project/:_projectId/artifact',
   name: 'artifact.add'
   action: ->
     @render 'addArtifact'
 
-Router.route '/gem/:_id/edit',
+Router.route '/project/:_projectId/artifact/:_id',
+  name: 'artifact.view'
+  action: ->
+    @render 'artifact', {
+      data: ->
+        data = {projectId: @params._projectId}
+        _.extend data, Artifacts.findOne _id: @params._id
+        return data
+    }
+
+Router.route '/project/:_projectId/artifact/:_id/edit',
+  name: 'artifact.edit'
+  action: ->
+    @render 'editArtifact', {
+      data: ->
+        data = {projectId: @params._projectId}
+        _.extend data, Artifacts.findOne _id: @params._id
+        return data
+    }
+
+Router.route '/project/:_projectId/gem',
+  name: 'gem.add'
+  action: ->
+    @render 'addGem'
+
+Router.route '/project/:_projectId/gem/:_id/edit',
   name: 'gem.edit'
   action: ->
     @render 'editGem', {
       data: ->
-        return Gems.findOne _id: @params._id
+        data = {projectId: @params._projectId}
+        _.extend data, Gems.findOne _id: @params._id
+        return data
     }
-
-Router.route '/gem',
-  name: 'gem.add'
-  action: ->
-    @render 'addGem'

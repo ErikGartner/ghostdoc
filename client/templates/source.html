@@ -1,0 +1,34 @@
+<template name="source">
+  <h1><a href="{{pathFor route='source.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if isProcessed}}{{else}}active{{/if}} mini inline loader"></div></h1>
+  <div class="ui divider"></div>
+
+  <div class="ui fluid container">
+    {{{render}}}
+  </div>
+</template>
+
+<template name="editSource">
+  <div>
+    {{#autoForm collection="Texts" doc=this id="editSourceForm" type="update"}}
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='text' rows=15}}
+      {{#if _id}}
+        {{> quickRemoveButton collection="Texts" _id=_id class="ui red button" beforeRemove=beforeRemove}}
+      {{/if}}
+      <button type="submit" class="ui blue button">Save</button>
+    {{/autoForm}}
+  </div>
+</template>
+
+<template name="addSource">
+  <div>
+    {{#autoForm collection="Texts" doc=this id="addSourceForm" type="insert"}}
+      {{> afQuickField name='name'}}
+      {{> afQuickField name='text' rows=15}}
+      {{#if _id}}
+        {{> quickRemoveButton collection="Texts" _id=_id class="ui red button"}}
+      {{/if}}
+      <button type="submit" class="ui blue button">Save</button>
+    {{/autoForm}}
+  </div>
+</template>

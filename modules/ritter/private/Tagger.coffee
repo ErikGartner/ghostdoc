@@ -55,7 +55,7 @@ class TaggerClass
 
   # renders the lexdata to highlighted Ghostdoc html.
   # This method should be called if data has been through preprocessTokens
-  renderToHtml: (lexData, textId) ->
+  renderToHtml: (lexData, projectId, textId) ->
     renderer = new marked.Renderer()
 
     # save original rendering in case of
@@ -68,8 +68,9 @@ class TaggerClass
       if title != 'GHOSTDOC-TOKEN'
         return defaultLinkRenderer(href, title, text)
       else
-        return '<a href="/artifact/' + href +
-          '"class="token" data-id="' + href + '">' + text + '</a>'
+        href = '/project/' + projectId + '/artifact/' + href
+        return '<a class="token" href="' + href + '">' +
+          text + '</a>'
 
     # textId is set then add id of text source to each paragraph
     if textId?
@@ -81,9 +82,9 @@ class TaggerClass
         return '<h' + level +
           ' class="reference"' +
           ' data-source="' + textId +
-          '" id="' + this.options.headerPrefix +
+          '" id="header-' +
           raw.toLowerCase().replace(/[^\w]+/g, '-') + '">' + text +
-          '</h' + level + '>\n';
+          '</h' + level + '>\n'
 
     return marked.parser lexData, {renderer: renderer}
 

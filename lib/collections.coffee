@@ -1,9 +1,10 @@
 @Texts = new Mongo.Collection('texts')
 @Artifacts = new Mongo.Collection('artifacts')
 @Gems = new Mongo.Collection('gems')
+@Projects = new Mongo.Collection('projects')
 
 @Schemas = {}
-Schemas.Texts = new SimpleSchema
+Schemas.Text = new SimpleSchema
   name:
     type: String
     label: 'Name'
@@ -20,18 +21,23 @@ Schemas.Texts = new SimpleSchema
     type: String
     label: 'Text'
 
-  collaborators:
-    type: [String]
-    optional: true
-    minCount: 0
-    label: 'Collaborator email'
-
   updatedAt:
     type: Date
     label: 'Last updated'
     autoValue: ->
       if @isUpdate or @isInsert
         return new Date()
+
+  project:
+    type: String
+    label: 'Project'
+    allowedValues: ->
+      return Projects.find(author: Meteor.userId()).map (doc) ->
+        return doc._id
+    autoform:
+      options: ->
+        return Projects.find(author: Meteor.userId()).map (doc) ->
+          return {label: doc.name, value: doc._id}
 
 Schemas.Gem = new SimpleSchema
   name:
@@ -50,20 +56,18 @@ Schemas.Gem = new SimpleSchema
     type: [String]
     label: 'Pattern'
 
-  artifacts:
-    type: [String]
-    minCount: 0
-    optional: true
-    label: 'Artifacts'
+  project:
+    type: String
+    label: 'Project'
     allowedValues: ->
-      return Artifacts.find(author: Meteor.userId()).map (doc) ->
+      return Projects.find(author: Meteor.userId()).map (doc) ->
         return doc._id
     autoform:
       options: ->
-        return Artifacts.find(author: Meteor.userId()).map (doc) ->
+        return Projects.find(author: Meteor.userId()).map (doc) ->
           return {label: doc.name, value: doc._id}
 
-Schemas.Artifacts = new SimpleSchema
+Schemas.Artifact = new SimpleSchema
   name:
     type: String
     label: 'Name'
@@ -86,28 +90,67 @@ Schemas.Artifacts = new SimpleSchema
       if @isInsert
         return Meteor.userId()
 
-  texts:
-    type: [String]
-    minCount: 1
-    label: 'Source Documents'
+  project:
+    type: String
+    label: 'Project'
     allowedValues: ->
-      return Texts.find(author: Meteor.userId()).map (doc) ->
+      return Projects.find(author: Meteor.userId()).map (doc) ->
         return doc._id
     autoform:
       options: ->
-        return Texts.find(author: Meteor.userId()).map (doc) ->
+        return Projects.find(author: Meteor.userId()).map (doc) ->
           return {label: doc.name, value: doc._id}
 
-Texts.attachSchema Schemas.Texts
-Artifacts.attachSchema Schemas.Artifacts
+Schemas.Project = new SimpleSchema
+  name:
+    type: String
+    label: 'Name'
+    max: 300
+
+  description:
+    type: String
+    label: 'Description'
+    max: 1000
+
+  author:
+    type: String
+    label: 'Author ID'
+    autoValue: ->
+      if @isInsert
+        return Meteor.userId()
+
+  collaborators:
+    type: [String]
+    optional: true
+    minCount: 0
+    label: 'Collaborator email'
+
+Texts.attachSchema Schemas.Text
+Artifacts.attachSchema Schemas.Artifact
 Gems.attachSchema Schemas.Gem
+Projects.attachSchema Schemas.Project
+
+Meteor.users.helpers
+  mail: ->
+    if @emails?
+      return @emails[0].address
+    else if @services?.facebook?.email
+      return @services.facebook.email
+    return undefined
 
 Artifacts.allow(
   insert: (userId, doc) ->
     return userId
 
   update: (userId, doc) ->
-    return userId == doc.author
+    if userId == doc.author
+      return true
+
+    collaborators = Projects.findOne(doc.project)?.collaborators
+    if collaborators? and Meteor.users.findOne(userId).mail() in collaborators
+      return true
+
+    return false
 
   remove: (userId, doc) ->
     return userId == doc.author
@@ -118,7 +161,14 @@ Texts.allow(
     return userId
 
   update: (userId, doc) ->
-    return userId == doc.author
+    if userId == doc.author
+      return true
+
+    collaborators = Projects.findOne(doc.project)?.collaborators
+    if collaborators? and Meteor.users.findOne(userId).mail() in collaborators
+      return true
+
+    return false
 
   remove: (userId, doc) ->
     return userId == doc.author
@@ -129,16 +179,33 @@ Gems.allow(
     return userId
 
   update: (userId, doc) ->
-    return userId == doc.author
+    if userId == doc.author
+      return true
+
+    collaborators = Projects.findOne(doc.project)?.collaborators
+    if collaborators? and Meteor.users.findOne(userId).mail() in collaborators
+      return true
+
+    return false
 
   remove: (userId, doc) ->
     return userId == doc.author
 )
 
-Meteor.users.helpers
-  mail: ->
-    if @emails?
-      return @emails[0].address
-    else if @services?.facebook?.email
-      return @services.facebook.email
-    return undefined
+Projects.allow(
+  insert: (userId, doc) ->
+    return userId
+
+  update: (userId, doc) ->
+    if userId == doc.author
+      return true
+
+    if doc.collaborators? and Meteor.users.findOne(userId).mail() in
+        doc.collaborators
+      return true
+
+    return false
+
+  remove: (userId, doc) ->
+    return userId == doc.author
+)

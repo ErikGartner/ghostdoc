@@ -57,6 +57,15 @@ gulp.task('tag-release', function (cb) {
   }
 });
 
+gulp.task('github-release', function (done) {
+  conventionalGithubReleaser({
+    type: 'oauth',
+    token: process.env.GITHUB_TOKEN
+  }, {
+    preset: 'angular'
+  }, done);
+});
+
 gulp.task('commit-changes', function () {
   return gulp.src('../')
     .pipe(git.add())
@@ -82,6 +91,7 @@ gulp.task('release', function (callback) {
     'commit-changes',
     'push-changes',
     'tag-release',
+    'github-release',
     function (error) {
       if (error) {
         console.log(error.message);
