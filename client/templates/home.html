@@ -4,7 +4,9 @@
       {{#each topProjects}}
       <div class="column">
         <h2><a href="{{pathFor 'project.view' _projectId=_id}}">{{name}}</a></h2>
-        <i>{{description}}</i>
+        <div style="word-wrap:break-word;">
+          {{#markdown}}{{description}}{{/markdown}}
+        </div>
         <div class="ui list">
           {{#each topSources}}
           <a class="link item" href="{{pathFor 'source.view' _id=_id _projectId=project}}">
