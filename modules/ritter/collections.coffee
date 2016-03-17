@@ -6,6 +6,7 @@ Texts.helpers
     if proc?
       return proc.data
     else
+      Meteor.call 'renderSource', @_id
       return marked(@text)
 
   isProcessed: ->
@@ -17,6 +18,7 @@ Artifacts.helpers
     if proc?
       return proc.data
     else
+      Meteor.call 'renderArtifact', @_id
       return false
 
   gems: ->
@@ -28,7 +30,7 @@ Artifacts.helpers
 
 projectUpdateHook = (userId, doc) ->
   if Meteor.isServer
-    Ritter.processProject doc.project
+    Ritter.removeProject doc.project
 
 Texts.after.insert projectUpdateHook
 Texts.after.update projectUpdateHook
@@ -42,6 +44,4 @@ Gems.after.insert projectUpdateHook
 Gems.after.update projectUpdateHook
 Gems.after.remove projectUpdateHook
 
-Projects.after.remove (userId, doc) ->
-  if Meteor.isServer
-    Ritter.removeProject doc._id
+Projects.after.remove projectUpdateHook
