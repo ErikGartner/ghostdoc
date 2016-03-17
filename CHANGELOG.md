@@ -1,3 +1,13 @@
+<a name="0.8.2"></a>
+## [0.8.2](//compare/0.8.1...v0.8.2) (2016-03-17)
+
+
+### Features
+
+* Lazy processing of data. fd2af32
+
+
+
 <a name="0.8.1"></a>
 ## [0.8.1](//compare/0.8.0...v0.8.1) (2016-03-16)
 
