@@ -18,10 +18,12 @@ class RitterClass
       @processArtifact artifact
       @processGems artifact
 
-  processText: (text) ->
+  processText: (text, force) ->
     id = RitterClass.ritterId text._id, 'text'
-    RitterData.remove id: id
+    if not force and RitterData.findOne(id: id)?
+      return
 
+    RitterData.remove id: id
     artifacts = Artifacts.find project: text.project
     markdown = Tagger.preprocessMarkdown text.text, artifacts
     lexData = Tagger.parseToLexical markdown
@@ -29,8 +31,11 @@ class RitterClass
 
     RitterData.insert {id: id, data: data, type: 'text', project: text.project}
 
-  processArtifact: (doc) ->
+  processArtifact: (doc, force) ->
     id = RitterClass.ritterId doc._id, 'artifact'
+    if not force and RitterData.findOne(id: id)?
+      return
+
     RitterData.remove id: id
 
     sources = Texts.find project: doc.project
