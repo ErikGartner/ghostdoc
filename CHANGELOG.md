@@ -1,3 +1,17 @@
+<a name="0.8.3"></a>
+## [0.8.3](//compare/0.8.2...v0.8.3) (2016-03-18)
+
+
+### Bug Fixes
+
+* Error rendering text 7055db9
+
+### Features
+
+* Add simple ToC 520b2f0
+
+
+
 <a name="0.8.2"></a>
 ## [0.8.2](//compare/0.8.1...v0.8.2) (2016-03-17)
 
