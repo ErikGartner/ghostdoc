@@ -1,5 +1,5 @@
 <template name="artifact">
-  <h1><a href="{{pathFor route='artifact.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}}</h1>
+  <h1><a href="{{pathFor route='artifact.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if references}}{{else}}active{{/if}} mini inline loader"></div></h1>
   <div class="ui divider"></div>
 
   <div id="artifactDiv" class="ui fluid container">
@@ -8,10 +8,6 @@
     {{#each references}}
       {{{this}}}
     {{/each}}
-
-    <div class="ui {{# if references}}{{else}}active{{/if}} inverted dimmer">
-      <div class="ui large text loader">Processing data...</div>
-    </div>
   </div>
 </template>
 
