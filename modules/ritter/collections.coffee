@@ -12,6 +12,13 @@ Texts.helpers
   isProcessed: ->
     return Ritter.getData(@_id, 'text')?
 
+  tableOfContent: ->
+    proc = Ritter.getData @_id, 'text-toc'
+    if proc?
+      return proc.data
+    else
+      return false
+
 Artifacts.helpers
   processed: ->
     proc = Ritter.getData @_id, 'artifact'
@@ -23,6 +30,13 @@ Artifacts.helpers
 
   gems: ->
     proc = Ritter.getData @_id, 'gems'
+    if proc?
+      return proc.data
+    else
+      return false
+
+  tableOfContent: ->
+    proc = Ritter.getData @_id, 'artifact-toc'
     if proc?
       return proc.data
     else

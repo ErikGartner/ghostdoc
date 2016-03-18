@@ -49,6 +49,15 @@ class TaggerClass
           link)
     return markdown
 
+  # Generates an object with all headings
+  generateTOC: (lexData) ->
+    filtered = _.filter lexData, (item) ->
+      return item.type == 'heading'
+
+    return _.map filtered, (item) ->
+      item.id = 'header-' + item.text.toLowerCase().replace(/[^\w]+/g, '-')
+      return item
+
   # this method just renders without highlighting
   renderToBasicHtml: (lexData) ->
     return marked.parser lexData
@@ -78,13 +87,18 @@ class TaggerClass
         return '<p class="reference" data-source="' + textId + '">' +
           text + '</p>'
 
-      renderer.heading = (text, level, raw) ->
-        return '<h' + level +
-          ' class="reference"' +
-          ' data-source="' + textId +
-          '" id="header-' +
-          raw.toLowerCase().replace(/[^\w]+/g, '-') + '">' + text +
-          '</h' + level + '>\n'
+    renderer.heading = (text, level, raw) ->
+      html = '<h' + level +
+        ' class="reference"' +
+        '" id="header-' +
+        raw.toLowerCase().replace(/[^\w]+/g, '-') + '"'
+
+      if textId?
+        html += ' data-source="' + textId
+
+      html += '">' + text +
+        '</h' + level + '>\n'
+      return html
 
     return marked.parser lexData, {renderer: renderer}
 

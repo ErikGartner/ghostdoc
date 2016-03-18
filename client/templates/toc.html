@@ -1,0 +1,13 @@
+<template name="toc">
+  {{#if tableOfContent}}
+  <div class="ui middle aligned list">
+    {{#each tableOfContent}}
+    <div class="item" style="padding-left:{{depth}}em;">
+      <div class="content">
+        <a class="header" href="#{{id}}">{{#markdown}}{{text}}{{/markdown}}</a>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</template>

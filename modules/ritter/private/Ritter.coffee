@@ -27,9 +27,18 @@ class RitterClass
     artifacts = Artifacts.find project: text.project
     markdown = Tagger.preprocessMarkdown text.text, artifacts
     lexData = Tagger.parseToLexical markdown
+    @processTOC text._id, 'text', text.project, lexData
     data = Tagger.renderToHtml lexData, text.project
 
     RitterData.insert {id: id, data: data, type: 'text', project: text.project}
+
+  processTOC: (docId, type, project, lexData) ->
+    id = RitterClass.ritterId docId, type + '-toc'
+    RitterData.remove id: id
+
+    toc = Tagger.generateTOC lexData
+
+    RitterData.insert {id: id, data: toc, type: 'toc', project: project}
 
   processArtifact: (doc, force) ->
     id = RitterClass.ritterId doc._id, 'artifact'
@@ -41,11 +50,15 @@ class RitterClass
     sources = Texts.find project: doc.project
     artifacts = Artifacts.find project: doc.project
 
+    allLexData = []
     data = sources.map (text) ->
       markdown = Tagger.preprocessMarkdown text.text, artifacts
       lexData = Tagger.parseToLexical markdown
       lexData = Tagger.extractReferences lexData, doc
+      allLexData = allLexData.concat lexData
       return Tagger.renderToHtml lexData, doc.project, text._id
+
+    @processTOC doc._id, 'artifact', doc.project, allLexData
 
     RitterData.insert {id: id, data: data, type: 'artifact', project: doc.project}
 

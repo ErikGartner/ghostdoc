@@ -1,14 +1,21 @@
 <template name="source">
-  <h1><a href="{{pathFor route='source.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if isProcessed}}{{else}}active{{/if}} mini inline loader"></div></h1>
-  <div class="ui divider"></div>
+  <div class="three wide column">
+    {{> toc}}
+  </div>
+  <div class="ten wide column">
+    <h1><a href="{{pathFor route='source.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if isProcessed}}{{else}}active{{/if}} mini inline loader"></div></h1>
+    <div class="ui divider"></div>
 
-  <div class="ui fluid container">
-    {{{render}}}
+    <div class="ui fluid basic segment" style="padding:0px;">
+      {{{render}}}
+    </div>
+  </div>
+  <div class="three wide column">
   </div>
 </template>
 
 <template name="editSource">
-  <div>
+  <div class="ten wide column">
     {{#autoForm collection="Texts" doc=this id="editSourceForm" type="update"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='text' rows=15}}
@@ -21,7 +28,7 @@
 </template>
 
 <template name="addSource">
-  <div>
+  <div class="ten wide column">
     {{#autoForm collection="Texts" doc=this id="addSourceForm" type="insert"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='text' rows=15}}

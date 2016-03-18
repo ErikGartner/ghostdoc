@@ -1,18 +1,24 @@
 <template name="artifact">
-  <h1><a href="{{pathFor route='artifact.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if references}}{{else}}active{{/if}} mini inline loader"></div></h1>
-  <div class="ui divider"></div>
+  <div class="three wide column">
+    {{> toc}}
+  </div>
+  <div class="ten wide column">
+    <h1><a href="{{pathFor route='artifact.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if references}}{{else}}active{{/if}} mini inline loader"></div></h1>
+    <div class="ui divider"></div>
 
-  <div id="artifactDiv" class="ui fluid container">
-    {{> infobox}}
-
-    {{#each references}}
-      {{{this}}}
-    {{/each}}
+    <div id="artifactDiv" class="ui fluid basic segment" style="padding:0px;">
+      {{> infobox}}
+      {{#each references}}
+        {{{this}}}
+      {{/each}}
+    </div>
+  </div>
+  <div class="three wide column">
   </div>
 </template>
 
 <template name="editArtifact">
-  <div>
+  <div class="ten wide column">
     {{#autoForm collection="Artifacts" doc=this id="editArtifactForm" type="update"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='tokens'}}
@@ -24,7 +30,7 @@
 </template>
 
 <template name="addArtifact">
-  <div>
+  <div class="ten wide column">
     {{#autoForm collection="Artifacts" id="addArtifactForm" type="insert"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='tokens'}}
