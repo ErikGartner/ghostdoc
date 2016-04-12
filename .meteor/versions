@@ -58,6 +58,7 @@ launch-screen@1.0.4
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
+jakobloekke:rabbitmq@0.1.2
 matb33:collection-hooks@0.8.1
 mdg:validation-error@0.4.0
 meteor@1.1.10

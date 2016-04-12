@@ -47,6 +47,8 @@ class RitterClass
 
     RitterData.remove id: id
 
+    @runExternalArtifactAnalyzer doc
+
     sources = Texts.find project: doc.project
     artifacts = Artifacts.find project: doc.project
 
@@ -70,6 +72,14 @@ class RitterClass
     gems = _.flatten gems, true
 
     RitterData.insert {id: id, data: gems, type: 'gems', project: artifact.project}
+
+  runExternalArtifactAnalyzer: (artifact) ->
+    msg =
+      type: 'artifact_analyzer'
+      data:
+        id: artifact._id
+    if RabbitMQ.connection?
+      RabbitMQ.connection.publish('ghostdoc-ritter', msg, null, null)
 
   removeProject: (projectId) ->
     RitterData.remove project: projectId

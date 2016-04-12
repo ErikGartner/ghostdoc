@@ -35,6 +35,13 @@ Artifacts.helpers
     else
       return false
 
+  externalAnalytics: ->
+    proc = Ritter.getData @_id, 'artifact_analytics'
+    if proc?
+      return proc.data
+    else
+      return false
+
   tableOfContent: ->
     proc = Ritter.getData @_id, 'artifact-toc'
     if proc?
