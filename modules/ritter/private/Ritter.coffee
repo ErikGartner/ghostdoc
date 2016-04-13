@@ -24,6 +24,9 @@ class RitterClass
       return
 
     RitterData.remove id: id
+
+    @runExternalSourceAnalyzer text
+
     artifacts = Artifacts.find project: text.project
     markdown = Tagger.preprocessMarkdown text.text, artifacts
     lexData = Tagger.parseToLexical markdown
@@ -78,6 +81,14 @@ class RitterClass
       type: 'artifact_analyzer'
       data:
         id: artifact._id
+    if RabbitMQ.connection?
+      RabbitMQ.connection.publish('ghostdoc-ritter', msg, null, null)
+
+  runExternalSourceAnalyzer: (text) ->
+    msg =
+      type: 'source_analyzer'
+      data:
+        id: text._id
     if RabbitMQ.connection?
       RabbitMQ.connection.publish('ghostdoc-ritter', msg, null, null)
 
