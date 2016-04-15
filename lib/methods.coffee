@@ -1,15 +1,24 @@
 Meteor.methods
-  renderSource: (textId) ->
+
+  renderSource: (ritterData, projectId, textId) ->
+    check ritterData, Object
+    check projectId, String
     check textId, String
     if Meteor.isServer
-      text = Texts.findOne textId
-      if text?
-        Ritter.processText text
+      lexData = ritterData.data.marked_tree.data
+      lexData.links = {}
+      compiled = Tagger.renderToHtml lexData, projectId, textId
+      RitterData.update {_id: ritterData._id}, {$set: {_compiled: compiled}}
+      return compiled
 
-  renderArtifact: (artifactId) ->
-    check artifactId, String
+  renderArtifact: (ritterData, projectId, textId) ->
+    check ritterData, Object
+    check projectId, String
+    check textId, String
     if Meteor.isServer
-      artifact = Artifacts.findOne artifactId
-      if artifact?
-        Ritter.processArtifact artifact
-        Ritter.processGems artifact
+      lexData = ritterData.data.marked_tree.data
+      compiled = _.map lexData, (item) ->
+        item.tree.links = {}
+        return Tagger.renderToHtml item.tree, projectId, item.source
+      RitterData.update {_id: ritterData._id}, {$set: {_compiled: compiled}}
+      return compiled

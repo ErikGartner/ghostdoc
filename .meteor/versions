@@ -24,6 +24,7 @@ check@1.1.0
 chuangbo:marked@0.3.5_1
 coffeescript@1.0.11
 dburles:collection-helpers@1.0.4
+dburles:mongo-collection-instances@0.3.4
 ddp@1.2.2
 ddp-client@1.2.1
 ddp-common@1.2.2
@@ -53,16 +54,18 @@ iron:location@1.0.11
 iron:middleware-stack@1.0.11
 iron:router@1.0.12
 iron:url@1.0.11
+jakobloekke:rabbitmq@0.1.2
 jquery@1.11.4
+lai:collection-extensions@0.1.4
 launch-screen@1.0.4
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
-jakobloekke:rabbitmq@0.1.2
 matb33:collection-hooks@0.8.1
 mdg:validation-error@0.4.0
 meteor@1.1.10
 meteor-base@1.0.1
+meteortoys:toykit@2.2.1
 minifiers@1.1.7
 minimongo@1.0.10
 mobile-experience@1.0.1
@@ -70,6 +73,7 @@ mobile-status-bar@1.0.6
 momentjs:moment@2.10.6
 mongo@1.1.3
 mongo-id@1.0.1
+msavin:mongol@1.6.2
 npm-mongo@1.4.39_1
 oauth@1.1.6
 oauth2@1.1.5

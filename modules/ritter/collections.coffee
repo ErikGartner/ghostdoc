@@ -2,56 +2,39 @@
 
 Texts.helpers
   processed: ->
-    proc = Ritter.getData @_id, 'text'
+    proc = Ritter.getData @_id, 'source_analytics'
     if proc?
-      return proc.data
-    else
-      Meteor.call 'renderSource', @_id
-      return marked(@text)
+      if not proc._compiled?
+        Meteor.call 'renderSource', proc, @project, @_id
+        return false
+      else
+        return proc._compiled
 
   isProcessed: ->
-    return Ritter.getData(@_id, 'text')?
+    return Ritter.getData(@_id, 'source_analytics')?
 
-  tableOfContent: ->
-    proc = Ritter.getData @_id, 'text-toc'
-    if proc?
-      return proc.data
-    else
-      return false
+  analytics: ->
+    return Ritter.getData @_id, 'source_analytics'
 
 Artifacts.helpers
   processed: ->
-    proc = Ritter.getData @_id, 'artifact'
-    if proc?
-      return proc.data
-    else
-      Meteor.call 'renderArtifact', @_id
-      return false
-
-  gems: ->
-    proc = Ritter.getData @_id, 'gems'
-    if proc?
-      return proc.data
-    else
-      return false
-
-  externalAnalytics: ->
     proc = Ritter.getData @_id, 'artifact_analytics'
     if proc?
-      return proc.data
-    else
-      return false
+      if not proc._compiled?
+        Meteor.call 'renderArtifact', proc, @project, @_id
+        return false
+      else
+        return proc._compiled
 
-  tableOfContent: ->
-    proc = Ritter.getData @_id, 'artifact-toc'
-    if proc?
-      return proc.data
-    else
-      return false
+  isProcessed: ->
+    return Ritter.getData(@_id, 'artifact_analytics')?
+
+  analytics: ->
+    return Ritter.getData @_id, 'artifact_analytics'
 
 projectUpdateHook = (userId, doc) ->
   if Meteor.isServer
-    Ritter.removeProject doc.project
+    Ritter.processProject doc.project
 
 Texts.after.insert projectUpdateHook
 Texts.after.update projectUpdateHook

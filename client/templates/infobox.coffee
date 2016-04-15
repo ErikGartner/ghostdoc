@@ -1,6 +1,5 @@
 Template.infobox.helpers
   gemsItems: ->
-    if not @_id? or not @projectId?
+    if not @_id? or not @projectId? or not @isProcessed()
       return
-    console.log(@externalAnalytics())
-    return @gems()
+    return @analytics().data.gems.data
