@@ -2,60 +2,60 @@
 
 Texts.helpers
   processed: ->
-    proc = Ritter.getData @_id, 'text'
+    proc = Ritter.getData @_id, 'source_analytics'
     if proc?
-      return proc.data
-    else
-      Meteor.call 'renderSource', @_id
-      return marked(@text)
+      if not proc._compiled?
+        Meteor.call 'renderSource', proc, @project, @_id
+        return false
+      else
+        return proc._compiled
 
   isProcessed: ->
-    return Ritter.getData(@_id, 'text')?
+    return Ritter.getData(@_id, 'source_analytics')?
 
-  tableOfContent: ->
-    proc = Ritter.getData @_id, 'text-toc'
-    if proc?
-      return proc.data
-    else
-      return false
+  analytics: ->
+    return Ritter.getData @_id, 'source_analytics'
 
 Artifacts.helpers
   processed: ->
-    proc = Ritter.getData @_id, 'artifact'
+    proc = Ritter.getData @_id, 'artifact_analytics'
     if proc?
-      return proc.data
-    else
-      Meteor.call 'renderArtifact', @_id
-      return false
+      if not proc._compiled?
+        Meteor.call 'renderArtifact', proc, @project, @_id
+        return false
+      else
+        return proc._compiled
 
-  gems: ->
-    proc = Ritter.getData @_id, 'gems'
-    if proc?
-      return proc.data
-    else
-      return false
+  isProcessed: ->
+    return Ritter.getData(@_id, 'artifact_analytics')?
 
-  tableOfContent: ->
-    proc = Ritter.getData @_id, 'artifact-toc'
-    if proc?
-      return proc.data
-    else
-      return false
+  analytics: ->
+    return Ritter.getData @_id, 'artifact_analytics'
 
 projectUpdateHook = (userId, doc) ->
   if Meteor.isServer
-    Ritter.removeProject doc.project
+    Ritter.processProject doc.project
 
 Texts.after.insert projectUpdateHook
 Texts.after.update projectUpdateHook
-Texts.after.remove projectUpdateHook
+Texts.after.remove (userId, doc) ->
+  if Meteor.isServer
+    id = Ritter.ritterId doc._id, 'source_analytics'
+    RitterData.remove {id: id}
+    Ritter.processProject doc.project
 
 Artifacts.after.insert projectUpdateHook
 Artifacts.after.update projectUpdateHook
-Artifacts.after.remove projectUpdateHook
+Artifacts.after.remove (userId, doc) ->
+  if Meteor.isServer
+    id = Ritter.ritterId doc._id, 'artifact_analytics'
+    RitterData.remove {id: id}
+    Ritter.processProject doc.project
 
 Gems.after.insert projectUpdateHook
 Gems.after.update projectUpdateHook
 Gems.after.remove projectUpdateHook
 
-Projects.after.remove projectUpdateHook
+Projects.after.remove (userId, doc) ->
+  if Meteor.isServer
+    Ritter.removeProject doc.project

@@ -27,7 +27,7 @@ Meteor.publishComposite 'projects', ->
       },
       {
         find: (project) ->
-          return RitterData.find()
+          return RitterData.find({project: project._id})
       }
     ]
   return pub

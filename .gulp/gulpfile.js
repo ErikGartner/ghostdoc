@@ -22,7 +22,7 @@ gulp.task('set-dev-packages', shell.task([
 ], {ignoreErrors: true}));
 
 gulp.task('run-local', shell.task([
-  'meteor run --settings ../settings.json',
+  'RABBITMQ_URL=amqp://guest:guest@localhost meteor run --settings ../settings.json',
 ]));
 
 gulp.task('bump', function() {

@@ -21,6 +21,16 @@ Schemas.Text = new SimpleSchema
     type: String
     label: 'Text'
 
+  markedTree:
+    type: String
+    label: 'Marked Tree'
+    autoValue: (doc) ->
+      try
+        return JSON.stringify(marked.lexer @field('text').value)
+      catch error
+        console.log 'Error when parsing for markedTree', @name, error
+        return ''
+
   updatedAt:
     type: Date
     label: 'Last updated'
