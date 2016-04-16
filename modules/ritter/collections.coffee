@@ -58,4 +58,4 @@ Gems.after.remove projectUpdateHook
 
 Projects.after.remove (userId, doc) ->
   if Meteor.isServer
-    Ritter.removeProject doc.project
+    Ritter.removeProject doc._id
