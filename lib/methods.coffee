@@ -7,7 +7,7 @@ Meteor.methods
     if Meteor.isServer
       lexData = ritterData.data.marked_tree.data
       lexData.links = {}
-      compiled = Tagger.renderToHtml lexData, projectId, textId
+      compiled = RitterRenderer.renderToHtml lexData, projectId, textId
       RitterData.update {_id: ritterData._id}, {$set: {_compiled: compiled}}
       return compiled
 
@@ -19,6 +19,6 @@ Meteor.methods
       lexData = ritterData.data.marked_tree.data
       compiled = _.map lexData, (item) ->
         item.tree.links = {}
-        return Tagger.renderToHtml item.tree, projectId, item.source
+        return RitterRenderer.renderToHtml item.tree, projectId, item.source
       RitterData.update {_id: ritterData._id}, {$set: {_compiled: compiled}}
       return compiled
