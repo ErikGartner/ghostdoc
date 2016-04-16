@@ -1,3 +1,25 @@
+<a name="0.9.0"></a>
+# [0.9.0](//compare/0.8.3...v0.9.0) (2016-04-16)
+
+
+### Bug Fixes
+
+* RitterData publish leak. 1164121
+
+### Features
+
+* Add External artifact analytics de7773f
+* Add marked parse tree field to texts dfa969f
+* Call external source analyzer 268c1b0
+* Hide TOC on mobile devices 648b83a
+* Renamed Tagger to RitterRenderer 238543f
+* Replace not remove ritter data on update. 429136a
+* Update to meteor 1.3.0 e384459
+* Update to Meteor 1.3.1 1304f8e
+* Working external analytics, though not lazy a9c34b4
+
+
+
 <a name="0.8.3"></a>
 ## [0.8.3](//compare/0.8.2...v0.8.3) (2016-03-18)
 
