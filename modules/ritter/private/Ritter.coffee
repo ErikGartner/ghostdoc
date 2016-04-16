@@ -2,15 +2,13 @@
 
 class RitterClass
 
-  @ritterId: (id, type) ->
+  ritterId: (id, type) ->
     return type + '_' + id
 
   getData: (id, type) ->
-    proc = RitterData.findOne id: RitterClass.ritterId(id, type)
+    proc = RitterData.findOne id: @ritterId(id, type)
 
   processProject: (projectId)->
-    @removeProject projectId
-
     Texts.find(project: projectId).forEach (text) =>
       @processText text
 

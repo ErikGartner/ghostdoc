@@ -38,14 +38,24 @@ projectUpdateHook = (userId, doc) ->
 
 Texts.after.insert projectUpdateHook
 Texts.after.update projectUpdateHook
-Texts.after.remove projectUpdateHook
+Texts.after.remove (userId, doc) ->
+  if Meteor.isServer
+    id = Ritter.ritterId doc._id, 'source_analytics'
+    RitterData.remove {id: id}
+    Ritter.processProject doc.project
 
 Artifacts.after.insert projectUpdateHook
 Artifacts.after.update projectUpdateHook
-Artifacts.after.remove projectUpdateHook
+Artifacts.after.remove (userId, doc) ->
+  if Meteor.isServer
+    id = Ritter.ritterId doc._id, 'artifact_analytics'
+    RitterData.remove {id: id}
+    Ritter.processProject doc.project
 
 Gems.after.insert projectUpdateHook
 Gems.after.update projectUpdateHook
 Gems.after.remove projectUpdateHook
 
-Projects.after.remove projectUpdateHook
+Projects.after.remove (userId, doc) ->
+  if Meteor.isServer
+    Ritter.removeProject doc.project
