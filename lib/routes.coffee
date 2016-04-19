@@ -95,3 +95,16 @@ Router.route '/project/:_projectId/gem/:_id/edit',
         _.extend data, Gems.findOne _id: @params._id
         return data
     }
+
+Router.route '/project/:_projectId/source/:_id/network',
+  name: 'network.view'
+  waitOn: ->
+    return Meteor.subscribe 'projects'
+
+  action: ->
+    @render 'network', {
+      data: ->
+        data = {projectId: @params._projectId}
+        _.extend data, Texts.findOne _id: @params._id
+        return data
+    }

@@ -3,4 +3,4 @@ Meteor.subscribe 'artifacts'
 Meteor.subscribe 'gems'
 Meteor.subscribe 'projects'
 
-Meteor.subscribe 'processedTexts'
+Meteor.subscribe 'ritterData'

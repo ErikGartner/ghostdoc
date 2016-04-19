@@ -1,27 +1,36 @@
 Template.network.onRendered ->
 
   @autorun =>
-    artifacts = Artifacts.find project: @data.projectId
+
+    analytics = @data.analytics()
+    if not analytics?
+      return
+
+    network = analytics.data.network_analytics
+    console.log 'Network data:', network
+
 
     idMap = {}
-    nodes = artifacts.map (doc, index) ->
+    nodes = Artifacts.find({project: @data.project}).map (doc, index) ->
       idMap[doc._id] = index
-      return {name: doc.name, image: doc.image}
+      node =
+        name: doc.name
+        image: doc.image
+        centrality: network.centrality[doc._id]
+        community: network.communities[doc._id]
+      return node
+
+    console.log 'Mappings:', idMap, nodes
 
     links = []
     minCount = 0
     maxCount = 0
-    artifacts.forEach (doc) ->
-      networkData = Ritter.getData doc._id, 'network'
-
-      _.map networkData.data, (count, id) ->
-        source = idMap[doc._id]
-        target = idMap[id]
-        if source != target# and count > 0
-          link = {source: idMap[doc._id], target: idMap[id], value: count }
-          minCount = Math.min(minCount, count)
-          maxCount = Math.max(maxCount, count)
-          links.push link
+    _.each network.pair_occurences, (toObj, from) ->
+      _.each toObj, (count, to) ->
+        link = {source: idMap[from], target: idMap[to], value: count}
+        minCount = Math.min(minCount, count)
+        maxCount = Math.max(maxCount, count)
+        links.push link
 
     console.log nodes, links
     json = {nodes: nodes, links: links}
@@ -31,7 +40,7 @@ Template.network.onRendered ->
 
     svg = d3.select("#artifactGraph").append("svg")
       .attr("width", width)
-      .attr("height", height);
+      .attr("height", height)
 
     force = d3.layout.force()
       .gravity(0.05)
@@ -47,7 +56,7 @@ Template.network.onRendered ->
         return res
       )
       .linkStrength(0.9)
-      .size([width, height]);
+      .size([width, height])
 
     force
       .nodes(json.nodes)
@@ -57,13 +66,13 @@ Template.network.onRendered ->
     link = svg.selectAll(".link")
       .data(json.links)
       .enter().append("line")
-      .attr("class", "link");
+      .attr("class", "link")
 
     node = svg.selectAll(".node")
       .data(json.nodes)
       .enter().append("g")
       .attr("class", "node")
-      .call(force.drag);
+      .call(force.drag)
 
     node.append("image")
       .attr("xlink:href", (d) ->
@@ -71,13 +80,16 @@ Template.network.onRendered ->
       .attr("x", -16)
       .attr("y", -16)
       .attr("width", 32)
-      .attr("height", 32);
+      .attr("height", 32)
 
     node.append("text")
       .attr("dx", 12)
-      .attr("dy", ".35em")
+      .attr("dy", 0)
+      .style("font-size", (d) ->
+        size = 2.5 * d.centrality + 0.5
+        return size  + "em")
       .text((d) ->
-        return d.name
+        return d.name + ' - ' + d.community
       )
 
     force.on "tick", ->
