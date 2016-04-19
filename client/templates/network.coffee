@@ -11,25 +11,31 @@ Template.network.onRendered ->
 
 
     idMap = {}
+    minCent = 1
+    maxCent = 0
+
     nodes = Artifacts.find({project: @data.project}).map (doc, index) ->
       idMap[doc._id] = index
+      centrality = network.centrality[doc._id]
+      minCent = Math.min minCent, centrality
+      maxCent = Math.max maxCent, centrality
       node =
         name: doc.name
         image: doc.image
-        centrality: network.centrality[doc._id]
+        centrality: centrality
         community: network.communities[doc._id]
       return node
 
     console.log 'Mappings:', idMap, nodes
 
     links = []
-    minCount = 0
+    minCount = 1000
     maxCount = 0
     _.each network.pair_occurences, (toObj, from) ->
       _.each toObj, (count, to) ->
         link = {source: idMap[from], target: idMap[to], value: count}
-        minCount = Math.min(minCount, count)
-        maxCount = Math.max(maxCount, count)
+        minCount = Math.min minCount, count
+        maxCount = Math.max maxCount, count
         links.push link
 
     console.log nodes, links
@@ -77,16 +83,41 @@ Template.network.onRendered ->
     node.append("image")
       .attr("xlink:href", (d) ->
         return d.image)
-      .attr("x", -16)
-      .attr("y", -16)
-      .attr("width", 32)
-      .attr("height", 32)
+      .attr("x", (d) ->
+        normed = (d.centrality - minCent) / (maxCent - minCent)
+        size = 54 * normed + 10
+        return size / -2
+      )
+      .attr("y", (d) ->
+        normed = (d.centrality - minCent) / (maxCent - minCent)
+        size = 54 * normed + 10
+        return size / -2
+      )
+      .attr("width", (d) ->
+        normed = (d.centrality - minCent) / (maxCent - minCent)
+        size = 54 * normed + 10
+        return size
+      )
+      .attr("height", (d) ->
+        normed = (d.centrality - minCent) / (maxCent - minCent)
+        size = 54 * normed + 10
+        return size
+      )
 
     node.append("text")
-      .attr("dx", 12)
-      .attr("dy", 0)
+      .attr("x", (d) ->
+        normed = (d.centrality - minCent) / (maxCent - minCent)
+        size = 54 * normed + 10
+        return size / 2
+      )
+      .attr("y", (d) ->
+        normed = (d.centrality - minCent) / (maxCent - minCent)
+        size = 54 * normed + 10
+        return size / 4
+      )
       .style("font-size", (d) ->
-        size = 2.5 * d.centrality + 0.5
+        normed = (d.centrality - minCent) / (maxCent - minCent)
+        size = 2.5 * normed + 0.5
         return size  + "em")
       .text((d) ->
         return d.name + ' - ' + d.community
