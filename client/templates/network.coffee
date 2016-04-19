@@ -7,7 +7,7 @@ Template.network.onRendered ->
       return
 
     network = analytics.data.network_analytics
-    console.log 'Network data:', network
+    #console.log 'Network data:', network
 
 
     idMap = {}
@@ -17,8 +17,9 @@ Template.network.onRendered ->
     nodes = Artifacts.find({project: @data.project}).map (doc, index) ->
       idMap[doc._id] = index
       centrality = network.centrality[doc._id]
-      minCent = Math.min minCent, centrality
-      maxCent = Math.max maxCent, centrality
+      if centrality?
+        minCent = Math.min minCent, centrality
+        maxCent = Math.max maxCent, centrality
       node =
         name: doc.name
         image: doc.image
@@ -26,7 +27,7 @@ Template.network.onRendered ->
         community: network.communities[doc._id]
       return node
 
-    console.log 'Mappings:', idMap, nodes
+    #console.log 'Mappings:', idMap, nodes
 
     links = []
     minCount = 1000
@@ -38,7 +39,7 @@ Template.network.onRendered ->
         maxCount = Math.max maxCount, count
         links.push link
 
-    console.log nodes, links
+    #console.log nodes, links
     json = {nodes: nodes, links: links}
 
     width = 900
@@ -52,13 +53,11 @@ Template.network.onRendered ->
       .gravity(0.05)
       .distance(250)
       .charge((node, index) ->
-        console.log node, index
         return -100
       )
       .linkDistance((link, index) ->
         norm = 1 - (link.value - minCount) / (maxCount - minCount)
         res = norm * 300 + 15
-        console.log link, index, norm, res
         return res
       )
       .linkStrength(0.9)
@@ -80,45 +79,39 @@ Template.network.onRendered ->
       .attr("class", "node")
       .call(force.drag)
 
+    powRescale = (x, xMin, xMax, yMin, yMax) ->
+      if not x?
+        return yMin
+      normed = (x - xMin) / (xMax - xMin)
+      a = 1/2
+      return Math.pow(normed, a) * yMax + yMin
+
     node.append("image")
       .attr("xlink:href", (d) ->
         return d.image)
       .attr("x", (d) ->
-        normed = (d.centrality - minCent) / (maxCent - minCent)
-        size = 54 * normed + 10
-        return size / -2
+        return powRescale(d.centrality, minCent, maxCent, 10, 54) / -2
       )
       .attr("y", (d) ->
-        normed = (d.centrality - minCent) / (maxCent - minCent)
-        size = 54 * normed + 10
-        return size / -2
+        return powRescale(d.centrality, minCent, maxCent, 10, 54) / -2
       )
       .attr("width", (d) ->
-        normed = (d.centrality - minCent) / (maxCent - minCent)
-        size = 54 * normed + 10
-        return size
+        return powRescale(d.centrality, minCent, maxCent, 10, 54)
       )
       .attr("height", (d) ->
-        normed = (d.centrality - minCent) / (maxCent - minCent)
-        size = 54 * normed + 10
-        return size
+        return powRescale(d.centrality, minCent, maxCent, 10, 54)
       )
 
     node.append("text")
       .attr("x", (d) ->
-        normed = (d.centrality - minCent) / (maxCent - minCent)
-        size = 54 * normed + 10
-        return size / 2
+        return powRescale(d.centrality, minCent, maxCent, 10, 54) / 2
       )
       .attr("y", (d) ->
-        normed = (d.centrality - minCent) / (maxCent - minCent)
-        size = 54 * normed + 10
-        return size / 4
+        return powRescale(d.centrality, minCent, maxCent, 10, 54) / 4
       )
       .style("font-size", (d) ->
-        normed = (d.centrality - minCent) / (maxCent - minCent)
-        size = 2.5 * normed + 0.5
-        return size  + "em")
+        return powRescale(d.centrality, minCent, maxCent, 0.5, 2.5) + "em"
+      )
       .text((d) ->
         return d.name + ' - ' + d.community
       )
