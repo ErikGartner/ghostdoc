@@ -23,7 +23,8 @@ Meteor.publishComposite 'projects', ->
       },
       {
         find: (project) ->
-          return Meteor.users.find _id: project.author
+          return Meteor.users.find {_id: project.author},
+            {fields: {'_id': 1, 'profile': 1, 'emails': 1}}
       },
       {
         find: (project) ->
