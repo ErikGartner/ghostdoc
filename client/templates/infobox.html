@@ -19,7 +19,6 @@
         {{/each}}
         </div>
         {{/if}}
-        {{#if associates}}
         <h3>Associates</h3>
         <div class="ui list">
           {{#each associates}}
@@ -31,7 +30,16 @@
           </div>
           {{/each}}
         </div>
-        {{/if}}
+        <div class="ui one statistics">
+          <div class="statistic">
+            <div class="label">
+              Rank
+            </div>
+            <div class="value">
+              {{rank}}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
