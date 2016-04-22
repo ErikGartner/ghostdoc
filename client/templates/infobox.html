@@ -26,6 +26,7 @@
             <img class="ui avatar image" src={{this.image}}>
             <div class="content">
               <a class="header" href={{pathFor 'artifact.view' _id=this._id _projectId=this.project}}>{{this.name}}</a>
+              <div class="description">{{this._occurrences}}</div>
             </div>
           </div>
           {{/each}}
@@ -33,6 +34,7 @@
         <div class="ui one statistics">
           <div class="statistic">
             <div class="label">
+              <i class="icon Sort Descending"></i>
               Rank
             </div>
             <div class="value">

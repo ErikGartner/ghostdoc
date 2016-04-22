@@ -24,7 +24,11 @@ Template.infobox.helpers
     assocs = _.sortBy assocs, (doc) ->
       return -1 * pairs[doc._id]
 
-    return _.first assocs, 5
+    assocs = _.first assocs, 8
+    assocs = _.map assocs, (doc) ->
+      doc._occurrences = pairs[doc._id]
+      return doc
+    return assocs
 
   rank: ->
     if not @_id? or not @projectId?
@@ -40,7 +44,6 @@ Template.infobox.helpers
 
     currentId = @_id
     rank = lodash.findIndex ranks, (doc) ->
-      console.log doc._id, @_id
       return doc._id == currentId
 
     return rank + 1
