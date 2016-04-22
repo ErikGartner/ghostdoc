@@ -31,6 +31,18 @@
           </div>
           {{/each}}
         </div>
+        <h3>Community ({{communitySize community}})</h3>
+        <div class="ui list">
+          {{#each community}}
+          <div class="item">
+            <img class="ui avatar image" src={{this.image}}>
+            <div class="content">
+              <a class="header" href={{pathFor 'artifact.view' _id=this._id _projectId=this.project}}>{{this.name}}</a>
+              <div class="description">{{this._occurrences}}</div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
         <div class="ui one statistics">
           <div class="statistic">
             <div class="label">
