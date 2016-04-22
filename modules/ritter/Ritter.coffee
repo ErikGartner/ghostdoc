@@ -15,7 +15,17 @@ class RitterClass
     Artifacts.find(project: projectId).forEach (artifact) =>
       @processArtifact artifact
 
-  processText: (text, force) ->
+    @processProjectAnalytics projectId
+
+  processProjectAnalytics: (projectId) ->
+    msg =
+      type: 'project_analyzer'
+      data:
+        id: projectId
+    if RabbitMQ.connection?
+      RabbitMQ.connection.publish('ghostdoc-ritter', msg, null, null)
+
+  processText: (text) ->
     msg =
       type: 'source_analyzer'
       data:
@@ -23,7 +33,7 @@ class RitterClass
     if RabbitMQ.connection?
       RabbitMQ.connection.publish('ghostdoc-ritter', msg, null, null)
 
-  processArtifact: (artifact, force) ->
+  processArtifact: (artifact) ->
     msg =
       type: 'artifact_analyzer'
       data:
