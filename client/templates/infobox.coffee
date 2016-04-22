@@ -24,7 +24,7 @@ Template.infobox.helpers
     assocs = _.sortBy assocs, (doc) ->
       return -1 * pairs[doc._id]
 
-    assocs = _.first assocs, 8
+    assocs = _.first assocs, 5
     assocs = _.map assocs, (doc) ->
       doc._occurrences = pairs[doc._id]
       return doc
