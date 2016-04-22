@@ -33,7 +33,7 @@ class RendererClass
       html = '<h' + level +
         ' class="reference"' +
         '" id="header-' +
-        raw.toLowerCase().replace(/[^A-Za-z]+/g, '-') + '"'
+        raw.toLowerCase().replace(/[^A-Za-z0-9_]+/g, '-') + '"'
 
       if textId?
         html += ' data-source="' + textId
