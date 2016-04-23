@@ -4,6 +4,7 @@ var git = require('gulp-git');
 var shell = require('gulp-shell');
 var bump = require('gulp-bump');
 var conventionalChangelog = require('gulp-conventional-changelog');
+var conventionalGithubReleaser = require('conventional-github-releaser');
 var runSequence = require('run-sequence');
 var fs = require('fs');
 

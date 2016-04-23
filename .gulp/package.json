@@ -3,6 +3,7 @@
   "description": "Smart Text Viewer",
   "version": "0.10.0",
   "dependencies": {
+    "conventional-github-releaser": "^1.1.2",
     "gulp": "^3.9.0",
     "gulp-bump": "^1.0.0",
     "gulp-conventional-changelog": "^0.7.0",
