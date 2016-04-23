@@ -1,2 +1,2 @@
 Template.registerHelper 'appVersion', ->
-  return Meteor.settings.public.ghostdoc?.version
+  return Meteor.settings?.public?.ghostdoc?.version

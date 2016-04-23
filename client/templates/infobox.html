@@ -4,21 +4,57 @@
       {{#if image}}
       <img class="ui medium rounded image" src={{image}}>
       {{/if}}
-      {{#if gemsItems}}
       <div class="ui segment">
-      <div class="ui list">
-      {{#each gemsItems}}
-        <a class="item">
-          <i class="right triangle icon"></i>
-          <div class="content">
-            <div class="header">{{name}}</div>
-            <div class="description">{{result}}</div>
+        {{#if gemsItems}}
+        <h3>Gems</h3>
+        <div class="ui list">
+        {{#each gemsItems}}
+          <a class="item">
+            <i class="right triangle icon"></i>
+            <div class="content">
+              <div class="header">{{name}}</div>
+              <div class="description">{{result}}</div>
+            </div>
+          </a>
+        {{/each}}
+        </div>
+        {{/if}}
+        <h3>Associates</h3>
+        <div class="ui list">
+          {{#each associates}}
+          <div class="item">
+            <img class="ui avatar image" src={{this.image}}>
+            <div class="content">
+              <a class="header" href={{pathFor 'artifact.view' _id=this._id _projectId=this.project}}>{{this.name}}</a>
+              <div class="description">{{this._occurrences}}</div>
+            </div>
           </div>
-        </a>
-      {{/each}}
+          {{/each}}
+        </div>
+        <h3>Community ({{communitySize}})</h3>
+        <div class="ui list">
+          {{#each community}}
+          <div class="item">
+            <img class="ui avatar image" src={{this.image}}>
+            <div class="content">
+              <a class="header" href={{pathFor 'artifact.view' _id=this._id _projectId=this.project}}>{{this.name}}</a>
+              <div class="description">{{this._occurrences}}</div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        <div class="ui one statistics">
+          <div class="statistic">
+            <div class="label">
+              <i class="icon Sort Descending"></i>
+              Rank
+            </div>
+            <div class="value">
+              {{rank}}
+            </div>
+          </div>
+        </div>
       </div>
-      </div>
-      {{/if}}
     </div>
   </div>
 </template>

@@ -32,6 +32,13 @@ Artifacts.helpers
   analytics: ->
     return Ritter.getData @_id, 'artifact_analytics'
 
+Projects.helpers
+  isProcessed: ->
+    return Ritter.getData(@_id, 'project_analytics')?
+
+  analytics: ->
+    return Ritter.getData @_id, 'project_analytics'
+
 projectUpdateHook = (userId, doc) ->
   if Meteor.isServer
     Ritter.processProject doc.project
