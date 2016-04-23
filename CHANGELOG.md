@@ -1,3 +1,30 @@
+<a name="0.10.0"></a>
+# [0.10.0](//compare/0.9.0...v0.10.0) (2016-04-23)
+
+
+### Bug Fixes
+
+* Bug that prevented RitterData cleanup on project deletion. 80d449c
+* Bug with heading id 2f4b14e
+* Minor bug 6526e27
+* Removed test page for network a617527
+* Security leak 4001b08
+
+### Features
+
+* Add associates 63c64a0
+* Add lodash 00ccdba
+* Add rank and redefined associates 54f0bb9
+* Improve network text scale cc2fae2
+* Improved text sizing and image sizing. 5e9bf0f
+* Integrated with new Ritter data ad87446
+* Only show 5 associates fc988ed
+* Show community on artifact page 5f20588
+* Show number of occurences e2c49ac
+* Use same header id generation as ritter ToC 7e35b72
+
+
+
 <a name="0.9.0"></a>
 # [0.9.0](//compare/0.8.3...v0.9.0) (2016-04-16)
 
