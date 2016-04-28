@@ -87,3 +87,51 @@ Template.infobox.helpers
       return data.communities[doc._id] == communityId
     , {_id: @_id}
     return community.length
+
+  friends: ->
+    if not @_id? or not @projectId?
+      return
+
+    project = Projects.findOne(@projectId)
+    if not project? or not project.isProcessed()
+      return false
+
+    data = project.analytics().data.relations_analytics
+
+    friends = _.filter Artifacts.find({project: @projectId}).fetch(), (doc) ->
+      return data.friend_scores[@_id][doc._id] > 0 and doc._id != @_id
+    , {_id: @_id}
+
+    currentId = @_id
+    friends = _.sortBy friends, (doc) ->
+      return -1 * data.friend_scores[currentId][doc._id]
+
+    friends = _.first friends, 5
+    friends = _.map friends, (doc) ->
+      doc._friend_score = data.friend_scores[currentId][doc._id]
+      return doc
+    return friends
+
+  enemies: ->
+    if not @_id? or not @projectId?
+      return
+
+    project = Projects.findOne(@projectId)
+    if not project? or not project.isProcessed()
+      return false
+
+    data = project.analytics().data.relations_analytics
+
+    enemies = _.filter Artifacts.find({project: @projectId}).fetch(), (doc) ->
+      return data.friend_scores[@_id][doc._id] < 0 and doc._id != @_id
+    , {_id: @_id}
+
+    currentId = @_id
+    enemies = _.sortBy enemies, (doc) ->
+      return data.friend_scores[currentId][doc._id]
+
+    enemies = _.first enemies, 5
+    enemies = _.map enemies, (doc) ->
+      doc._friend_score = data.friend_scores[currentId][doc._id]
+      return doc
+    return enemies

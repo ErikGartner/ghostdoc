@@ -19,7 +19,7 @@
         {{/each}}
         </div>
         {{/if}}
-        <h3>Associates</h3>
+        <h3>Affiliates</h3>
         <div class="ui list">
           {{#each associates}}
           <div class="item">
@@ -27,6 +27,30 @@
             <div class="content">
               <a class="header" href={{pathFor 'artifact.view' _id=this._id _projectId=this.project}}>{{this.name}}</a>
               <div class="description">{{this._occurrences}}</div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        <h3>Friends</h3>
+        <div class="ui list">
+          {{#each friends}}
+          <div class="item">
+            <img class="ui avatar image" src={{this.image}}>
+            <div class="content">
+              <a class="header" href={{pathFor 'artifact.view' _id=this._id _projectId=this.project}}>{{this.name}}</a>
+              <div class="description">{{this._friend_score}}</div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        <h3>Enemies</h3>
+        <div class="ui list">
+          {{#each enemies}}
+          <div class="item">
+            <img class="ui avatar image" src={{this.image}}>
+            <div class="content">
+              <a class="header" href={{pathFor 'artifact.view' _id=this._id _projectId=this.project}}>{{this.name}}</a>
+              <div class="description">{{this._friend_score}}</div>
             </div>
           </div>
           {{/each}}
