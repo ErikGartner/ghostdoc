@@ -108,7 +108,7 @@ Template.infobox.helpers
 
     friends = _.first friends, 5
     friends = _.map friends, (doc) ->
-      doc._friend_score = data.friend_scores[currentId][doc._id]
+      doc._friend_score = Math.round data.friend_scores[currentId][doc._id]
       return doc
     return friends
 
@@ -132,6 +132,6 @@ Template.infobox.helpers
 
     enemies = _.first enemies, 5
     enemies = _.map enemies, (doc) ->
-      doc._friend_score = data.friend_scores[currentId][doc._id]
+      doc._friend_score = Math.round data.friend_scores[currentId][doc._id]
       return doc
     return enemies
