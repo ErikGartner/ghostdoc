@@ -1,3 +1,19 @@
+<a name="0.10.2"></a>
+## [0.10.2](//compare/0.10.1...v0.10.2) (2016-07-23)
+
+
+### Bug Fixes
+
+* Incorrect Gem form width d4cee0a
+
+### Features
+
+* Add enemies and friends 7b723c1
+* Round friend score 4c427e9
+* Upgraded to Meteor 1.3.2.4 d44a444
+
+
+
 <a name="0.10.1"></a>
 ## [0.10.1](//compare/0.10.0...v0.10.1) (2016-04-23)
 
