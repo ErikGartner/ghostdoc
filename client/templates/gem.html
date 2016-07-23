@@ -3,7 +3,6 @@
   {{#autoForm collection="Gems" doc=this id="editGemForm" type="update"}}
     {{> afQuickField name='name'}}
     {{> afQuickField name='patterns'}}
-    {{> afQuickField name='artifacts'}}
     <button type="submit" class="ui blue button">Update</button>
     {{> quickRemoveButton collection="Gems" _id=this._id class="ui red button" beforeRemove=beforeRemove}}
   {{/autoForm}}
@@ -15,7 +14,6 @@
   {{#autoForm collection="Gems" id="addGemForm" type="insert"}}
     {{> afQuickField name='name'}}
     {{> afQuickField name='patterns'}}
-    {{> afQuickField name='artifacts'}}
     <button type="submit" class="ui green button">Insert</button>
   {{/autoForm}}
   </div>
