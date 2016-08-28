@@ -3,8 +3,8 @@ Meteor.publishComposite 'projects', ->
     find: ->
       user = Meteor.users.findOne _id: @userId
       if user?
-        return Projects.find $or: [{author: @userId},
-          {collaborators: user.mail()}]
+        return Projects.find {$or: [{author: @userId},
+          {collaborators: user.mail()}]}, {fields: {'trello_user_key': 0}}
       else
         return undefined
 

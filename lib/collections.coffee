@@ -135,6 +135,16 @@ Schemas.Project = new SimpleSchema
     minCount: 0
     label: 'Collaborator email'
 
+  trello_user_key:
+    type: String
+    optional: true
+    label: 'Trello API user key'
+
+  trello_org_id:
+    type: String
+    optional: true
+    label: 'Trello API Organization id'
+
 Texts.attachSchema Schemas.Text
 Artifacts.attachSchema Schemas.Artifact
 Gems.attachSchema Schemas.Gem

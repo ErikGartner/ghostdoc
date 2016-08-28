@@ -4,7 +4,18 @@
       {{#if image}}
       <img class="ui medium rounded image" src={{image}}>
       {{/if}}
-      <div class="ui segment">
+      <div class="ui basic segment">
+        <div class="ui one statistics">
+          <div class="statistic">
+            <div class="label">
+              <i class="icon Sort Descending"></i>
+              Rank
+            </div>
+            <div class="value">
+              {{rank}}
+            </div>
+          </div>
+        </div>
         {{#if gemsItems}}
         <h3>Gems</h3>
         <div class="ui list">
@@ -31,30 +42,6 @@
           </div>
           {{/each}}
         </div>
-        <h3>Friends</h3>
-        <div class="ui list">
-          {{#each friends}}
-          <div class="item">
-            <img class="ui avatar image" src={{this.image}}>
-            <div class="content">
-              <a class="header" href={{pathFor 'artifact.view' _id=this._id _projectId=this.project}}>{{this.name}}</a>
-              <div class="description">{{this._friend_score}}</div>
-            </div>
-          </div>
-          {{/each}}
-        </div>
-        <h3>Enemies</h3>
-        <div class="ui list">
-          {{#each enemies}}
-          <div class="item">
-            <img class="ui avatar image" src={{this.image}}>
-            <div class="content">
-              <a class="header" href={{pathFor 'artifact.view' _id=this._id _projectId=this.project}}>{{this.name}}</a>
-              <div class="description">{{this._friend_score}}</div>
-            </div>
-          </div>
-          {{/each}}
-        </div>
         <h3>Community ({{communitySize}})</h3>
         <div class="ui list">
           {{#each community}}
@@ -67,18 +54,35 @@
           </div>
           {{/each}}
         </div>
-        <div class="ui one statistics">
-          <div class="statistic">
-            <div class="label">
-              <i class="icon Sort Descending"></i>
-              Rank
+      </div>
+
+      {{#if trelloCards}}
+        <div class="ui basic card">
+          <div class="content">
+            <div class="header">Trello</div>
+            <div class="meta">
             </div>
-            <div class="value">
-              {{rank}}
+            <div class="description">
+              <div class="ui list">
+                {{#each trelloCards}}
+                <div class="item">
+                  <i class="right triangle icon"></i>
+                  <div class="content">
+                    <a class="header" target='_blank' href={{this.shortUrl}}>{{this.name}}</a>
+                    <div class="description">
+                      {{#each this.labels}}
+                        <div title={{this.name}} class="ui {{this.color}} horizontal label"></div>
+                      {{/each}}
+                      {{this.listName}}
+                    </div>
+                  </div>
+                </div>
+                {{/each}}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      {{/if}}
     </div>
   </div>
 </template>
