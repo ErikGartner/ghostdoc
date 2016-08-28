@@ -68,25 +68,7 @@ Template.infobox.helpers
     community = _.sortBy community, (doc) ->
       return -1 * data.centrality[doc._id]
 
-    return _.first community, 3
-
-  communitySize: (community) ->
-    if not @_id? or not @projectId?
-      return
-
-    project = Projects.findOne(@projectId)
-    if not project? or not project.isProcessed()
-      return false
-
-    data = project.analytics().data.network_analytics
-    communityId = data.communities[@_id]
-    centrality = data.centrality[@_id]
-    pairs = data.pair_occurences[@_id]
-
-    community = _.filter Artifacts.find({project: @projectId}).fetch(), (doc) ->
-      return data.communities[doc._id] == communityId
-    , {_id: @_id}
-    return community.length
+    return _.first community, 5
 
   friends: ->
     if not @_id? or not @projectId?
@@ -135,3 +117,17 @@ Template.infobox.helpers
       doc._friend_score = Math.round data.friend_scores[currentId][doc._id]
       return doc
     return enemies
+
+  trelloCards: ->
+    if not @_id? or not @projectId?
+      return
+
+    project = Projects.findOne(@projectId)
+    if not project? or not project.isProcessed()
+      return false
+
+    data = project.analytics().data.trello.artifact_cards[@_id]
+    data = _.sortBy data, (doc) ->
+      return -1 * Date.parse(doc.dateLastActivity)
+    console.log data
+    return data
