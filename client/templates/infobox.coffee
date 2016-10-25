@@ -48,17 +48,6 @@ Template.infobox.helpers
 
     return rank + 1
 
-  sentiment_score: ->
-    if not @_id? or not @projectId?
-      return
-
-    project = Projects.findOne(@projectId)
-    if not project? or not project.isProcessed()
-      return false
-
-    data = project.analytics().data.relations_analytics
-    return Math.round(100 * data.artifact_scores[@_id])
-
   trelloCards: ->
     if not @_id? or not @projectId?
       return

@@ -5,24 +5,13 @@
       <img class="ui medium rounded image" src={{image}}>
       {{/if}}
       <div class="ui basic segment">
-        <div class="ui two statistics">
-          <div class="statistic">
-            <div class="label">
-              <i class="icon Sort Descending"></i>
-              Rank
-            </div>
-            <div class="value">
-              {{rank}}
-            </div>
+        <div class="statistic">
+          <div class="label">
+            <i class="icon Sort Descending"></i>
+            Rank
           </div>
-          <div class="statistic">
-            <div class="label">
-              <i class="icon Sort Descending"></i>
-              Positivity
-            </div>
-            <div class="value">
-              {{sentiment_score}}%
-            </div>
+          <div class="value">
+            {{rank}}
           </div>
         </div>
         {{#if gemsItems}}
