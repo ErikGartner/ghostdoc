@@ -30,6 +30,9 @@ gulp.task('bump', function() {
   gulp.src('../settings.json')
   .pipe(bump({key: "public.ghostdoc.version", type: argv.bump}))
   .pipe(gulp.dest('../'));
+  gulp.src('../package.json')
+  .pipe(bump({key: "version", type: argv.bump}))
+  .pipe(gulp.dest('../'));
   return gulp.src('./package.json')
   .pipe(bump({key: "version", type: argv.bump}))
   .pipe(gulp.dest('./'));
