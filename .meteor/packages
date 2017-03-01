@@ -27,7 +27,7 @@ aldeed:autoform
 fabienb4:autoform-semantic-ui
 aldeed:delete-button
 dburles:collection-helpers
-accounts-facebook@1.1.0
+accounts-facebook
 matb33:collection-hooks
 jakobloekke:rabbitmq
 d3js:d3
