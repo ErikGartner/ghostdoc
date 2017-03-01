@@ -1,8 +1,9 @@
 {
   "public": {
-    "analyticsSettings": {
-      "Google Analytics": {
-        "trackingId": "UA-71930396-1"
+    "ga": {
+      "id": "UA-71930396-1",
+      "set": {
+        "forceSSL": true
       }
     },
     "ghostdoc": {

@@ -1,5 +1,6 @@
 Router.configure
   layoutTemplate: 'ApplicationLayout'
+  trackPageView: true
 
 Router.route '/',
   name: 'home'
