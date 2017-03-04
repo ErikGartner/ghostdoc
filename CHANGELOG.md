@@ -1,3 +1,14 @@
+<a name="0.10.5"></a>
+## [0.10.5](//compare/0.10.4...v0.10.5) (2017-03-04)
+
+
+### Bug Fixes
+
+* Dropdown selection bug 801682a
+* Gulpscript for Meteor npm package.json 17b6886
+
+
+
 <a name="0.10.4"></a>
 ## [0.10.4](//compare/0.10.3...v0.10.4) (2017-03-01)
 
