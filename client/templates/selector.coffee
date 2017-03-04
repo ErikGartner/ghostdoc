@@ -1,11 +1,11 @@
 Template.selector_view.onRendered ->
   $('#selector_view').dropdown
-    action: 'hide'
+    action: 'nothing'
     fullTextSearch: true
 
 Template.selector_project.onRendered ->
   $('#selector_project').dropdown
-    action: 'hide'
+    action: 'nothing'
     fullTextSearch: true
 
 Template.selector_view.helpers
