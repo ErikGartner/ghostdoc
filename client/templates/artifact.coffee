@@ -5,6 +5,11 @@ Template.artifact.helpers
       return false
     return @processed()
 
+  hasReferences: ->
+    if not @_id?
+      return false
+    return @isProcessed()
+
 Template.editArtifact.helpers
   beforeRemove: ->
     return (collection, id) ->

@@ -17,6 +17,9 @@ Template.infobox.helpers
     centrality = data.centrality[@_id]
     pairs = data.pair_occurences[@_id]
 
+    if not pairs?
+      return false
+
     assocs = _.filter Artifacts.find({project: @projectId}).fetch(), (doc) ->
       return pairs[doc._id]? and doc._id != @_id
     , {_id: @_id}
