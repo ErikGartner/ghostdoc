@@ -1,3 +1,17 @@
+<a name="0.10.6"></a>
+## [0.10.6](//compare/0.10.5...v0.10.6) (2017-03-05)
+
+
+### Bug Fixes
+
+* Rank bug 1ef0dad
+
+### Features
+
+* Add semantic-ui package instead of css files 2be6d92
+
+
+
 <a name="0.10.5"></a>
 ## [0.10.5](//compare/0.10.4...v0.10.5) (2017-03-04)
 
