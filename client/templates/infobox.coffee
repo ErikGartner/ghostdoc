@@ -22,7 +22,8 @@ Template.infobox.helpers
     , {_id: @_id}
 
     assocs = _.sortBy assocs, (doc) ->
-      return -1 * pairs[doc._id]
+      return pairs[doc._id]
+    assocs.reverse()
 
     assocs = _.first assocs, 5
     assocs = _.map assocs, (doc) ->
@@ -40,7 +41,10 @@ Template.infobox.helpers
 
     data = project.analytics().data.network_analytics
     ranks = _.sortBy Artifacts.find({project: @projectId}).fetch(), (doc) ->
-      return -1 * data.centrality[doc._id]
+      if not data.centrality[doc._id]?
+        return 0
+      return data.centrality[doc._id]
+    ranks.reverse()
 
     currentId = @_id
     rank = lodash.findIndex ranks, (doc) ->
@@ -58,5 +62,6 @@ Template.infobox.helpers
 
     data = project.analytics().data.trello.artifact_cards[@_id]
     data = _.sortBy data, (doc) ->
-      return -1 * Date.parse(doc.dateLastActivity)
+      return Date.parse(doc.dateLastActivity)
+    data.reverse()
     return data
