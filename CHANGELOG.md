@@ -1,3 +1,13 @@
+<a name="0.12.0"></a>
+# [0.12.0](//compare/0.11.0...v0.12.0) (2017-03-05)
+
+
+### Features
+
+* Improved publication filtering by only fetching project data on demand. 78f549d
+
+
+
 <a name="0.11.0"></a>
 # [0.11.0](//compare/0.10.6...v0.11.0) (2017-03-05)
 
