@@ -1,3 +1,13 @@
+<a name="0.11.0"></a>
+# [0.11.0](//compare/0.10.6...v0.11.0) (2017-03-05)
+
+
+### Features
+
+* Allow collaborators to edit and remove artifacts and gems 3d7a8d6
+
+
+
 <a name="0.10.6"></a>
 ## [0.10.6](//compare/0.10.5...v0.10.6) (2017-03-05)
 
