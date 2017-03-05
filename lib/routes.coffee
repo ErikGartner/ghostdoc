@@ -1,6 +1,8 @@
 Router.configure
   layoutTemplate: 'ApplicationLayout'
   trackPageView: true
+  subscriptions: ->
+    Meteor.subscribe 'list.projects'
 
 Router.route '/',
   name: 'home'
@@ -13,7 +15,9 @@ Router.route '/project',
     @render 'addProject'
 
 Router.route '/project/:_projectId',
-  name: 'project.view',
+  name: 'project.view'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
   action: ->
     @render 'project', {
       data: ->
@@ -24,6 +28,8 @@ Router.route '/project/:_projectId',
 
 Router.route '/project/:_projectId/edit',
   name: 'project.edit',
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
   action: ->
     @render 'editProject', {
       data: ->
@@ -34,11 +40,15 @@ Router.route '/project/:_projectId/edit',
 
 Router.route '/project/:_projectId/source',
   name: 'source.add'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
   action: ->
     @render 'addSource'
 
 Router.route '/project/:_projectId/source/:_id/edit',
   name: 'source.edit'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
   action: ->
     @render 'editSource', {
       data: ->
@@ -49,6 +59,8 @@ Router.route '/project/:_projectId/source/:_id/edit',
 
 Router.route '/project/:_projectId/source/:_id',
   name: 'source.view'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
   action: ->
     @render 'source', {
       data: ->
@@ -59,11 +71,15 @@ Router.route '/project/:_projectId/source/:_id',
 
 Router.route '/project/:_projectId/artifact',
   name: 'artifact.add'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
   action: ->
     @render 'addArtifact'
 
 Router.route '/project/:_projectId/artifact/:_id',
   name: 'artifact.view'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
   action: ->
     @render 'artifact', {
       data: ->
@@ -74,6 +90,8 @@ Router.route '/project/:_projectId/artifact/:_id',
 
 Router.route '/project/:_projectId/artifact/:_id/edit',
   name: 'artifact.edit'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
   action: ->
     @render 'editArtifact', {
       data: ->
@@ -84,11 +102,15 @@ Router.route '/project/:_projectId/artifact/:_id/edit',
 
 Router.route '/project/:_projectId/gem',
   name: 'gem.add'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
   action: ->
     @render 'addGem'
 
 Router.route '/project/:_projectId/gem/:_id/edit',
   name: 'gem.edit'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
   action: ->
     @render 'editGem', {
       data: ->
