@@ -158,58 +158,40 @@ Meteor.users.helpers
       return @services.facebook.email
     return undefined
 
+
+isOwnerOrCollaborator = (userId, doc) ->
+  if userId == doc.author
+    return true
+
+  collaborators = Projects.findOne(doc.project)?.collaborators
+  if collaborators? and Meteor.users.findOne(userId).mail() in collaborators
+    return true
+
+  return false
+
+
 Artifacts.allow(
   insert: (userId, doc) ->
     return userId
 
-  update: (userId, doc) ->
-    if userId == doc.author
-      return true
-
-    collaborators = Projects.findOne(doc.project)?.collaborators
-    if collaborators? and Meteor.users.findOne(userId).mail() in collaborators
-      return true
-
-    return false
-
-  remove: (userId, doc) ->
-    return userId == doc.author
+  update: isOwnerOrCollaborator
+  remove: isOwnerOrCollaborator
 )
 
 Texts.allow(
   insert: (userId, doc) ->
     return userId
 
-  update: (userId, doc) ->
-    if userId == doc.author
-      return true
-
-    collaborators = Projects.findOne(doc.project)?.collaborators
-    if collaborators? and Meteor.users.findOne(userId).mail() in collaborators
-      return true
-
-    return false
-
-  remove: (userId, doc) ->
-    return userId == doc.author
+  update: isOwnerOrCollaborator
+  remove: isOwnerOrCollaborator
 )
 
 Gems.allow(
   insert: (userId, doc) ->
     return userId
 
-  update: (userId, doc) ->
-    if userId == doc.author
-      return true
-
-    collaborators = Projects.findOne(doc.project)?.collaborators
-    if collaborators? and Meteor.users.findOne(userId).mail() in collaborators
-      return true
-
-    return false
-
-  remove: (userId, doc) ->
-    return userId == doc.author
+  update: isOwnerOrCollaborator
+  remove: isOwnerOrCollaborator
 )
 
 Projects.allow(
@@ -217,14 +199,7 @@ Projects.allow(
     return userId
 
   update: (userId, doc) ->
-    if userId == doc.author
-      return true
-
-    if doc.collaborators? and Meteor.users.findOne(userId).mail() in
-        doc.collaborators
-      return true
-
-    return false
+    return userId == doc.author
 
   remove: (userId, doc) ->
     return userId == doc.author
