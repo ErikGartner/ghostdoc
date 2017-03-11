@@ -2,6 +2,7 @@
   <div class="ten wide column">
   {{#autoForm collection="Gems" doc=this id="editGemForm" type="update"}}
     {{> afQuickField name='name'}}
+    {{> gemHelp}}
     {{> afQuickField name='patterns'}}
     <button type="submit" class="ui blue button">Update</button>
     {{> quickRemoveButton collection="Gems" _id=this._id class="ui red button" beforeRemove=beforeRemove}}
@@ -13,8 +14,22 @@
   <div class="ten wide column">
   {{#autoForm collection="Gems" id="addGemForm" type="insert"}}
     {{> afQuickField name='name'}}
+    {{> gemHelp}}
     {{> afQuickField name='patterns'}}
     <button type="submit" class="ui green button">Insert</button>
   {{/autoForm}}
+  </div>
+</template>
+
+<template name="gemHelp">
+  <div class="ui message">
+    <div class="header">
+      Gem Pattern Format
+    </div>
+    <ul class="list">
+      <li>Gems patterns are built upon Python regex</li>
+      <li><span class="cmd_pattern">~GH_THIS_ARTIFACT~</span> matches the Artifact</li>
+      <li><span class="cmd_pattern">~GH_OTHER_ARTIFACT~</span> matches any other Artifact</li>
+    </ul>
   </div>
 </template>
