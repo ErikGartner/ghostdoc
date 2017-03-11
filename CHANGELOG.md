@@ -1,3 +1,17 @@
+<a name="0.13.0"></a>
+# [0.13.0](//compare/0.12.1...v0.13.0) (2017-03-11)
+
+
+### Bug Fixes
+
+* Removed unneccessary publication 2612cf9
+
+### Features
+
+* Add basic gem patterns ef24f06
+
+
+
 <a name="0.12.1"></a>
 ## [0.12.1](//compare/0.12.0...v0.12.1) (2017-03-05)
 
