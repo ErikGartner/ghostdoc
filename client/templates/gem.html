@@ -37,28 +37,24 @@
 <template name="viewGem">
   <div class="ten wide column">
     <h1><a href="{{pathFor route='gem.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} {{#if filterValue}}- {{filterValue}}{{/if}}</h1>
-    <div class="ui items">
-    {{#each artifacts}}
-        <div class="item">
-          <div>
-            {{#if artifact.image}}
-            <a href={{pathFor 'artifact.view' _id=artifact._id _projectId=artifact.project}}>
-              <img class="ui tiny image" src="{{artifact.image}}">
+
+    <div class="ui stackable two column centered grid">
+      {{#each artifacts}}
+      <div class="ui column">
+        <div class="ui segment">
+          <h2>
+            <a href={{pathFor 'artifact.view' _id=artifact._id _projectId=artifact.project}}>{{artifact.name}}{{#if artifact.image}}
+              <img src="{{artifact.image}}" class="ui mini right floated spaced rounded image">{{/if}}
             </a>
-            {{/if}}
-          </div>
-          <div class="content">
-            <a class="header" href={{pathFor 'artifact.view' _id=artifact._id _projectId=artifact.project}}>{{artifact.name}}</a>
-            <div class="description">
-              <ul>
-                {{#each gems}}{{#each result}}
-                  <li>{{this}}</li>
-                {{/each}}{{/each}}
-              </ul>
-            </div>
-          </div>
+          </h2>
+          <ul>
+            {{#each gems}}{{#each result}}
+              <li>{{this}}</li>
+            {{/each}}{{/each}}
+          </ul>
         </div>
-    {{/each}}
+      </div>
+      {{/each}}
     </div>
   </div>
 </template>
