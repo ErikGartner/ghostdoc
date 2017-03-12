@@ -118,3 +118,27 @@ Router.route '/project/:_projectId/gem/:_id/edit',
         _.extend data, Gems.findOne _id: @params._id
         return data
     }
+
+Router.route '/project/:_projectId/gem/:_id',
+  name: 'gem.view'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
+  action: ->
+    @render 'viewGem', {
+      data: ->
+        data = {projectId: @params._projectId}
+        _.extend data, Gems.findOne _id: @params._id
+        return data
+    }
+
+Router.route '/project/:_projectId/gem/:_id/:_value',
+  name: 'gem.view.values'
+  subscriptions: ->
+    Meteor.subscribe 'get.project', @params._projectId
+  action: ->
+    @render 'viewGem', {
+      data: ->
+        data = {projectId: @params._projectId, gemValue: @params._value}
+        _.extend data, Gems.findOne _id: @params._id
+        return data
+    }

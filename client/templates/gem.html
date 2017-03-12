@@ -33,3 +33,32 @@
     </ul>
   </div>
 </template>
+
+<template name="viewGem">
+  <div class="ten wide column">
+    <h1><a href="{{pathFor route='gem.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} {{#if filterValue}}- {{filterValue}}{{/if}}</h1>
+    <div class="ui items">
+    {{#each artifacts}}
+        <div class="item">
+          <div>
+            {{#if artifact.image}}
+            <a href={{pathFor 'artifact.view' _id=artifact._id _projectId=artifact.project}}>
+              <img class="ui tiny image" src="{{artifact.image}}">
+            </a>
+            {{/if}}
+          </div>
+          <div class="content">
+            <a class="header" href={{pathFor 'artifact.view' _id=artifact._id _projectId=artifact.project}}>{{artifact.name}}</a>
+            <div class="description">
+              <ul>
+                {{#each gems}}{{#each result}}
+                  <li>{{this}}</li>
+                {{/each}}{{/each}}
+              </ul>
+            </div>
+          </div>
+        </div>
+    {{/each}}
+    </div>
+  </div>
+</template>

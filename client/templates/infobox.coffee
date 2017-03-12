@@ -63,8 +63,11 @@ Template.infobox.helpers
     if not project? or not project.isProcessed()
       return false
 
-    data = project.analytics().data.trello.artifact_cards[@_id]
+    data = project.analytics().data.trello?.artifact_cards[@_id]
     data = _.sortBy data, (doc) ->
       return Date.parse(doc.dateLastActivity)
     data.reverse()
     return data
+
+  _projectId: ->
+    return Router.current().params._projectId
