@@ -24,12 +24,12 @@ Template.viewGem.onCreated ->
   @autorun ->
     # Filter data on search value changes
     data = Session.get 'all_values'
-    filter = Session.get('filter_value').toLowerCase()
+    filter = Session.get('filter_value')?.toLowerCase()
     if filter? and filter != ""
       data = _.filter data, (a) ->
         return _.find a.gems, (g) ->
           return _.find g.result, (v) ->
-            return v.toLowerCase().indexOf(filter) > -1
+            return v?.toLowerCase().indexOf(filter) > -1
 
     Session.set 'values', data
 
