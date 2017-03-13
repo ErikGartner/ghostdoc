@@ -36,11 +36,20 @@
 
 <template name="viewGem">
   <div class="ten wide column">
-    <h1><a href="{{pathFor route='gem.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} {{#if filterValue}}- {{filterValue}}{{/if}}</h1>
+    <h1><a href="{{pathFor route='gem.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}}</h1>
 
-    <div class="ui stackable two column centered grid">
+    <div class="ui stackable grid">
+      <div class="sixteen wide column">
+        <div class="fluid ui search">
+          <div class="fluid ui icon input">
+            <input id="gemsearch" type="text" placeholder="Search for values..." value={{filter}}>
+            <i class="search icon"></i>
+          </div>
+        </div>
+      </div>
+
       {{#each artifacts}}
-      <div class="ui column">
+      <div class="eight wide column">
         <div class="ui segment">
           <h2>
             <a href={{pathFor 'artifact.view' _id=artifact._id _projectId=artifact.project}}>{{artifact.name}}{{#if artifact.image}}
