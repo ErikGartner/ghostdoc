@@ -6,9 +6,10 @@
     <h1><a href="{{pathFor route='source.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if isProcessed}}{{else}}active{{/if}} mini inline loader"></div></h1>
     <div class="ui divider"></div>
 
-    <div class="ui fluid basic segment" style="padding:0px;">
+    <div id="sourceText" class="ui fluid basic segment" style="padding:0px;">
       {{{render}}}
     </div>
+    {{> inlineAddArtifact}}
   </div>
   <div class="three wide column">
   </div>

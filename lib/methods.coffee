@@ -22,3 +22,22 @@ Meteor.methods
         return RitterRenderer.renderToHtml item.tree, projectId, item.source
       RitterData.update {_id: ritterData._id}, {$set: {_compiled: compiled}}
       return compiled
+
+  createArtifact: (name, projectId) ->
+    check name, String
+    check projectId, String
+    if name == '' or name.length > 50
+      return false
+
+    tokens = name.split ' '
+    if Meteor.isServer
+      project = Projects.findOne projectId
+      if not project? or (project.author != @userId and
+                          @userId not in project.collaborators)
+        return
+      return Artifacts.insert {
+        name: name,
+        tokens: tokens,
+        project: projectId,
+        author: @userId
+      }
