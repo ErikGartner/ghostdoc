@@ -14,17 +14,3 @@ Template.editSource.helpers
 Template.source.events
   'click .token': (event) ->
     $('html, body').animate {scrollTop: 0}, 'slow'
-
-  'mouseup .reference': (event) ->
-    if event.altKey
-      $(event.target).popup
-        popup: '#addArtifactPopup'
-        on: 'manual'
-        position: 'top left'
-      $(event.target).popup 'show'
-
-  'click #addArtifactButton': (event) ->
-    text = window.getSelection().toString().trim()
-    if not text? or text == ''
-      return
-    Meteor.call 'createArtifact', text, @project
