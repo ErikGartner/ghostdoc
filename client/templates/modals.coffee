@@ -1,12 +1,18 @@
 showModal = (event) ->
   if event.altKey
     $('#addArtifactModal').modal 'show'
+    return false
+  return true
 
 updateSelectedText = (event) ->
-  Session.set 'selectedText', window.getSelection().toString().trim()
+  if $(event.target).hasClass('reference')
+    Session.set 'selectedText', window.getSelection().toString().trim()
+    return false
+  return true
 
 hideModal = (event) ->
-  $('#addArtifactModal').modal 'hide'
+  if $(event.target).attr('id') == 'addArtifactButton'
+    $('#addArtifactModal').modal 'hide'
 
 Template.inlineAddArtifact.helpers
   selectedValues: ->
@@ -19,9 +25,9 @@ Template.inlineAddArtifact.helpers
 Template.inlineAddArtifact.onRendered ->
   $('body').on 'keyup', showModal
   $('body').on 'mouseup', updateSelectedText
-  $('body').on 'click #addArtifactButton', hideModal
+  $('#addArtifactModal').on 'click', hideModal
 
 Template.inlineAddArtifact.onDestroyed ->
   $('body').off 'keyup', showModal
   $('body').off 'mouseup', updateSelectedText
-  $('body').off 'click #addArtifactButton', hideModal
+  $('#addArtifactModal').off 'click', hideModal
