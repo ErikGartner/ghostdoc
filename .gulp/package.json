@@ -1,7 +1,7 @@
 {
   "name": "Ghostdoc",
   "description": "Smart Text Viewer",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "dependencies": {
     "conventional-github-releaser": "^1.1.2",
     "gulp": "^3.9.0",
