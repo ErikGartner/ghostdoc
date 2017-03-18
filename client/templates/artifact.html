@@ -15,6 +15,7 @@
   </div>
   <div class="three wide column">
   </div>
+  {{> inlineAddArtifact}}
 </template>
 
 <template name="editArtifact">
@@ -31,11 +32,11 @@
 
 <template name="addArtifact">
   <div class="ten wide column">
-    {{#autoForm collection="Artifacts" id="addArtifactForm" type="insert"}}
+    {{#autoForm collection="Artifacts" id="addArtifactForm" doc=defaultValues type="insert"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='tokens'}}
       {{> afQuickField name='image'}}
-      <button type="submit" class="ui green button">Add</button>
+      <button id="addArtifactButton" type="submit" class="ui green button">Add</button>
     {{/autoForm}}
   </div>
 </template>

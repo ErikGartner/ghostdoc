@@ -1,0 +1,17 @@
+<template name="inlineAddArtifact">
+  <div id="addArtifactPopup" class="ui flowing popup top left transition hidden">
+    <div class="ui buttons">
+        <div id="addArtifactButton" class="ui green button">Create artifact</div>
+    </div>
+  </div>
+
+  <div id="addArtifactModal" class="ui small modal">
+    <div class="ui icon header">
+      <i class="tag icon"></i>
+      Add artifact from selection
+    </div>
+    <div class="content">
+      {{> addArtifact defaultValues=selectedValues}}
+    </div>
+  </div>
+</template>

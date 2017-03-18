@@ -14,9 +14,3 @@ Template.editSource.helpers
 Template.source.events
   'click .token': (event) ->
     $('html, body').animate {scrollTop: 0}, 'slow'
-
-  'click div': (event) ->
-    text = window.getSelection().toString().trim()
-    if not text? or text == ''
-      return
-    console.log text
