@@ -1,3 +1,13 @@
+<a name="0.15.0"></a>
+# [0.15.0](//compare/0.14.1...v0.15.0) (2017-03-18)
+
+
+### Features
+
+* Add quick command (alt+a) to add artifact from selection cf353ef
+
+
+
 <a name="0.14.1"></a>
 ## [0.14.1](//compare/0.14.0...v0.14.1) (2017-03-13)
 
