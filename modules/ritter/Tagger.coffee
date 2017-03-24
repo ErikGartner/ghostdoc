@@ -13,6 +13,7 @@ class RendererClass
     defaultLinkRenderer = renderer.link
     defaultParagraphRender = renderer.paragraph # only adds <p> tags
     defaultHeadingRender = renderer.heading # only adds <p> tags
+    defaultListItemRender = renderer.listitem
 
     # custom rendering function that highlights
     renderer.link = (href, title, text) ->
@@ -27,7 +28,11 @@ class RendererClass
     if textId?
       renderer.paragraph = (text) ->
         return '<p class="reference" data-source="' + textId + '">' +
-          text + '</p>'
+          text + '</p>\n'
+
+      renderer.listitem = (text) ->
+        return '<li class="reference" data-source="' + textId + '">' + text +
+          '</li>\n'
 
     renderer.heading = (text, level, raw) ->
       html = '<h' + level +
