@@ -1,5 +1,5 @@
 <template name="editGem">
-  <div class="ten wide column">
+  <div class="sixteen wide column">
   {{#autoForm collection="Gems" doc=this id="editGemForm" type="update"}}
     {{> afQuickField name='name'}}
     {{> gemHelp}}
@@ -11,7 +11,7 @@
 </template>
 
 <template name="addGem">
-  <div class="ten wide column">
+  <div class="sixteen wide column">
   {{#autoForm collection="Gems" id="addGemForm" type="insert"}}
     {{> afQuickField name='name'}}
     {{> gemHelp}}
@@ -35,7 +35,7 @@
 </template>
 
 <template name="viewGem">
-  <div class="ten wide column">
+  <div class="sixteen wide column">
     <h1><a href="{{pathFor route='gem.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}}</h1>
 
     <div class="ui stackable grid">

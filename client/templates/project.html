@@ -1,5 +1,5 @@
 <template name="project">
-  <div class="ten wide column">
+  <div class="sixteen wide column">
     <h1><a href="{{pathFor route='project.edit' _projectId=_id}}"><i class="icon edit"></i></a>{{name}} <small>by {{authorName}}</small></h1>
 
     <div class="ui stackable one column grid">
@@ -64,7 +64,7 @@
             </a>
             {{#each gems}}
             <a class="link item" href="{{pathFor 'gem.view' _id=_id _projectId=project}}">
-              <i class="diamond icon"></i>
+              <i class="star icon"></i>
               {{name}}
             </a>
             {{/each}}
@@ -76,7 +76,7 @@
 </template>
 
 <template name="addProject">
-  <div class="ten wide column">
+  <div class="sixteen wide column">
     {{#autoForm collection="Projects" id="addProjectForm" type="insert"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='description' rows=5}}

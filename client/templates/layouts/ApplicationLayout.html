@@ -3,19 +3,18 @@
 
   <div class="pusher">
     <div class="ui container">
-      <div class="ui centered stackable grid">
+      <div class="ui stackable grid">
         <div class="row" style="padding-top:2em;">
-          <div class="four wide column">
+          <div class="fourteen wide column">
             {{> header}}
+            {{> selector}}
           </div>
-          <div class="six wide column" style="padding-top:0.7em;">
-             {{> selector}}
-           </div>
         </div>
       </div>
-      <div class="ui centered stackable doubling grid">
+      <div class="ui stackable doubling grid">
         {{>yield}}
       </div>
     </div>
   </div>
+
 </template>

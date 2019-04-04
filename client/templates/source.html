@@ -1,22 +1,30 @@
 <template name="source">
-  <div class="three wide computer only column">
-    {{> toc}}
-  </div>
-  <div class="ten wide column">
-    <h1><a href="{{pathFor route='source.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if isProcessed}}{{else}}active{{/if}} mini inline loader"></div></h1>
-    <div class="ui divider"></div>
+  {{> toc}}
 
-    <div id="sourceText" class="ui fluid basic segment" style="padding:0px;">
-      {{{render}}}
+  {{#if hasToc}}
+    <div class="thirteen wide column">
+      <h1><a href="{{pathFor route='source.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if isProcessed}}{{else}}active{{/if}} mini inline loader"></div></h1>
+      <div class="ui divider"></div>
+
+      <div id="sourceText" class="ui fluid basic segment" style="padding:0px;">
+        {{{render}}}
+      </div>
     </div>
-  </div>
-  <div class="three wide computer only column">
-  </div>
+  {{else}}
+    <div class="thirteen wide column">
+      <h1><a href="{{pathFor route='source.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if isProcessed}}{{else}}active{{/if}} mini inline loader"></div></h1>
+      <div class="ui divider"></div>
+
+      <div id="sourceText" class="ui fluid basic segment" style="padding:0px;">
+        {{{render}}}
+      </div>
+    </div>
+  {{/if}}
   {{> inlineAddArtifact}}
 </template>
 
 <template name="editSource">
-  <div class="ten wide column">
+  <div class="sixteen wide column">
     {{#autoForm collection="Texts" doc=this id="editSourceForm" type="update"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='text' rows=15}}
@@ -29,7 +37,7 @@
 </template>
 
 <template name="addSource">
-  <div class="ten wide column">
+  <div class="sixteen wide column">
     {{#autoForm collection="Texts" doc=this id="addSourceForm" type="insert"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='text' rows=15}}

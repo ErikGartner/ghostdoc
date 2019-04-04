@@ -10,6 +10,11 @@ Template.artifact.helpers
       return false
     return @isProcessed()
 
+  hasToc: ->
+    if not @_id? or not @projectId? or not @isProcessed()
+      return false
+    return @analytics().data.toc.data?
+
 Template.editArtifact.helpers
   beforeRemove: ->
     return (collection, id) ->

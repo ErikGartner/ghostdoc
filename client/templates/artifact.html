@@ -1,25 +1,36 @@
 <template name="artifact">
-  <div class="three wide computer only column">
-    {{> toc}}
-  </div>
-  <div class="ten wide column">
-    <h1><a href="{{pathFor route='artifact.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if hasReferences}}{{else}}active{{/if}} mini inline loader"></div></h1>
-    <div class="ui divider"></div>
+  {{> toc}}
 
-    <div id="artifactDiv" class="ui fluid basic segment" style="padding:0px;">
-      {{> infobox}}
-      {{#each references}}
-        {{{this}}}
-      {{/each}}
+  {{#if hasToc}}
+    <div class="thirteen wide column">
+      <h1><a href="{{pathFor route='artifact.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if hasReferences}}{{else}}active{{/if}} mini inline loader"></div></h1>
+      <div class="ui divider"></div>
+
+      <div id="artifactDiv" class="ui fluid basic segment" style="padding:0px;">
+        {{> infobox}}
+        {{#each references}}
+          {{{this}}}
+        {{/each}}
+      </div>
     </div>
-  </div>
-  <div class="three wide computer only column">
-  </div>
+  {{else}}
+    <div class="sixteen wide column">
+      <h1><a href="{{pathFor route='artifact.edit' _projectId=projectId}}"><i class="icon edit"></i></a>{{name}} <div class="ui {{#if hasReferences}}{{else}}active{{/if}} mini inline loader"></div></h1>
+      <div class="ui divider"></div>
+
+      <div id="artifactDiv" class="ui fluid basic segment" style="padding:0px;">
+        {{> infobox}}
+        {{#each references}}
+          {{{this}}}
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
   {{> inlineAddArtifact}}
 </template>
 
 <template name="editArtifact">
-  <div class="ten wide column">
+  <div class="sixteen wide column">
     {{#autoForm collection="Artifacts" doc=this id="editArtifactForm" type="update"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='tokens'}}
@@ -31,7 +42,7 @@
 </template>
 
 <template name="addArtifact">
-  <div class="ten wide column">
+  <div class="sixteen wide column">
     {{#autoForm collection="Artifacts" id="addArtifactForm" doc=defaultValues type="insert"}}
       {{> afQuickField name='name'}}
       {{> afQuickField name='tokens'}}
