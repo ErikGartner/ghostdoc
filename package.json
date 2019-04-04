@@ -4,7 +4,7 @@
   "description": "*A smart text viewer that semi-automatically identifies, highlights and summarizes based on artifacts.*",
   "main": "index.js",
   "dependencies": {
-    "@babel/runtime": "^7.0.0-beta.42",
+    "@babel/runtime": "^7.4.3",
     "babel-runtime": "^6.23.0",
     "meteor-node-stubs": "^0.2.5"
   },
